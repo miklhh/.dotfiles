@@ -1,0 +1,8 @@
+# What to test?
+* Partions.
+* Keyboard layout.
+* Locale.
+* Network manager.
+* nm-applet.
+* dash pacman hook.
+* tlp for notebooks.

@@ -1,0 +1,56 @@
+### 
+### NOTE:
+### The only comments alowed in the packages.txt list file is single line
+### comments starting with one or more '#' characters in the begining of any 
+### line. Anything else (excluding the blank line) will be parsed as a package.
+###
+
+###  Fonts ###
+ttf-hack
+noto-fonts
+noto-fonts-emoji
+ttf-dejavu
+
+### Text editors ###
+gvim
+neovim
+emacs
+
+### Networking ###
+networkmanager
+network-manager-applet
+nm-connection-editor
+
+### Environment and utilities ###
+fish
+dash
+acpi
+lm_sensors
+sysstat
+feh
+
+### i3 & Co ###
+i3-wm
+i3blocks
+
+### Passwords ###
+keepassxc
+
+### Web browser ###
+chromium
+firefox
+
+### Programming related ###
+git
+python2
+python3
+gcc
+gcc-libs
+go
+gdb
+valgrind
+make
+cmake
+
+### Alsa family.
+alsa-utils
