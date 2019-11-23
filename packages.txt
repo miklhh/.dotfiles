@@ -28,6 +28,10 @@ acpi
 lm_sensors
 sysstat
 feh
+time
+file
+sudo
+openssh
 
 ### i3 & Co ###
 i3-wm

@@ -10,6 +10,8 @@
 # the extracted Arch filesystem from the ISO will preserve the file owenership
 # status of the Arch ISO system root.
 
+# Processors to use.
+PROCESSORS="255"
 
 # Directories.
 MNT_DIR="fmnt"
@@ -138,7 +140,7 @@ fi
 # Unsquashify the airootfs.sfs.
 SQUASHFS_PATH="mnt/customiso/arch/x86_64/airootfs.sfs"
 echo "* Extracting '$SQUASHFS_PATH':"
-if unsquashfs -q "$ISO_DIR_CUSTOM"/arch/x86_64/airootfs.sfs 2>>"$LOG_FILE"
+if unsquashfs -processors "$PROCESSORS" -q "$ISO_DIR_CUSTOM"/arch/x86_64/airootfs.sfs 2>>"$LOG_FILE"
 then
     echo "* Successfully extracted 'airootfs.sfs'."
 else
@@ -149,9 +151,10 @@ fi
 # Copy content.
 echo "* Injecting Arch filesystem ('$SQUASHFS_ROOT_DIR'):"
 cp install_packages.sh "$SQUASHFS_ROOT_DIR"/root/install_packages.sh
+cp packages.txt "$SQUASHFS_ROOT_DIR"/root/packages.txt
 
 # Make new squash archive.
-if mksquashfs "$SQUASHFS_ROOT_DIR" airootfs.sfs -quiet 2>>"$LOG_FILE"
+if mksquashfs "$SQUASHFS_ROOT_DIR" airootfs.sfs -quiet -processors "$PROCESSORS" 2>>"$LOG_FILE"
 then
     echo "* Successfully recreated Arch root archive ('airootfs.sfs')."
 else
