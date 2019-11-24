@@ -1,0 +1,162 @@
+Module                  Size  Used by
+fuse                  139264  3
+ccm                    20480  6
+btusb                  65536  0
+btrtl                  24576  1 btusb
+btbcm                  16384  1 btusb
+btintel                28672  1 btusb
+bluetooth             675840  5 btrtl,btintel,btbcm,btusb
+ecdh_generic           16384  1 bluetooth
+ecc                    32768  1 ecdh_generic
+uvcvideo              114688  0
+x86_pkg_temp_thermal    20480  0
+intel_powerclamp       20480  0
+coretemp               20480  0
+snd_soc_skl           118784  0
+snd_hda_codec_hdmi     65536  1
+kvm                   778240  0
+snd_soc_hdac_hda       24576  1 snd_soc_skl
+snd_hda_codec_realtek   126976  1
+snd_hda_ext_core       36864  2 snd_soc_hdac_hda,snd_soc_skl
+snd_hda_codec_generic    94208  1 snd_hda_codec_realtek
+snd_soc_skl_ipc        69632  1 snd_soc_skl
+ledtrig_audio          16384  2 snd_hda_codec_generic,snd_hda_codec_realtek
+snd_soc_sst_ipc        20480  1 snd_soc_skl_ipc
+snd_soc_sst_dsp        40960  1 snd_soc_skl_ipc
+snd_soc_acpi_intel_match    28672  1 snd_soc_skl
+snd_soc_acpi           16384  2 snd_soc_acpi_intel_match,snd_soc_skl
+hid_rmi                24576  0
+rmi_core               94208  1 hid_rmi
+snd_soc_core          286720  2 snd_soc_hdac_hda,snd_soc_skl
+irqbypass              16384  1 kvm
+videobuf2_vmalloc      20480  2 rmi_core,uvcvideo
+i915                 2326528  4
+videobuf2_memops       20480  1 videobuf2_vmalloc
+crct10dif_pclmul       16384  1
+hid_sensor_accel_3d    20480  0
+hid_sensor_gyro_3d     20480  0
+hid_sensor_als         20480  0
+crc32_pclmul           16384  0
+hid_sensor_incl_3d     20480  0
+hid_sensor_magn_3d     20480  0
+hid_sensor_rotation    20480  0
+videobuf2_v4l2         28672  2 rmi_core,uvcvideo
+hid_sensor_trigger     20480  12 hid_sensor_gyro_3d,hid_sensor_incl_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_magn_3d,hid_sensor_rotation
+ghash_clmulni_intel    16384  0
+industrialio_triggered_buffer    16384  6 hid_sensor_gyro_3d,hid_sensor_incl_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_magn_3d,hid_sensor_rotation
+videobuf2_common       57344  3 rmi_core,videobuf2_v4l2,uvcvideo
+kfifo_buf              16384  1 industrialio_triggered_buffer
+hid_sensor_iio_common    20480  7 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_incl_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_magn_3d,hid_sensor_rotation
+mousedev               24576  0
+snd_compress           28672  1 snd_soc_core
+industrialio           90112  9 industrialio_triggered_buffer,hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_incl_3d,kfifo_buf,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_magn_3d,hid_sensor_rotation
+ac97_bus               16384  1 snd_soc_core
+snd_pcm_dmaengine      16384  1 snd_soc_core
+videodev              237568  4 rmi_core,videobuf2_v4l2,uvcvideo,videobuf2_common
+joydev                 28672  0
+nls_iso8859_1          16384  1
+nls_cp437              20480  1
+snd_hda_intel          53248  3
+iwlmvm                471040  0
+mc                     61440  4 videodev,videobuf2_v4l2,uvcvideo,videobuf2_common
+hid_multitouch         32768  0
+hid_sensor_hub         24576  8 hid_sensor_gyro_3d,hid_sensor_trigger,hid_sensor_iio_common,hid_sensor_incl_3d,hid_sensor_als,hid_sensor_accel_3d,hid_sensor_magn_3d,hid_sensor_rotation
+snd_hda_codec         159744  5 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_realtek,snd_soc_hdac_hda
+aesni_intel           372736  4
+i2c_algo_bit           16384  1 i915
+iTCO_wdt               16384  0
+hid_generic            16384  0
+mei_hdcp               24576  0
+iTCO_vendor_support    16384  1 iTCO_wdt
+aes_x86_64             20480  1 aesni_intel
+vfat                   24576  1
+intel_rapl_msr         20480  0
+mac80211              999424  1 iwlmvm
+fat                    86016  1 vfat
+drm_kms_helper        212992  1 i915
+crypto_simd            16384  1 aesni_intel
+snd_hda_core          102400  8 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_ext_core,snd_hda_codec,snd_hda_codec_realtek,snd_soc_hdac_hda,snd_soc_skl
+wmi_bmof               16384  0
+cryptd                 24576  2 crypto_simd,ghash_clmulni_intel
+libarc4                16384  1 mac80211
+glue_helper            16384  1 aesni_intel
+intel_wmi_thunderbolt    20480  0
+intel_cstate           16384  0
+snd_hwdep              20480  1 snd_hda_codec
+intel_uncore          147456  0
+drm                   516096  5 drm_kms_helper,i915
+iwlwifi               393216  1 iwlmvm
+intel_rapl_perf        16384  0
+snd_pcm               135168  8 snd_hda_codec_hdmi,snd_hda_intel,snd_hda_ext_core,snd_hda_codec,snd_soc_core,snd_soc_skl,snd_hda_core,snd_pcm_dmaengine
+intel_gtt              24576  1 i915
+pcspkr                 16384  0
+snd_timer              40960  1 snd_pcm
+input_leds             16384  0
+snd                   110592  16 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek,snd_timer,snd_compress,snd_soc_core,snd_pcm
+agpgart                53248  2 intel_gtt,drm
+i2c_i801               36864  0
+cfg80211              856064  3 iwlmvm,iwlwifi,mac80211
+processor_thermal_device    20480  0
+syscopyarea            16384  1 drm_kms_helper
+soundcore              16384  1 snd
+idma64                 20480  0
+intel_rapl_common      28672  2 intel_rapl_msr,processor_thermal_device
+mei_me                 45056  1
+sysfillrect            16384  1 drm_kms_helper
+int340x_thermal_zone    16384  1 processor_thermal_device
+sysimgblt              16384  1 drm_kms_helper
+intel_xhci_usb_role_switch    16384  0
+intel_lpss_pci         20480  0
+mei                   122880  3 mei_hdcp,mei_me
+intel_soc_dts_iosf     20480  1 processor_thermal_device
+fb_sys_fops            16384  1 drm_kms_helper
+roles                  16384  1 intel_xhci_usb_role_switch
+intel_pch_thermal      16384  0
+intel_lpss             16384  1 intel_lpss_pci
+ideapad_laptop         24576  0
+i2c_hid                32768  0
+sparse_keymap          16384  1 ideapad_laptop
+rfkill                 28672  6 bluetooth,ideapad_laptop,cfg80211
+hid                   143360  5 i2c_hid,hid_multitouch,hid_sensor_hub,hid_generic,hid_rmi
+wmi                    36864  3 intel_wmi_thunderbolt,wmi_bmof,ideapad_laptop
+tpm_crb                20480  0
+tpm_tis                16384  0
+tpm_tis_core           24576  1 tpm_tis
+battery                24576  0
+int3400_thermal        20480  0
+tpm                    73728  3 tpm_tis,tpm_crb,tpm_tis_core
+evdev                  24576  12
+rng_core               16384  1 tpm
+mac_hid                16384  0
+acpi_thermal_rel       16384  1 int3400_thermal
+ac                     16384  0
+vboxnetflt             32768  0
+vboxnetadp             28672  0
+vboxpci                28672  0
+vboxdrv               503808  3 vboxpci,vboxnetadp,vboxnetflt
+sg                     40960  0
+crypto_user            16384  0
+ip_tables              36864  0
+x_tables               49152  1 ip_tables
+ext4                  770048  1
+crc32c_generic         16384  0
+crc16                  16384  2 bluetooth,ext4
+mbcache                16384  1 ext4
+jbd2                  135168  1 ext4
+sd_mod                 57344  4
+ahci                   40960  3
+libahci                40960  1 ahci
+serio_raw              20480  0
+sdhci_pci              49152  0
+atkbd                  36864  0
+libps2                 20480  1 atkbd
+cqhci                  32768  1 sdhci_pci
+libata                282624  2 libahci,ahci
+sdhci                  69632  1 sdhci_pci
+xhci_pci               20480  0
+mmc_core              184320  3 sdhci,cqhci,sdhci_pci
+crc32c_intel           24576  1
+scsi_mod              249856  3 sd_mod,libata,sg
+xhci_hcd              278528  1 xhci_pci
+i8042                  32768  1 ideapad_laptop
+serio                  28672  5 rmi_core,serio_raw,atkbd,i8042

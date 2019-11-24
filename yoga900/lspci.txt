@@ -1,0 +1,63 @@
+00:00.0 Host bridge: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers (rev 08)
+	Subsystem: Lenovo Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+	Kernel driver in use: skl_uncore
+00:02.0 VGA compatible controller: Intel Corporation Skylake GT2 [HD Graphics 520] (rev 07)
+	Subsystem: Lenovo Skylake GT2 [HD Graphics 520]
+	Kernel driver in use: i915
+	Kernel modules: i915
+00:04.0 Signal processing controller: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem (rev 08)
+	Subsystem: Lenovo Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem
+	Kernel driver in use: proc_thermal
+	Kernel modules: processor_thermal_device
+00:14.0 USB controller: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP USB 3.0 xHCI Controller
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-LP Thermal subsystem (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP Thermal subsystem
+	Kernel driver in use: intel_pch_thermal
+	Kernel modules: intel_pch_thermal
+00:15.0 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #0 (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP Serial IO I2C Controller
+	Kernel driver in use: intel-lpss
+	Kernel modules: intel_lpss_pci
+00:15.1 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #1 (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP Serial IO I2C Controller
+	Kernel driver in use: intel-lpss
+	Kernel modules: intel_lpss_pci
+00:15.3 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #3 (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP Serial IO I2C Controller
+	Kernel driver in use: intel-lpss
+	Kernel modules: intel_lpss_pci
+00:16.0 Communication controller: Intel Corporation Sunrise Point-LP CSME HECI #1 (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP CSME HECI
+	Kernel driver in use: mei_me
+	Kernel modules: mei_me
+00:17.0 SATA controller: Intel Corporation Sunrise Point-LP SATA Controller [AHCI mode] (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP SATA Controller [AHCI mode]
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 (rev f1)
+	Kernel driver in use: pcieport
+00:1c.5 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 (rev f1)
+	Kernel driver in use: pcieport
+00:1f.0 ISA bridge: Intel Corporation Sunrise Point-LP LPC Controller (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP LPC Controller
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-LP PMC (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP PMC
+00:1f.3 Audio device: Intel Corporation Sunrise Point-LP HD Audio (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP HD Audio
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel, snd_soc_skl
+00:1f.4 SMBus: Intel Corporation Sunrise Point-LP SMBus (rev 21)
+	Subsystem: Lenovo Sunrise Point-LP SMBus
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+01:00.0 Network controller: Intel Corporation Wireless 8260 (rev 3a)
+	Subsystem: Intel Corporation Wireless 8260
+	Kernel driver in use: iwlwifi
+	Kernel modules: iwlwifi
+02:00.0 SD Host controller: O2 Micro, Inc. Device 8620 (rev 01)
+	Subsystem: Lenovo Device 3800
+	Kernel driver in use: sdhci-pci
+	Kernel modules: sdhci_pci
