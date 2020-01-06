@@ -1,8 +1,9 @@
 """
 """ Mikael Henriksson .vimrc for the vim editor.
-""" Updated: 2018-01-14
-""" Updated: 2018-09-03
-""" Updated: 2018-10-31
+"""
+""" Updated 2020-01-06:
+"""         - Removed the Vim easy-clip pluggin.
+"""         - Commented the YCM extra global configuration.
 """
 """ Requires the Vundle Vim plugin manager. Information on how this component
 """ can be installed can be found on: 'https://github.com/VundleVim/Vundle.vim'.
@@ -24,8 +25,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-repeat'
-Plugin 'svermeulen/vim-easyclip'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerline/powerline-fonts'
@@ -41,17 +40,17 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 1
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_extra_conf_globlist = ['~/programming/mOS/*']
+"let g:ycm_extra_conf_globlist = ['~/programming/mOS/*']
 
 
 " --- Airline settings. ---
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'           
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}              " This 'ugly' trigram fallback is
-endif                                       " used since my fonts never seems to
-"let g:airline_symbols.whitespace = '三'     " properly display the 'trigram for
-"let g:airline_symbols.linenr = '三'         " for heaven' character.
+endif                                       " used since my term never seems to
+let g:airline_symbols.whitespace = '三'     " properly display the 'trigram for
+let g:airline_symbols.linenr = '三'         " heaven' character.
 
 
 " --- Line numbering, toggle with Ctrl+L+L. ---
