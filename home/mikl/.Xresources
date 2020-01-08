@@ -36,12 +36,17 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
+### DPI. 172 = 96 * 1.8
+Xft.dpi:	172
+
 ### Font settins.
-*.font: xft:Hack:size=22,\
-        xft:Noto Sans Mono:size=22,\
-        xft:DejaVu Sans Mono:size=22,\
-        xft:WenQuanYi Micro Hei Mono:size=22
-        
+*.font:     xft:Hack:style=Regular:size=12, \
+            xft:MesloLGS NF:style=Regular:size=12, \
+            xft:WenQuauYi Zen Hei Mono:style=Regular:size=12, \
+            xft:DejaVu Sans:size=12, \
+            xft:PowerlineSymbols:style=Medium:size=12, \
+
+
 *.alpha: 150
 
 ### Emacs settings.
@@ -50,3 +55,5 @@ emacs.font: Monospace 12
 ### Urxvt settings.
 URxvt.letterSpace:          0
 URxvt.scrollBar:            false
+URxvt*transparent:          false
+URxvt*shading:              60
