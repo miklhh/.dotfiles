@@ -6,6 +6,9 @@ setxkbmap -option caps:escape
 setxkbmap se
 xset r rate 225 25
 
+# Disable touchscreen.
+xinput disable 10
+
 # Launch applets.
 nm-applet &
 blueman-applet &
