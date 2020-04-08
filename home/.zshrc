@@ -26,19 +26,28 @@ export PATH="$HOME/sw:$PATH"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Export HOST and NAME variable.
+export HOST=$(hostname)
+export NAME=$(whoami)
+
 # It is only worth using oh-my-zsh in a non linux tty type terminal. Such a use
 # would greatly garble a tty terminal output.
-if [ "$TERM" != "linux" ]
+if [ "$TERM" != "linux" ] && [ -f "$ZSH/oh-my-zsh.sh" ]
 then
     source $ZSH/oh-my-zsh.sh
 else
-    PROMPT="$PWD \$ $reset_color"
+    autoload -U colors && colors
+    PROMPT="%{$fg[red]%}$NAME%{$reset_color%}@%{$fg[green]%}$HOST%{$reset_color%}%{$fg[magenta]%} $PWD$reset_color \$ "
 fi
+
+# Export HOST variable.
+export HOST=$(hostname)
 
 # User configuration
 export EDITOR='vim'
 
 # Aliases
+alias ls='ls --color=auto'
 alias ll='ls -l'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
