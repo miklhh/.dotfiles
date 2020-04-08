@@ -17,9 +17,15 @@
 """ these fonts, run the uninstall.sh script from the same directory.
 
 
-" --- Vundle package manager for Vim. ---
+" --- Vim != Vi ---
 set nocompatible
 filetype off
+
+
+" --- Set leaderkey. ---
+let mapleader = " "
+
+" --- Vundle package manager for Vim. ---
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -29,6 +35,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerline/powerline-fonts'
 Plugin 'morhetz/gruvbox'
+Plugin 'ap/vim-css-color'
 
 call vundle#end()
 filetype plugin indent on
@@ -45,7 +52,7 @@ let g:ycm_enable_diagnostic_highlighting = 0
 
 " --- Airline settings. ---
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'bubblegum'           
+let g:airline_theme = 'bubblegum'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}              " This 'ugly' trigram fallback is
 endif                                       " used since my term never seems to
@@ -69,13 +76,6 @@ set expandtab
 " --- Specialfile treatments. ---
 autocmd BufEnter *.tcc :setlocal filetype=cpp
 autocmd BufEnter *.tpp :setlocal filetype=cpp
-
-
-" --- Natural split navigations. ---
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
 
 
 " --- Other settings. ---

@@ -11,6 +11,13 @@ export ZSH="/home/mikl/.oh-my-zsh"
 # Theme of zsh.
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# High DPI features.
+export QT_AUTO_SCEEN_SCALE_FACTOR=0
+export QT_SCALE_FACTOR=1.25
+
+# Extend PATH
+export PATH="$HOME/sw:$PATH"
+
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*

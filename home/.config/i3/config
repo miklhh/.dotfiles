@@ -7,18 +7,17 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Hack Bold 21
-#font pango:Inconsolata, Icons 26
+font pango:Hack Bold 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 20
+#font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -31,11 +30,14 @@ font pango:Hack Bold 21
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -91,37 +93,49 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-bindcode $mod+49 workspace §
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session) COMMENTED OUT. KILL i3 MANUALLY INSTEAD.
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -142,9 +156,10 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -152,35 +167,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        position top
-        #status_command i3status -c ~/.config/i3/i3status.conf
         status_command i3blocks
-        colors {
-            background #10001B
-            #                   border  backgr. text
-            focused_workspace   #AAAAAA #204090 #DDDDDD
-            inactive_workspace  #555555 #051580 #BBBBBB
-        }
 }
 
+# Binds for XF86 volume control with amixer.
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -M -q -D pulse sset Master 2%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -M -q -D pulse sset Master 2%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec --no-startup-id amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
-# ------------------------------------------------------------------------------
-# User-added function keys.
-bindsym XF86AudioMute 		    exec --no-startup-id pamixer -t && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume 	exec --no-startup-id pamixer -d 3 && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume	exec --no-startup-id pamixer -i 3 && pkill -RTMIN+1 i3blocks
-bindsym XF86MonBrightnessUp     exec --no-startup-id xbacklight -inc 10 && -RTMIN+1 i3blocks
-bindsym XF86MonBrightnessDown   exec --no-startup-id xbacklight -dec 10 && -RTMIN+1 i3blocks
-bindsym $mod+Shift+Return       exec env QT_SCALE_FACTOR=2.25 dolphin
-bindcode 107                    exec --no-startup-id scrot -e 'mv $f ~/media/images/screenshots/%Y-%m-%d_%H:%M:%S.png'
+# Binds for XF86 screen brightness controll with xbacklight.
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
-# ------------------------------------------------------------------------------
-# Other user-added key-binds.
-bindsym $mod+d exec dmenu_run -fn 'Droid Sans Mono-18'
-
-
-# ------------------------------------------------------------------------------
-# User-added startup functionality.
-exec --no-startup-id nm-applet                      # Use nm-applet on startup.
-exec --no-startup-id pamixer --set-volume 0         # Zero volume on startup.
-exec --no-startup-id pamixer -m                     # Mute sound on startup.
+# Bind printscreen
+bindsym Print exec --no-startup-id screenshot_interactive
