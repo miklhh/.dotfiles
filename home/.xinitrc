@@ -7,9 +7,8 @@ xrdb ~/.Xresources
 # Keyboard settings. Swedish keyboard layout with ESC and CAPS_LOCK swaped. Also
 # set a comfortable repeat delay and rate.
 #
-setxkbmap -option caps:escape
-setxkbmap se
-xset r rate 225 25
+command -v "setxkbmap" && setxkbmap -option caps:escape && setxkbmap se
+command -v "xset" && xset r rate 225 25
 
 #
 # Disable touchscreen on GLaDOS.
