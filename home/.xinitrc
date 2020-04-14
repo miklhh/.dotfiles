@@ -11,9 +11,9 @@ command -v "setxkbmap" && setxkbmap -option caps:escape && setxkbmap se
 command -v "xset" && xset r rate 225 25
 
 #
-# Disable touchscreen on GLaDOS.
+# Disable touchscreen on GLaDOS, it really stinks...
 #
-[ "$(hostname)" = "GLaDOS" ] && xinput disable 10
+[ "$(hostname)" = "GLaDOS" ] && xinput --disable "ELAN21EF:00 04F3:21EF"
 
 #
 # Launch applets.
