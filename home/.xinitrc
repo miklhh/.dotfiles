@@ -11,9 +11,15 @@ command -v "setxkbmap" && setxkbmap -option caps:escape && setxkbmap se
 command -v "xset" && xset r rate 225 25
 
 #
-# Disable touchscreen on GLaDOS, it really stinks...
+# Machine specific settings. Disable touchscreen on GLaDOS and enable 144 Hz 
+# monitor refresh rate on bumble.
 #
 [ "$(hostname)" = "GLaDOS" ] && xinput --disable "ELAN21EF:00 04F3:21EF"
+[ "$(hostname)" = "bumble" ] && xrandr --rate 144
+
+#
+# Try to set the monitor refresh rate to 144
+#
 
 #
 # Launch applets.
