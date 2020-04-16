@@ -11,7 +11,7 @@ command -v "setxkbmap" && setxkbmap -option caps:escape && setxkbmap se
 command -v "xset" && xset r rate 225 25
 
 #
-# Machine specific settings. Disable touchscreen on GLaDOS and enable 144 Hz 
+# Machine specific settings. Disable touchscreen on GLaDOS and enable 144 Hz
 # monitor refresh rate on bumble.
 #
 [ "$(hostname)" = "GLaDOS" ] && xinput --disable "ELAN21EF:00 04F3:21EF"
@@ -27,6 +27,7 @@ command -v "xset" && xset r rate 225 25
 command -v "nm-applet" && nm-applet &
 command -v "blueman-applet" && blueman-applet &
 command -v "redshift" && redshift -t 5500:3500 &
+command -v "volumeicon" && volumeicon &
 
 #
 # Set background image.
