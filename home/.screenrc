@@ -1,0 +1,1 @@
+hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{= kB}%?%-Lw%?%{+b r}(%{G}%n*%f %t%?(%u)%?%{r})%{-b B}%?%+Lw%?%?%= %{g}%]'
