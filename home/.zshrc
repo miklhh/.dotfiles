@@ -1,54 +1,34 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#
+# My personal .zshrc configuration as of 2020-04-20 for usage at bumble and
+# GLaDOS. Very miniscule configuration, but it does the job.
+#
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/mikl/.oh-my-zsh"
 
-# Theme of zsh.
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Basic ENV variables.
+export HOST=$(hostname)
+export NAME=$(whoami)
+export PATH="$HOME/sw:$PATH"
+export EDITOR="vim"
+export PAGER="less"
 
 # High DPI features.
 export QT_AUTO_SCEEN_SCALE_FACTOR=0
 export QT_SCALE_FACTOR=1.25
 
-# Extend PATH
-export PATH="$HOME/sw:$PATH"
-
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-# Export HOST and NAME variable.
-export HOST=$(hostname)
-export NAME=$(whoami)
-
-# It is only worth using oh-my-zsh in a non linux tty type terminal. Such a use
-# would greatly garble a tty terminal output.
-if [ "$TERM" != "linux" ] && [ -f "$ZSH/oh-my-zsh.sh" ]
-then
-    source $ZSH/oh-my-zsh.sh
-else
-    autoload -U colors && colors
-    PROMPT="%{$fg[red]%}$NAME%{$reset_color%}@%{$fg[green]%}$HOST%{$reset_color%}%{$fg[magenta]%} $PWD$reset_color \$ "
-fi
-
-# Export HOST variable.
-export HOST=$(hostname)
-
-# User configuration
-export EDITOR='vim'
-
-# Aliases
+# ZSH aliases.
 alias ls='ls --color=auto'
 alias ll='ls -l'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# It is only worth using P10K in a non linux TTY type terminal (and if it
+# exists!). Usage in TTYs and on systems without p10k is laaaame.
+if [ "$TERM" != "linux" ] && [ -f "$HOME/powerlevel10k/powerlevel10k.zsh-theme" ]
+then
+    P10K_NORMAL="$HOME/.p10k_norm.zsh"
+    P10K_FLAT="$HOME/.p10k_flat.zsh"
+    fc-list -q 'MesloLGS NF' && source "$P10K_NORMAL" || source "$P10K_FLAT"
+    source ~/powerlevel10k/powerlevel10k.zsh-theme
+else
+    autoload -U colors && colors
+    PROMPT="%{$fg[cyan]%}$NAME%{$reset_color%}@%{$fg[green]%}$HOST%{$reset_color%}%{$fg[yellow]%} $PWD$reset_color \$ "
+fi
+
