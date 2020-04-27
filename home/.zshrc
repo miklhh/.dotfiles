@@ -8,6 +8,9 @@
 #
 
 
+# Test.
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 # Export base env-variables.
 export HOST=$(hostname)
 export NAME=$(whoami)
@@ -59,8 +62,8 @@ setopt hist_expire_dups_first # Delete duplicates first when HISTFILE is full.
 setopt hist_ignore_all_dups   # Remove older enties if command is a duplicate.
 setopt share_history          # Share history among ZSH sessions.
 setopt hist_verify            # Upon hitting enter, reload line into edit buf.
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
 
 
 #
