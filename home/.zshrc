@@ -67,10 +67,12 @@ bindkey '^[[B' history-beginning-search-forward
 
 
 #
-# Rebind HOME and END keys to get to the begining/end of the current line.
+# Bind HOME, END & DEL keys to get to the begining/end of the current line and
+# for deleting a character.
 #
 bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
+bindkey '^[[3~' delete-char
 
 
 #
