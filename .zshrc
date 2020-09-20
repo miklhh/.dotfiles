@@ -7,10 +7,6 @@
 #         www.github.com/miklhh
 #
 
-
-# Test.
-export QT_QPA_PLATFORMTHEME="qt5ct"
-
 # Export base env-variables.
 export HOST=$(hostname)
 export NAME=$(whoami)
@@ -18,12 +14,19 @@ export PATH="$HOME/sw:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 
-# High DPI features (what arer they doing here?! fix this you lazy!).
-export QT_AUTO_SCEEN_SCALE_FACTOR=0
-export QT_SCALE_FACTOR=1.25
+# High DPI features (should perhaps be moved elsewhere).
+[ "$(hostname)" = "GLaDOS" ] && export QT_AUTO_SCEEN_SCALE_FACTOR=0
+[ "$(hostname)" = "GLaDOS" ] && export QT_SCALE_FACTOR=1.25
 
 # Aliases (should be exported to .zsh_aliases).
-alias ls='ls --color=auto'
+if [ $(uname -s) = "Darwin" ]
+then
+    # MacOS machine with FreeBSD ls.
+    alias ls='ls -G'
+else
+    # Any other machine (probably Linux).
+    alias ls='ls --color=auto'
+fi
 alias ll='ls -l'
 
 
@@ -33,19 +36,16 @@ alias ll='ls -l'
 # interactive shell session, we source one of two P10K-profiles based on whether
 # the MesloLGD Nerd Font is available through fontconfig or not.
 #
-P10K_INSTALL_DIR="$HOME/powerlevel10k"
-P10K_THEME="$P10K_INSTALL_DIR/powerlevel10k.zsh-theme"
+P10K_THEME="$HOME/powerlevel10k/powerlevel10k.zsh-theme"
 if [ "$TERM" != "linux" ] && [ -f "$P10K_THEME" ]
 then
-    # Interactive prompt settings.
-    P10K_NORMAL="$HOME/.p10k_norm.zsh"
-    P10K_FLAT="$HOME/.p10k_flat.zsh"
-    fc-list -q 'MesloLGS NF' && source "$P10K_NORMAL" || source "$P10K_FLAT"
+    # Interactive prompt settings. To generate a new one, run 'p10k configure'.
+    source "$HOME/.p10k.zsh"
     source "$P10K_THEME"
 else
     # Not so fun prompt settings.
     autoload -U colors && colors
-    PROMPT="%{$fg[cyan]%}$NAME%{$reset_color%}@%{$fg[green]%}$HOST%{$reset_color%}%{$fg[yellow]%} $PWD$reset_color \$ "
+    PROMPT="%{$fg[cyan]%}$NAME%{$reset_color%}@%{$fg[green]%}$HOST%{$reset_color%}%{$fg[yellow]%} %~$reset_color \$ "
 fi
 
 

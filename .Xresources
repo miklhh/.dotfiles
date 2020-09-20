@@ -1,4 +1,4 @@
-### Font color.
+! Font colors.
 ! special
 *.foreground:   #c5c8c6
 *.background:   #1d1f21
@@ -35,28 +35,30 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
-### DPI. 172 = 96 * 1.8
-Xft.dpi:	172
+!
+! DPI settings. It appears as GNOME does not honor this setting and overwrites
+! the DPI setting after .Xresources have been loaded. Oh well, still usefull for
+! other DE/WM.
+!
+Xft.dpi:	89
 
-### Font settins.
+! Font settins.
+*.alpha: 150
 *.font:     xft:Hack:style=Regular:size=12, \
             xft:MesloLGS NF:style=Regular:size=12, \
             xft:WenQuauYi Zen Hei Mono:style=Regular:size=12, \
             xft:DejaVu Sans:size=12, \
             xft:PowerlineSymbols:style=Medium:size=12, \
 
-
-*.alpha: 150
-
-### Cursor size.
+! Cursor settings.
 Xcursor.size:   32
 Xcursor.theme:  redglass
 *.cursorColor:  #c5c8c6
 
-### Emacs settings.
+! Emacs settings.
 emacs.font: Monospace 12
 
-### Urxvt settings.
+! Urxvt settings.
 URxvt.letterSpace:          0
 URxvt.scrollBar:            false
 URxvt*transparent:          false

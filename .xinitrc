@@ -18,10 +18,6 @@ command -v "xset" && xset r rate 225 25
 [ "$(hostname)" = "bumble" ] && xrandr --rate 144
 
 #
-# Try to set the monitor refresh rate to 144
-#
-
-#
 # Launch applets.
 #
 command -v "nm-applet" && nm-applet &
@@ -36,6 +32,9 @@ BACKGROUND_IMAGE="$HOME/.config/background.jpeg"
 [ -f "$BACKGROUND_IMAGE" ] && feh --bg-scale "$BACKGROUND_IMAGE"
 
 #
-# Start i3 window manager.
+# Start windowing system. User should probably start gnome-sessions with a
+# display manager if they can.
 #
 exec i3 --shmlog-size=26214400
+#exec gnome-session
+#exec startxfce4
