@@ -8,7 +8,14 @@ set nocompatible
 filetype off
 
 " --- Enable 24-bit true color support
-set termguicolors
+if exists('+termguicolors')
+    " TMUX compliance
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+    " Enable true color
+    set termguicolors
+endif
 
 " --- Vundle ---
 " Note to self: Vundle has been depricated and should probably be replaced
@@ -93,3 +100,4 @@ set incsearch       " Highlight text when searching
 set signcolumn=no   " No extra linting column
 syntax on
 set nowrap
+
