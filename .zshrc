@@ -6,14 +6,22 @@
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
 
+#
 # Export base env-variables.
+#
 export HOST=$(hostname)
 export NAME=$(whoami)
-export PATH="$HOME/sw:$PATH"
 export EDITOR="vim"
 export PAGER="less"
 
-# Aliases (should be exported to .zsh_aliases).
+#
+# Source .zsh-extra which can contain system specific configuration.
+#
+[ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra" 
+
+#
+# Coloring when using ls.
+#
 if [ $(uname -s) = "Darwin" ]
 then
     # MacOS machine with FreeBSD ls.
