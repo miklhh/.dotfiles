@@ -35,7 +35,7 @@ filetype plugin indent on
 " --- Gruvbox colorscheme settings. Setting explanation can be found:
 "  https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
-let g:gruvbox_italic='1'
+let g:gruvbox_italic='0'
 let g:gruvbox_contrast_dark='hard'
 set background=dark
 colorscheme gruvbox
@@ -89,6 +89,9 @@ let NERDTreeShowLineNumbers=1
 
 " --- Undotree settings.
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" --- Redraw on <leader+r>
+nnoremap <leader>r :redraw!<CR>
 
 " --- Other settings
 set laststatus=2
