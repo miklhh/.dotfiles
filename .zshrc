@@ -28,7 +28,7 @@ then
     alias ls='ls -G'
 else
     # Any other machine (probably Linux).
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto --group-directories-first'
 fi
 alias ll='ls -l'
 
