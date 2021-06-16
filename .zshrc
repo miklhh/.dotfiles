@@ -61,7 +61,7 @@ export SAVEHIST=5000          # Max events stored in history file
 setopt extended_history       # Record timestamp in history file
 setopt hist_expire_dups_first # Delete duplicates first when HISTFILE is full
 setopt hist_ignore_all_dups   # Remove older enties if command is a duplicate
-setopt share_history          # Share history among ZSH sessions
+setopt inc_append_history     # Load history only on startup but append in realtime
 setopt hist_verify            # Upon hitting enter, reload line into edit buf
 bindkey '^[[A' history-beginning-search-backward # '^[[A' = Up-arrow
 bindkey '^[[B' history-beginning-search-forward  # '^[[B' = Down-arrow
