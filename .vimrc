@@ -29,6 +29,8 @@ call vundle#begin()
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'mbbill/undotree'
     Plugin 'morhetz/gruvbox'
+    Plugin 'junegunn/fzf'
+    Plugin 'junegunn/vim-peekaboo'
 call vundle#end()
 filetype plugin indent on
 
@@ -53,6 +55,9 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" --- FZF settings
+map <Leader>e :FZF<CR>
 
 " --- Line and column numbering ---
 set number
