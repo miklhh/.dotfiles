@@ -77,6 +77,12 @@ bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 
+#
+# Use ripgrep with fzf if available.
+#
+if which rg 1>/dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+fi
 
 #
 # Basic autocompletion.
