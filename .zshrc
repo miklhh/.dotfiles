@@ -1,10 +1,11 @@
 #
 # Configuration is very miniscule but it does the job both for faint tty
 # sessions and in interactive colored terminal emulators. If Powerlevel10k is
-# available, it should be sourced.
+# available, it is sourced.
 #
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
+
 
 #
 # Export base env-variables.
@@ -17,7 +18,7 @@ export PAGER="less"
 #
 # Source .zsh-extra which can contain system specific configuration.
 #
-[ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra" 
+[ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra"
 
 #
 # Coloring when using ls.
@@ -33,27 +34,25 @@ fi
 alias ll='ls -l'
 
 #
-# Prompt settings. In a TTY environment we use a basic zsh standard prompt, same
+# Prompt settings. In a tty environment we use a basic zsh standard prompt. Same
 # thing goes if P10K is not installed. If P10K is installed and this is an
-# interactive shell session, we source one of two P10K-profiles based on whether
-# the MesloLGD Nerd Font is available through fontconfig or not.
+# interactive shell session, we source P10K profile.
 #
 P10K_THEME="$HOME/powerlevel10k/powerlevel10k.zsh-theme"
 if [ "$TERM" != "linux" ] && [ -f "$P10K_THEME" ]
 then
-    # Interactive prompt settings. To generate a new one, run 'p10k configure'.
+    # Interactive prompt settings. To generate a new prompt (located in
+    # $HOME/.p10k.zsh), run 'p10k configure'.
     source "$P10K_THEME"
     source "$HOME/.p10k.zsh"
 else
-    # Not so fun prompt settings.
+    # Non P10K prompt.
     autoload -U colors && colors
     PROMPT="[%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} %{$fg[yellow]%}%~%{$reset_color%}] $ "
 fi
 
-
 #
-# History settings. Most of these settings are straight up taken from the
-# 'oh-my-zsh/lib/history.zsh' configuration. They don't require oh-my-zsh.
+# Zsh history settings.
 #
 [ -z "$HISTFILE" ] && export HISTFILE="$HOME/.zsh-history"
 export HISTSIZE=5000          # Max events stored in session
@@ -67,7 +66,6 @@ bindkey '^[[A' history-beginning-search-backward # '^[[A' = Up-arrow
 bindkey '^[[B' history-beginning-search-forward  # '^[[B' = Down-arrow
 bindkey -a j history-beginning-search-forward
 bindkey -a k history-beginning-search-backward
-
 
 #
 # Bind HOME, END & DEL keys to get to the begining/end of the current line and
@@ -85,7 +83,16 @@ if which rg 1>/dev/null; then
 fi
 
 #
-# Basic autocompletion.
+# Change directory fzf style.
+#
+if which fzf 1>/dev/null; then
+    alias cdd='cd $(find . -type d | fzf)'
+else
+    alias cdd='echo "fzf not in \$PATH"'
+fi
+
+#
+# Enable zsh autocompletion.
 #
 autoload -U compinit
 compinit
