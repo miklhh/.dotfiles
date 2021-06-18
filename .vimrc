@@ -30,6 +30,7 @@ call vundle#begin()
     Plugin 'mbbill/undotree'
     Plugin 'morhetz/gruvbox'
     Plugin 'junegunn/fzf'
+    Plugin 'junegunn/fzf.vim'
     Plugin 'junegunn/vim-peekaboo'
 call vundle#end()
 filetype plugin indent on
@@ -56,8 +57,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" --- FZF settings
+" --- FZF bindings
 map <Leader>e :FZF<CR>
+map <Leader>w :Buffers<CR>
 
 " --- Line and column numbering ---
 set number
@@ -106,6 +108,7 @@ set hlsearch        " Highlight on search
 set hidden          " Keep buffers open in bg for fast reopening
 set incsearch       " Highlight text when searching
 set signcolumn=no   " No extra linting column
+set cursorline      " Highlight the current line
 syntax on
 set nowrap
 
