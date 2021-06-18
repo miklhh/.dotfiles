@@ -80,6 +80,13 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
+" Pinky friendly substitute for <C-u> and <C-d>
+nnoremap U <C-u>
+nnoremap D <C-d>
+xnoremap U <C-u>
+xnoremap D <C-d>
+
+
 " Cycle numbered registers when yanking. This allow the numbered registers to
 " act like a ring buffer when performing the yank operation (just like delete
 " already does!)
