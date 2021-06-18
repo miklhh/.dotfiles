@@ -22,15 +22,29 @@ endif
 " with some other plugin manager. Maybe have a look at Vim-Plug.
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'preservim/nerdtree'
+
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
+
+    " Trees
     Plugin 'mbbill/undotree'
+    Plugin 'preservim/nerdtree'
+
+    " Colorscheme
     Plugin 'morhetz/gruvbox'
+
+    " Vim fuzzyfinding
     Plugin 'junegunn/fzf'
     Plugin 'junegunn/fzf.vim'
+
+    " Clipboard peek-a-boo
     Plugin 'junegunn/vim-peekaboo'
+
+    " Gives :Bdetele and :Bwipeout which behaves like well designed citizens
+    Plugin 'moll/vim-bbye'
+
 call vundle#end()
 filetype plugin indent on
 
