@@ -86,7 +86,7 @@ fi
 # Change directory fzf style.
 #
 if which fzf 1>/dev/null; then
-    alias cdd='cd $(find . -type d | fzf)'
+    alias cdd='cd $(find . -type d | fzf || echo .)'
 else
     alias cdd='echo "fzf not in \$PATH"'
 fi
