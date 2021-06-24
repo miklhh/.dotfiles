@@ -83,6 +83,12 @@ if which rg 1>/dev/null; then
 fi
 
 #
+# Vi keybindings. This is not always loaded by default if not specified
+# explicitly, i.e., on MacOSX iTerm2.
+#
+bindkey -v
+
+#
 # Change directory fzf style.
 #
 if which fzf 1>/dev/null; then
