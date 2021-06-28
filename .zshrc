@@ -16,16 +16,21 @@ export EDITOR="vim"
 export PAGER="less"
 
 #
-# Source .zsh-extra which can contain system specific configuration.
+# Source .zsh-extra which can contain system specific configuration
 #
 [ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra"
 
 #
-# Coloring when using ls.
+# Add .cargo/bin to path if available
+#
+[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:$PATH"
+
+#
+# Settings for ls
 #
 if [ $(uname -s) = "Darwin" ]
 then
-    # MacOS machine with FreeBSD ls.
+    # MacOS machine with FreeBSD ls
     alias ls='ls -G'
 else
     # Any other machine (probably Linux).
@@ -46,13 +51,13 @@ then
     source "$P10K_THEME"
     source "$HOME/.p10k.zsh"
 else
-    # Non P10K prompt.
+    # Non P10K prompt
     autoload -U colors && colors
     PROMPT="[%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} %{$fg[yellow]%}%~%{$reset_color%}] $ "
 fi
 
 #
-# Zsh history settings.
+# Zsh history settings
 #
 [ -z "$HISTFILE" ] && export HISTFILE="$HOME/.zsh-history"
 export HISTSIZE=5000          # Max events stored in session
@@ -69,14 +74,14 @@ bindkey -a k history-beginning-search-backward
 
 #
 # Bind HOME, END & DEL keys to get to the begining/end of the current line and
-# for deleting a character.
+# for deleting a character
 #
 bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 
 #
-# Use ripgrep with fzf if available.
+# Use ripgrep with fzf if available
 #
 if which rg 1>/dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -84,21 +89,25 @@ fi
 
 #
 # Vi keybindings. This is not always loaded by default if not specified
-# explicitly, i.e., on MacOSX iTerm2.
+# explicitly, i.e., on MacOSX iTerm2
 #
 bindkey -v
 
 #
-# Change directory fzf style.
+# Change directory fzf style
 #
 if which fzf 1>/dev/null; then
-    alias cdd='cd $(find . -type d | fzf || echo .)'
+    if which bfs 1>/dev/null; then
+        alias cdd='cd $(bfs . -type d | fzf || echo .)'
+    else
+        alias cdd='cd $(find . -type d | fzf || echo .)'
+    fi
 else
     alias cdd='echo "fzf not in \$PATH"'
 fi
 
 #
-# Enable zsh autocompletion.
+# Enable zsh autocompletion
 #
 autoload -U compinit
 compinit
