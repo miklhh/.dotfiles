@@ -16,14 +16,19 @@ export EDITOR="vim"
 export PAGER="less"
 
 #
-# Source .zsh-extra which can contain system specific configuration
+# Source ${HOME}.zsh-extra which can contain system specific configuration
 #
 [ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra"
 
 #
-# Add .cargo/bin to path if available
+# Add ${HOME}/.cargo/bin to path if available
 #
 [ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:$PATH"
+
+#
+# Add ${HOME}.local/bin to path if available
+#
+[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:$PATH"
 
 #
 # Settings for ls
