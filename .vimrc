@@ -1,7 +1,11 @@
 """
-""" Minimalist .vimrc version for slow terminal emulators.
+""" True-hearted .vimrc for quick and easy navigation and file editing
 """ Author: Mikael Henriksson
 """
+
+" -----------------------------------------------------------------------------
+" --                             Initialization                              --
+" -----------------------------------------------------------------------------
 
 " Vim != Vi
 set nocompatible
@@ -9,7 +13,7 @@ filetype off
 
 " Enable 24-bit true color support
 if exists('+termguicolors')
-    " TMUX compliance
+    " Tmux compliance
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -17,39 +21,47 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-" -- Vundle --
-" Note to self: Vundle has been depricated and should probably be replaced
-" with some other plugin manager. Maybe have a look at Vim-Plug.
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Enable filetype detection, plugin loading and auto indentation
+filetype plugin indent on
+syntax on
 
-    Plugin 'VundleVim/Vundle.vim'
+" -----------------------------------------------------------------------------
+" --                               Vim Plug                                  --
+" -----------------------------------------------------------------------------
+call plug#begin('~/.vim/plugged')
 
-    Plugin 'vim-airline/vim-airline'
-    Plugin 'vim-airline/vim-airline-themes'
+    " Airline Vim tray
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
-    " Trees
-    Plugin 'mbbill/undotree'
-    Plugin 'preservim/nerdtree'
+    " UndoTree and NerdTree
+    Plug 'mbbill/undotree'
+    Plug 'preservim/nerdtree'
 
     " Colorscheme
-    Plugin 'morhetz/gruvbox'
+    Plug 'morhetz/gruvbox'
 
-    " Vim fuzzyfinding
-    Plugin 'junegunn/fzf'
-    Plugin 'junegunn/fzf.vim'
+    " Vim FZF
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } 
+    Plug 'junegunn/fzf.vim'
+    Plug 'chengzeyi/fzf-preview.vim'
+    "Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
     " Clipboard peek-a-boo
-    Plugin 'junegunn/vim-peekaboo'
+    Plug 'junegunn/vim-peekaboo'
 
     " Gives :Bdetele and :Bwipeout which behaves like well designed citizens
-    Plugin 'moll/vim-bbye'
+    Plug 'moll/vim-bbye'
 
-call vundle#end()
-filetype plugin indent on
+" Initialize plugin system
+call plug#end()
 
-" Gruvbox colorscheme settings. Setting explanation can be found:
-" https://github.com/morhetz/gruvbox/wiki/Configuration
+" -----------------------------------------------------------------------------
+" --                              Appearance                                 --
+" -----------------------------------------------------------------------------
+
+" Gruvbox colorscheme settings
+" More info: https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
 let g:gruvbox_italic='0'
 let g:gruvbox_contrast_dark='hard'
@@ -59,28 +71,33 @@ colorscheme gruvbox
 " Airline settings
 let g:airline_theme = 'gruvbox'
 
-" Map leader key
-let mapleader = " "
-
-" Enable filetype detection, plugin loading and auto indentation
-filetype plugin indent on
-
-" Use white space for tabbing
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" FZF bindings
-map <Leader>e :FZF<CR>
-map <Leader>w :Buffers<CR>
-
 " Line and column numbering
 set number
 set relativenumber
 set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
 
-" Delete functionality, use 'Leader+d' to remove and yank
+
+" -----------------------------------------------------------------------------
+" --                              Keybindings                                --
+" -----------------------------------------------------------------------------
+
+" Map leader key to spacebar
+let mapleader = " "
+
+" Fzf file to open in new buffer by filename
+map <Leader>e :FZF<CR>
+
+" Fzf buffer swapping by filename
+map <Leader>w :Buffers<CR>
+
+" Fzf lines in current buffer
+map <Leader>f :FZFBLines<CR>
+
+" Fzf lines in all open buffers
+map <Leader>F :Lines<CR>
+
+" No yank on delete. Use <Leader+d> to remove and yank
 nnoremap d "_d
 xnoremap d "_d
 nnoremap x "_x
@@ -100,6 +117,44 @@ nnoremap D <C-d>
 xnoremap U <C-u>
 xnoremap D <C-d>
 
+" No highlight
+nnoremap <leader>n :noh<CR>
+
+" i3-like binding for switching between splits
+nnoremap <leader>ö <C-W>l
+nnoremap <leader>j <C-W>h
+nnoremap <leader>k <C-W>j
+nnoremap <leader>l <C-W>k
+
+" NerdTree
+let NERDTreeShowLineNumbers=1
+nnoremap <leader>o :NERDTreeToggle<CR>
+
+" UndoTree
+nnoremap <leader>u :UndotreeToggle<CR>
+
+" Redraw
+nnoremap <leader>r :redraw!<CR>
+
+" -----------------------------------------------------------------------------
+" --                                Misc                                     --
+" -----------------------------------------------------------------------------
+
+" Other settings
+set laststatus=2
+set scrolloff=4
+set backspace=2
+set hlsearch        " Highlight on search
+set hidden          " Keep buffers open in bg for fast reopening
+set incsearch       " Highlight text when searching
+set signcolumn=no   " No extra linting column
+set cursorline      " Highlight the current line
+set nowrap
+
+" Use white space for tabbing
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " Cycle numbered registers when yanking. This allow the numbered registers to
 " act like a ring buffer when performing the yank operation (just like delete
@@ -122,35 +177,4 @@ if !exists("g:RegisteredYankRingBuffer")
     :autocmd TextYankPost * call SaveLastReg()
 endif
 :autocmd VimEnter * let g:last_yank=@"
-
-" :noh bind
-nnoremap <leader>n :noh<CR>
-
-" i3-like binding for switching between splits
-nnoremap <leader>ö <C-W>l
-nnoremap <leader>j <C-W>h
-nnoremap <leader>k <C-W>j
-nnoremap <leader>l <C-W>k
-
-" Nerdtree settings
-nnoremap <leader>o :NERDTreeToggle<CR>
-let NERDTreeShowLineNumbers=1
-
-" Undotree settings.
-nnoremap <leader>u :UndotreeToggle<CR>
-
-" Redraw on <leader+r>
-nnoremap <leader>r :redraw!<CR>
-
-" Other settings
-set laststatus=2
-set scrolloff=4
-set backspace=2
-set hlsearch        " Highlight on search
-set hidden          " Keep buffers open in bg for fast reopening
-set incsearch       " Highlight text when searching
-set signcolumn=no   " No extra linting column
-set cursorline      " Highlight the current line
-syntax on
-set nowrap
 
