@@ -53,6 +53,9 @@ call plug#begin('~/.vim/plugged')
     " Gives :Bdetele and :Bwipeout which behaves like well designed citizens
     Plug 'moll/vim-bbye'
 
+    " Get Vim startup time with :StartupTime
+    Plug 'dstein64/vim-startuptime'
+
 " Initialize plugin system
 call plug#end()
 
