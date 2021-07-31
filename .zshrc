@@ -94,9 +94,10 @@ fi
 
 #
 # Vi keybindings. This is not always loaded by default if not specified
-# explicitly, i.e., on MacOSX iTerm2
+# explicitly, e.g., on MacOSX iTerm2
 #
 bindkey -v
+bindkey "^?" backward-delete-char
 
 #
 # Change directory fzf style
