@@ -1,0 +1,13 @@
+- clean: ['~']
+
+- link:
+    ~/.vim: .vim/
+    ~/.vimrc: .config/nvim/init.vim
+    ~/.config/nvim: .config/nvim
+    ~/.zshrc: .zshrc
+    ~/.config/zsh: .config/zsh
+    ~/.Xresources: .Xresources
+    ~/.ssh/config: .ssh/config
+    ~/.scripts: .scripts
+    ~/.gitconfig: .gitconfig
+
