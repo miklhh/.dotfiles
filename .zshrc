@@ -12,8 +12,8 @@
 #
 export HOST=$(hostname)
 export NAME=$(whoami)
-export EDITOR="vim"
 export PAGER="less"
+command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
 #
 # Source ${HOME}.zsh-extra which can contain system specific configuration
@@ -33,7 +33,7 @@ export PAGER="less"
 #
 # Alias Vim -> NVim
 #
-alias vim='nvim'
+command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim'
 
 #
 # Settings for ls
