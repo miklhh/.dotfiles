@@ -1,39 +1,39 @@
 ! Font colors.
 ! special
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-
-! black
-*.color0:       #282a2e
-*.color8:       #373b41
-
-! red
-*.color1:       #d90404
-*.color9:       #cc6666
-
-! green
-*.color2:       #e7ff00
-*.color10:      #b5bd68
-
-! yellow
-*.color3:       #de935f
-*.color11:      #f0c674
-
-! blue
-*.color4:       #5f819d
-*.color12:      #81a2be
-
-! magenta
-*.color5:       #85678f
-*.color13:      #b294bb
-
-! cyan
-*.color6:       #5e8d87
-*.color14:      #8abeb7
-
-! white
-*.color7:       #707880
-*.color15:      #c5c8c6
+!*.foreground:   #c5c8c6
+!*.background:   #1d1f21
+!
+!! black
+!*.color0:       #282a2e
+!*.color8:       #373b41
+!
+!! red
+!*.color1:       #d90404
+!*.color9:       #cc6666
+!
+!! green
+!*.color2:       #e7ff00
+!*.color10:      #b5bd68
+!
+!! yellow
+!*.color3:       #de935f
+!*.color11:      #f0c674
+!
+!! blue
+!*.color4:       #5f819d
+!*.color12:      #81a2be
+!
+!! magenta
+!*.color5:       #85678f
+!*.color13:      #b294bb
+!
+!! cyan
+!*.color6:       #5e8d87
+!*.color14:      #8abeb7
+!
+!! white
+!*.color7:       #707880
+!*.color15:      #c5c8c6
 
 !
 ! DPI settings. It appears as GNOME does not honor this setting and overwrites
@@ -44,8 +44,8 @@ Xft.dpi:	89
 
 ! Font settins.
 *.alpha: 150
-*.font:     xft:Hack:style=Regular:size=12, \
-            xft:MesloLGS NF:style=Regular:size=12, \
+*.font:     xft:MesloLGS NF:style=Regular:size=12, \
+            xft:Hack:style=Regular:size=12, \
             xft:WenQuauYi Zen Hei Mono:style=Regular:size=12, \
             xft:DejaVu Sans:size=12, \
             xft:PowerlineSymbols:style=Medium:size=12, \
@@ -53,7 +53,7 @@ Xft.dpi:	89
 ! Cursor settings.
 Xcursor.size:   32
 Xcursor.theme:  redglass
-*.cursorColor:  #c5c8c6
+!*.cursorColor:  #c5c8c6
 
 ! Emacs settings.
 emacs.font: Monospace 12
@@ -63,3 +63,199 @@ URxvt.letterSpace:          0
 URxvt.scrollBar:            false
 URxvt*transparent:          false
 URxvt*shading:              60
+
+!!! drop in Solarized colorscheme for Xresources/Xdefaults
+!
+!!!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
+!!!--------- ------- ---- -------  ----------- ---------- ----------- -----------
+!!!base03    #002b36  8/4 brblack  234 #1c1c1c 15 -12 -12   0  43  54 193 100  21
+!!!base02    #073642  0/4 black    235 #262626 20 -12 -12   7  54  66 192  90  26
+!!!base01    #586e75 10/7 brgreen  240 #585858 45 -07 -07  88 110 117 194  25  46
+!!!base00    #657b83 11/7 bryellow 241 #626262 50 -07 -07 101 123 131 195  23  51
+!!!base0     #839496 12/6 brblue   244 #808080 60 -06 -03 131 148 150 186  13  59
+!!!base1     #93a1a1 14/4 brcyan   245 #8a8a8a 65 -05 -02 147 161 161 180   9  63
+!!!base2     #eee8d5  7/7 white    254 #e4e4e4 92 -00  10 238 232 213  44  11  93
+!!!base3     #fdf6e3 15/7 brwhite  230 #ffffd7 97  00  10 253 246 227  44  10  99
+!!!yellow    #b58900  3/3 yellow   136 #af8700 60  10  65 181 137   0  45 100  71
+!!!orange    #cb4b16  9/3 brred    166 #d75f00 50  50  55 203  75  22  18  89  80
+!!!red       #dc322f  1/1 red      160 #d70000 50  65  45 220  50  47   1  79  86
+!!!magenta   #d33682  5/5 magenta  125 #af005f 50  65 -05 211  54 130 331  74  83
+!!!violet    #6c71c4 13/5 brmagenta 61 #5f5faf 50  15 -45 108 113 196 237  45  77
+!!!blue      #268bd2  4/4 blue      33 #0087ff 55 -10 -45  38 139 210 205  82  82
+!!!cyan      #2aa198  6/6 cyan      37 #00afaf 60 -35 -05  42 161 152 175  74  63
+!!!green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
+!
+!
+!#define S_base03        #002b36
+!#define S_base02        #073642
+!#define S_base01        #586e75
+!#define S_base00        #657b83
+!#define S_base0         #839496
+!#define S_base1         #93a1a1
+!#define S_base2         #eee8d5
+!#define S_base3         #fdf6e3
+!#define S_yellow        #b58900
+!#define S_orange        #cb4b16
+!#define S_red           #dc322f
+!#define S_magenta       #d33682
+!#define S_violet        #6c71c4
+!#define S_blue          #268bd2
+!#define S_cyan          #2aa198
+!#define S_green         #859900
+!
+!*background:            S_base03
+!*foreground:            S_base00
+!*fading:                40
+!*fadeColor:             S_base03
+!*cursorColor:           S_base1
+!*pointerColorBackground:S_base01
+!*pointerColorForeground:S_base1
+!
+!!! black dark/light
+!*color0:                S_base02
+!*color8:                S_base03
+!
+!!! red dark/light
+!*color1:                S_red
+!*color9:                S_orange
+!
+!!! green dark/light
+!*color2:                S_green
+!*color10:               S_base01
+!
+!!! yellow dark/light
+!*color3:                S_yellow
+!*color11:               S_base00
+!
+!!! blue dark/light
+!*color4:                S_blue
+!*color12:               S_base0
+!
+!!! magenta dark/light
+!*color5:                S_magenta
+!*color13:               S_violet
+!
+!!! cyan dark/light
+!*color6:                S_cyan
+!*color14:               S_base1
+!
+!!! white dark/light
+!*color7:                S_base2
+!*color15:               S_base3
+
+! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
+
+! Project:    Nord XResources
+! Version:    0.1.0
+! Repository: https://github.com/arcticicestudio/nord-xresources
+! License:    MIT
+
+!#define nord0 #2E3440
+!#define nord1 #3B4252
+!#define nord2 #434C5E
+!#define nord3 #4C566A
+!#define nord4 #D8DEE9
+!#define nord5 #E5E9F0
+!#define nord6 #ECEFF4
+!#define nord7 #8FBCBB
+!#define nord8 #88C0D0
+!#define nord9 #81A1C1
+!#define nord10 #5E81AC
+!#define nord11 #BF616A
+!#define nord12 #D08770
+!#define nord13 #EBCB8B
+!#define nord14 #A3BE8C
+!#define nord15 #B48EAD
+!
+!*.foreground:   nord4
+!*.background:   nord0
+!*.cursorColor:  nord4
+!*fading: 35
+!*fadeColor: nord3
+!
+!*.color0: nord1
+!*.color1: nord11
+!*.color2: nord14
+!*.color3: nord13
+!*.color4: nord9
+!*.color5: nord15
+!*.color6: nord8
+!*.color7: nord5
+!*.color8: nord3
+!*.color9: nord11
+!*.color10: nord14
+!*.color11: nord13
+!*.color12: nord9
+!*.color13: nord15
+!*.color14: nord7
+!*.color15: nord6
+
+!#define G_dark0         #282828
+!#define G_dark1         #3c3836
+!#define G_dark2         #504945
+!#define G_dark3         #665c54
+!#define G_dark4         #7c6f64
+!
+!#define G_medium        #928374
+!
+!#define G_light0        #fdf4c1
+!#define G_light1        #ebdbb2
+!#define G_light2        #d5c4a1
+!#define G_light3        #bdae93
+!#define G_light4        #a89984
+!
+!#define G_red0          #fb4934
+!#define G_green0        #b8bb26
+!#define G_yellow0       #fabd2f
+!#define G_blue0         #83a598
+!#define G_purple0       #d3869b
+!#define G_aqua0         #8ec07c
+!#define G_orange0       #fe8019
+!
+!#define G_red1          #9d0006
+!#define G_green1        #79740e
+!#define G_yellow1       #b57614
+!#define G_blue1         #076678
+!#define G_purple1       #8f3f71
+!#define G_aqua1         #427b58
+!#define G_orange1       #af3a03
+!
+!
+!*background:              G_dark0
+!*foreground:              G_light1
+!*cursorColor:             G_light1
+!*fading:                  40
+!*fadeColor:               G_dark0
+!
+!! Black
+!*color0:                  G_dark0
+!*color8:                  G_dark1
+!
+!! Red
+!*color1:                  G_red0
+!*color9:                  G_red1
+!
+!! Green
+!*color2:                  G_green0
+!*color10:                 G_green1
+!
+!! Yellow
+!*color3:                  G_yellow0
+!*color11:                 G_yellow1
+!
+!! Blue
+!*color4:                  G_blue0
+!*color12:                 G_blue1
+!
+!! Magenta
+!*color5:                  G_purple0
+!*color13:                 G_purple1
+!
+!! Cyan
+!*color6:                  G_aqua0
+!*color14:                 G_aqua1
+!
+!! White
+!*color7:                  G_light0
+!*color15:                 G_light1
