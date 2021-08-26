@@ -2,7 +2,6 @@
 
 - link:
     ~/.vim: .vim/
-      #~/.vimrc: .config/nvim/init.vim
     ~/.config/nvim/init.vim: ~/.vimrc
     ~/.config/nvim: .config/nvim
     ~/.zshrc: .zshrc
