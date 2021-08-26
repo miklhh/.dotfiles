@@ -3,7 +3,6 @@
 - link:
     ~/.vim: .vim/
     ~/.config/nvim/init.vim: ~/.vimrc
-    ~/.config/nvim: .config/nvim
     ~/.zshrc: .zshrc
     ~/.config/zsh: .config/zsh
     ~/.Xresources: .Xresources
