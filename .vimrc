@@ -9,7 +9,6 @@
 
 " Vim != Vi
 set nocompatible
-"set clipboard+=unnamedplus
 filetype off
 
 " Enable 24-bit true color support
@@ -46,7 +45,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } 
     Plug 'junegunn/fzf.vim'
     Plug 'chengzeyi/fzf-preview.vim'
-    "Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
     " Clipboard peek-a-boo
     Plug 'junegunn/vim-peekaboo'
@@ -156,6 +154,13 @@ nnoremap <leader>u :UndotreeToggle<CR>
 " Redraw
 nnoremap <leader>r :redraw!<CR>
 
+" NVim-Compe keybindings
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
 " -----------------------------------------------------------------------------
 " --                                Misc                                     --
 " -----------------------------------------------------------------------------
@@ -230,23 +235,23 @@ let g:compe.source.ultisnips = v:true
 let g:compe.source.luasnip = v:true
 let g:compe.source.emoji = v:true
 
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
-" -------------------------------------
-" -- C++ Language server with Clangd --
-" -------------------------------------
+" -----------------------------------------------
+" --      C++ Language server with Clangd      --
+" -----------------------------------------------
 lua << EOF
 require'lspconfig'.clangd.setup{}
+EOF
+
+" -----------------------------------------------
+" --  Rust language server with Rust-analyzer  --
+" -----------------------------------------------
+lua << EOF
 require'lspconfig'.rust_analyzer.setup{}
 EOF
 
-" -----------------------------------------
-" -- VHDL Language server with VHDL-Tool --
-" -----------------------------------------
+" -----------------------------------------------
+" --    VHDL Language server with VHDL-Tool    --
+" -----------------------------------------------
 
 lua << EOF
 local lspconfig = require'lspconfig'
@@ -266,20 +271,3 @@ end
 lspconfig.vhdl_tool.setup{}
 EOF
 
-"lua << EOF
-"local lspconfig = require'lspconfig'
-"local configs = require'lspconfig/configs'
-"local util = require 'lspconfig/util'
-"-- Check if it's already defined for when reloading this file.
-"if not lspconfig.hdl_checker then
-"  configs.hdl_checker = {
-"    default_config = {
-"      cmd = {'hdl_checker', '--lsp'};
-"      filetypes = {'vhdl'};
-"      root_dir = util.root_pattern('.hdl_checker.config', '.git');
-"      settings = {};
-"    };
-"  }
-"end
-"lspconfig.hdl_checker.setup{}
-"EOF
