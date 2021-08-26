@@ -2,9 +2,12 @@
 
 - link:
     ~/.vim: .vim/
-    ~/.config/nvim/init.vim: ~/.vimrc
+    ~/.vimrc: .vimrc
+    ~/.config/nvim/init.vim: .vimrc
     ~/.zshrc: .zshrc
+    ~/.tmux.conf: .tmux.conf
     ~/.config/zsh: .config/zsh
+    ~/.screenrc: .screenrc
     ~/.Xresources: .Xresources
     ~/.ssh/config: .ssh/config
     ~/.scripts: .scripts
