@@ -69,7 +69,7 @@ fi
 #
 # Zsh history settings
 #
-[ -z "$HISTFILE" ] && export HISTFILE="$HOME/.zsh-history"
+[ -z "$HISTFILE" ] && export HISTFILE="$HOME/.config/zsh/.zsh-history"
 export HISTSIZE=5000          # Max events stored in session
 export SAVEHIST=5000          # Max events stored in history file
 setopt extended_history       # Record timestamp in history file
@@ -121,5 +121,5 @@ fi
 # Enable zsh autocompletion
 #
 autoload -U compinit
-compinit
+compinit -d "${HOME}/.config/zsh/.zcompdump"
 
