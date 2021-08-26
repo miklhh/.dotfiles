@@ -64,6 +64,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
 
+    " NeoVim sudo read/write (:SudaRead, :SudaWrite)
+    Plug 'lambdalisue/suda.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -227,8 +230,56 @@ let g:compe.source.ultisnips = v:true
 let g:compe.source.luasnip = v:true
 let g:compe.source.emoji = v:true
 
-" C++ Language Server with Clangd
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" -------------------------------------
+" -- C++ Language server with Clangd --
+" -------------------------------------
 lua << EOF
 require'lspconfig'.clangd.setup{}
+require'lspconfig'.rust_analyzer.setup{}
 EOF
 
+" -----------------------------------------
+" -- VHDL Language server with VHDL-Tool --
+" -----------------------------------------
+
+lua << EOF
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig/configs'
+local util = require 'lspconfig/util'
+-- Check if it's already defined for when reloading this file.
+if not lspconfig.vhdl_tool then
+  configs.vhdl_tool = {
+    default_config = {
+      cmd = {'vhdl-tool', 'lsp'};
+      filetypes = {'vhdl'};
+      root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
+      settings = {};
+    };
+  }
+end
+lspconfig.vhdl_tool.setup{}
+EOF
+
+"lua << EOF
+"local lspconfig = require'lspconfig'
+"local configs = require'lspconfig/configs'
+"local util = require 'lspconfig/util'
+"-- Check if it's already defined for when reloading this file.
+"if not lspconfig.hdl_checker then
+"  configs.hdl_checker = {
+"    default_config = {
+"      cmd = {'hdl_checker', '--lsp'};
+"      filetypes = {'vhdl'};
+"      root_dir = util.root_pattern('.hdl_checker.config', '.git');
+"      settings = {};
+"    };
+"  }
+"end
+"lspconfig.hdl_checker.setup{}
+"EOF
