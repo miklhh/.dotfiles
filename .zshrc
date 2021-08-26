@@ -31,6 +31,11 @@ export PAGER="less"
 [ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:$PATH"
 
 #
+# Alias Vim -> NVim
+#
+alias vim='nvim'
+
+#
 # Settings for ls
 #
 if [ $(uname -s) = "Darwin" ]
@@ -48,7 +53,7 @@ alias ll='ls -l'
 # thing goes if P10K is not installed. If P10K is installed and this is an
 # interactive shell session, we source P10K profile.
 #
-P10K_THEME="$HOME/powerlevel10k/powerlevel10k.zsh-theme"
+P10K_THEME="$HOME/.powerlevel10k/powerlevel10k.zsh-theme"
 if [ "$TERM" != "linux" ] && [ -f "$P10K_THEME" ]
 then
     # Interactive prompt settings. To generate a new prompt (located in
