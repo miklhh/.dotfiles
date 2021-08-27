@@ -13,3 +13,16 @@
     ~/.scripts: .scripts
     ~/.gitconfig: .gitconfig
 
+- shell:
+  # Install Meslo LGS Nerd Font
+  - command: .local/share/fonts/download-meslo-font.bash
+
+- link:
+  # Link Meslo LGD Nerd Font
+    ~/.local/share/fonts/MesloLGS NF Regular.ttf: .local/share/fonts/MesloLGS NF Regular.ttf
+    ~/.local/share/fonts/MesloLGS NF Bold.ttf: .local/share/fonts/MesloLGS NF Bold.ttf
+    ~/.local/share/fonts/MesloLGS NF Italic.ttf: .local/share/fonts/MesloLGS NF Italic.ttf
+    ~/.local/share/fonts/MesloLGS NF Bold Italic.ttf: .local/share/fonts/MesloLGS NF Bold Italic.ttf
+
+- shell:
+  - command: fc-cache -rf
