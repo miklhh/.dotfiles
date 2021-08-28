@@ -23,15 +23,15 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 #
 # Add ${HOME}/.cargo/bin to path if available
 #
-[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:$PATH"
+[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:${PATH}"
 
 #
 # Add ${HOME}.local/bin to path if available
 #
-[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:$PATH"
+[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
 
 #
-# Alias Vim -> NVim
+# Alias Vim -> NeoVim
 #
 command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim'
 
@@ -53,20 +53,21 @@ alias ll='ls -l'
 # thing goes if P10K is not installed. If P10K is installed and this is an
 # interactive shell session, we source P10K profile.
 #
-P10K_THEME="$HOME/.powerlevel10k/powerlevel10k.zsh-theme"
-if [ "$TERM" != "linux" ] && [ -f "$P10K_THEME" ]
+[ -d "${HOME}/powerlevel10k" ] && P10K_THEME="${HOME}/powerlevel10k/powerlevel10k.zsh-theme"
+[ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
+if [ "${TERM}" != "linux" ] && [ -f "${P10K_THEME}" ]
 then
     # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
     # Initialization code that may require console input (password prompts, [y/n]
     # confirmations, etc.) must go above this block; everything else may go below.
-    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     fi
 
     # Interactive prompt settings. To generate a new prompt (located in
-    # $HOME/.p10k.zsh), run 'p10k configure'.
-    source "$P10K_THEME"
-    source "$HOME/.p10k.zsh"
+    # ${HOME}/.p10k.zsh), run 'p10k configure'.
+    source "${P10K_THEME}"
+    source "${HOME}/.p10k.zsh"
 else
     # Non P10K prompt
     autoload -U colors && colors
@@ -76,7 +77,7 @@ fi
 #
 # Zsh history settings
 #
-[ -z "$HISTFILE" ] && export HISTFILE="$HOME/.config/zsh/.zsh-history"
+export HISTFILE="${HOME}/.config/zsh/.zsh-history"
 export HISTSIZE=5000          # Max events stored in session
 export SAVEHIST=5000          # Max events stored in history file
 setopt extended_history       # Record timestamp in history file
@@ -121,7 +122,7 @@ if which fzf 1>/dev/null; then
         alias cdd='cd $(find . -type d | fzf || echo .)'
     fi
 else
-    alias cdd='echo "fzf not in \$PATH"'
+    alias cdd='echo "fzf not in \${PATH}"'
 fi
 
 #
