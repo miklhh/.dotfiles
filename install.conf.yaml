@@ -3,6 +3,7 @@
 - link:
     ~/.vim: .vim/
     ~/.vimrc: .vimrc
+    ~/.config/nvim: .config/nvim
     ~/.config/nvim/init.vim: .vimrc
     ~/.zshrc: .zshrc
     ~/.tmux.conf: .tmux.conf
@@ -23,6 +24,3 @@
     ~/.local/share/fonts/MesloLGS NF Bold.ttf: .local/share/fonts/MesloLGS NF Bold.ttf
     ~/.local/share/fonts/MesloLGS NF Italic.ttf: .local/share/fonts/MesloLGS NF Italic.ttf
     ~/.local/share/fonts/MesloLGS NF Bold Italic.ttf: .local/share/fonts/MesloLGS NF Bold Italic.ttf
-
-- shell:
-  - command: fc-cache -rf
