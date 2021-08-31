@@ -71,7 +71,7 @@ then
 else
     # Non P10K prompt
     autoload -U colors && colors
-    PROMPT="[%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%} %{$fg[yellow]%}%~%{$reset_color%}] $ "
+    PROMPT="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B %{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
 fi
 
 #
