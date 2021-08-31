@@ -1,17 +1,26 @@
 - clean: ['~']
 
 - link:
+    # Vim-Plugged for regular Vim
     ~/.vim/autoload/plug.vim: 
       create: true
       path: .vim/autoload/plug.vim
+
+    # Vim Pluged for NeoVim
     ~/.local/share/nvim/site/autoload/plug.vim:
       create: true
       path: .vim/autoload/plug.vim
-    ~/.config/nvim:
+
+    # Lua scripts for NeoVim
+    ~/.config/nvim/lua:
       create: true
-      path: .config/nvim
+      path: .config/nvim/lua
+
+    # Vim config
     ~/.vimrc: .vimrc
     ~/.config/nvim/init.vim: .vimrc
+
+    # Misc
     ~/.zshrc: .zshrc
     ~/.tmux.conf: .tmux.conf
     ~/.config/zsh: .config/zsh
