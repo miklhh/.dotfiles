@@ -1,9 +1,16 @@
 - clean: ['~']
 
 - link:
-    ~/.vim: .vim/
+    ~/.vim/autoload/plug.vim: 
+      create: true
+      path: .vim/autoload/plug.vim
+    ~/.local/share/nvim/site/autoload/plug.vim:
+      create: true
+      path: .vim/autoload/plug.vim
+    ~/.config/nvim:
+      create: true
+      path: .config/nvim
     ~/.vimrc: .vimrc
-    ~/.config/nvim: .config/nvim
     ~/.config/nvim/init.vim: .vimrc
     ~/.zshrc: .zshrc
     ~/.tmux.conf: .tmux.conf
@@ -14,13 +21,13 @@
     ~/.scripts: .scripts
     ~/.gitconfig: .gitconfig
 
-- shell:
-  # Install Meslo LGS Nerd Font
+- shell: # Download Meslo LGS Nerd Font
   - command: .local/share/fonts/download-meslo-font.bash
 
-- link:
-  # Link Meslo LGD Nerd Font
-    ~/.local/share/fonts/MesloLGS NF Regular.ttf: .local/share/fonts/MesloLGS NF Regular.ttf
+- link: # Install Meslo LGS Nerd Font
+    ~/.local/share/fonts/MesloLGS NF Regular.ttf: 
+      create: true
+      path: .local/share/fonts/MesloLGS NF Regular.ttf
     ~/.local/share/fonts/MesloLGS NF Bold.ttf: .local/share/fonts/MesloLGS NF Bold.ttf
     ~/.local/share/fonts/MesloLGS NF Italic.ttf: .local/share/fonts/MesloLGS NF Italic.ttf
     ~/.local/share/fonts/MesloLGS NF Bold Italic.ttf: .local/share/fonts/MesloLGS NF Bold Italic.ttf
