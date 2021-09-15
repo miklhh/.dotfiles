@@ -61,7 +61,10 @@ call plug#begin('~/.vim/plugged')
 
     " Neovim LSP plugins
     if has('nvim')
+        " Good default LSP configurations for common LSP-Servers
         Plug 'neovim/nvim-lspconfig'
+
+        " Auto completion plugin for NVim
         Plug 'hrsh7th/nvim-compe'
         Plug 'hrsh7th/vim-vsnip'
         Plug 'hrsh7th/vim-vsnip-integ'
@@ -216,28 +219,32 @@ endif
 "
 if has('nvim')
 
+" Autocompletion using NVim-Compe. NVim-Compe has been depricated and should
+" be replaced with NVim-Cmp in the future. Although, as writing this note,
+" NVim-Cmp is not yet ready to replace NVim-Compe.
+"   -- Mikael Henriksson [2021-09-15]
+set completeopt=menuone,noselect
 lua << EOF
     require('config/compe')
     require('config/keybinds')
 EOF
 
-    " -----------------------------------------------
-    " --      C++ Language server with Clangd      --
-    " -----------------------------------------------
+" [LaTeX] LSP config
+lua << EOF
+    require'lspconfig'.texlab.setup{}
+EOF
+
+" [C++] Clangd config
 lua << EOF
     require'lspconfig'.clangd.setup{}
 EOF
 
-    " -----------------------------------------------
-    " --  Rust language server with Rust-analyzer  --
-    " -----------------------------------------------
+" [Rust] Rust Analyzer config
 lua << EOF
     require'lspconfig'.rust_analyzer.setup{}
 EOF
 
-    " -----------------------------------------------
-    " --    VHDL Language server with VHDL-Tool    --
-    " -----------------------------------------------
+" VHDL Language server with VHDL-Tool
 lua << EOF
     local lspconfig = require'lspconfig'
     local configs = require'lspconfig/configs'
