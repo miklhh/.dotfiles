@@ -59,6 +59,9 @@ call plug#begin('~/.vim/plugged')
     " Vim fugitive (Git integration)
     Plug 'tpope/vim-fugitive'
 
+    " LaTeX synctex synchronization through DBus
+    Plug 'peterbjorgensen/sved'
+
     " Neovim LSP plugins
     if has('nvim')
         " Good default LSP configurations for common LSP-Servers
