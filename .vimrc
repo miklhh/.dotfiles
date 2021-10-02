@@ -76,6 +76,9 @@ call plug#begin('~/.vim/plugged')
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
     Plug 'lambdalisue/suda.vim'
 
+    " Tmux proper syntax highlighting
+    Plug 'tmux-plugins/vim-tmux'
+
 " Initialize plugin system
 call plug#end()
 
@@ -99,6 +102,16 @@ colorscheme gruvbox
 
 " Airline settings
 let g:airline_theme = 'gruvbox'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.column = '➔'
+set noshowmode
 
 " Line and column numbering
 set number
