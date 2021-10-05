@@ -89,19 +89,27 @@ bindkey -a j history-beginning-search-forward
 bindkey -a k history-beginning-search-backward
 
 #
-# Bind HOME, END & DEL keys to get to the begining/end of the current line and
-# for deleting a character
+# Bind HOME, END & DEL keys to get to the begining/end of the current line and for deleting a character
 #
 bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 
 #
-# Use ripgrep with fzf if available
+# Use Ripgrep with Fzf if available
 #
 if which rg 1>/dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs -g '!{node_modules,.git}'"
 fi
+
+#
+# Fast Tmux pane relative directory changes. Example: when in Tmux use 'cddl' in any pane to change directory to the
+# pane located left of the active pane.
+#
+alias cddl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
+alias cddr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
+alias cddu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
+alias cddd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
 
 #
 # Vi keybindings. This is not always loaded by default if not specified
@@ -115,12 +123,13 @@ bindkey "^?" backward-delete-char
 #
 if which fzf 1>/dev/null; then
     if which bfs 1>/dev/null; then
-        alias cdd='cd $(bfs . -type d | fzf || echo .)'
+        alias cdd='cd $(bfs . -type d -exclude -name .git | sed "s/\.\///g" | fzf || echo .)'
     else
+        echo "Warning: 'bfs' not in \${PATH}"
         alias cdd='cd $(find . -type d | fzf || echo .)'
     fi
 else
-    alias cdd='echo "fzf not in \${PATH}"'
+    alias cdd="echo \"Warning: 'fzf' not in \${PATH}\""
 fi
 
 #
