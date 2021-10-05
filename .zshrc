@@ -1,7 +1,6 @@
 #
-# Configuration is very miniscule but it does the job both for faint tty
-# sessions and in interactive colored terminal emulators. If Powerlevel10k is
-# available, it is sourced.
+# Configuration is very miniscule but it does the job both for faint tty sessions and in interactive colored terminal
+# emulators. If Powerlevel10k is available it is sourced. If not fallback prompt is available.
 #
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
@@ -49,9 +48,8 @@ fi
 alias ll='ls -l'
 
 #
-# Prompt settings. In a tty environment we use a basic zsh standard prompt. Same
-# thing goes if P10K is not installed. If P10K is installed and this is an
-# interactive shell session, we source P10K profile.
+# Prompt settings. In a tty environment we use a basic zsh standard prompt. Same thing goes if P10K is not installed.
+# If P10K is installed and this is an interactive shell session, we source P10K profile.
 #
 [ -d "${HOME}/powerlevel10k" ] && P10K_THEME="${HOME}/powerlevel10k/powerlevel10k.zsh-theme"
 [ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
