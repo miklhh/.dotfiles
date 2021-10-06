@@ -32,7 +32,7 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 #
 # Alias Vim -> NeoVim
 #
-command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim'
+command -v "nvim" 1>/dev/null 3>&1 && alias vim='nvim' || echo "[ .zshrc:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
 
 #
 # Settings for ls
@@ -100,6 +100,8 @@ bindkey '^[[3~' delete-char
 #
 if which rg 1>/dev/null; then
     export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs -g '!{node_modules,.git}'"
+else
+    echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
 fi
 
 #
@@ -122,14 +124,16 @@ bindkey "^?" backward-delete-char
 # Change directory fzf style
 #
 if which fzf 1>/dev/null; then
+    alias fzf_cdd_command='fzf --height=15'
     if which bfs 1>/dev/null; then
-        alias cdd='cd $(bfs . -type d -exclude -name .git | sed "s/\.\///g" | fzf || echo .)'
+        alias cdd='cd $(bfs . -type d -exclude -name .git | sed "s/\.\///g" | fzf_cdd_command || echo .)'
     else
-        echo "Warning: 'bfs' not in \${PATH}"
-        alias cdd='cd $(find . -type d | fzf || echo .)'
+        echo "[ .zshrc:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
+        alias cdd='cd $(find . -type d | fzf_cdd_command || echo .)'
     fi
 else
-    alias cdd="echo \"Warning: 'fzf' not in \${PATH}\""
+    echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
+    alias cdd="echo \"[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
 fi
 
 #
