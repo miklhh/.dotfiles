@@ -2,7 +2,7 @@
 
 - link:
     # Vim-Plugged for regular Vim
-    ~/.vim/autoload/plug.vim: 
+    ~/.vim/autoload/plug.vim:
       create: true
       path: .vim/autoload/plug.vim
 
@@ -34,7 +34,7 @@
   - command: .local/share/fonts/download-meslo-font.bash
 
 - link: # Install Meslo LGS Nerd Font
-    ~/.local/share/fonts/MesloLGS NF Regular.ttf: 
+    ~/.local/share/fonts/MesloLGS NF Regular.ttf:
       create: true
       path: .local/share/fonts/MesloLGS NF Regular.ttf
     ~/.local/share/fonts/MesloLGS NF Bold.ttf: .local/share/fonts/MesloLGS NF Bold.ttf
