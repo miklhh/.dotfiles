@@ -163,10 +163,10 @@ xnoremap D <C-d>
 nnoremap <leader>n :noh<CR>
 
 " i3-like binding for switching between splits
-nnoremap <leader>ö <C-W>l
-nnoremap <leader>j <C-W>h
-nnoremap <leader>k <C-W>j
-nnoremap <leader>l <C-W>k
+nnoremap <M-ö> <C-W>l
+nnoremap <M-j> <C-W>h
+nnoremap <M-k> <C-W>j
+nnoremap <M-l> <C-W>k
 
 " NerdTree
 let NERDTreeShowLineNumbers=1
