@@ -126,15 +126,23 @@ bindkey "^?" backward-delete-char
 if which fzf 1>/dev/null; then
     alias fzf_cdd_command='fzf --height=15'
     if which bfs 1>/dev/null; then
-        alias cdd='cd $(bfs . -type d -exclude -name .git | sed "s/\.\///g" | fzf_cdd_command || echo .)'
+        alias cdd='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cdd_command || echo .)'
     else
         echo "[ .zshrc:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
-        alias cdd='cd $(find . -type d | fzf_cdd_command || echo .)'
+        alias cdd='cd $(find . -type d 2>/dev/null | fzf_cdd_command || echo .)'
     fi
 else
     echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
     alias cdd="echo \"[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
 fi
+
+#
+# Open file with xdg-open fzf style
+#
+if which fzf 1>/dev/null; then
+    alias oo='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
+fi
+
 
 #
 # Enable zsh autocompletion
