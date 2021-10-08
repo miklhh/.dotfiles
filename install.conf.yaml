@@ -20,8 +20,11 @@
     ~/.vimrc: .vimrc
     ~/.config/nvim/init.vim: .vimrc
 
-    # Misc
+    # Zsh config
     ~/.zshrc: .zshrc
+    ~/.zsh-alias: .zsh-alias
+
+    # Misc
     ~/.tmux.conf: .tmux.conf
     ~/.config/zsh: .config/zsh
     ~/.screenrc: .screenrc

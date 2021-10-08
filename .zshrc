@@ -6,46 +6,23 @@
 #
 
 
-#
 # Export base env-variables.
-#
-export HOST=$(hostname)
+export HOST=$(uname -n)
 export NAME=$(whoami)
 export PAGER="less"
 command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
-#
-# Source ${HOME}.zsh-extra which can contain system specific configuration
-#
-[ -f "${HOME}/.zsh-extra" ] && source "${HOME}/.zsh-extra"
+# Source ${HOME}/.zsh-local which can contain configuration local to the machine
+[ -f "${HOME}/.zsh-local" ] && source "${HOME}/.zsh-local"
 
-#
+# Source the Zsh alias file
+[ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
+
 # Add ${HOME}/.cargo/bin to path if available
-#
 [ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:${PATH}"
 
-#
 # Add ${HOME}.local/bin to path if available
-#
 [ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
-
-#
-# Alias Vim -> NeoVim
-#
-command -v "nvim" 1>/dev/null 3>&1 && alias vim='nvim' || echo "[ .zshrc:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
-
-#
-# Settings for ls
-#
-if [ $(uname -s) = "Darwin" ]
-then
-    # MacOS machine with FreeBSD ls
-    alias ls='ls -G'
-else
-    # Any other machine (probably Linux).
-    alias ls='ls --color=auto --group-directories-first'
-fi
-alias ll='ls -l'
 
 #
 # Prompt settings. In a tty environment we use a basic zsh standard prompt. Same thing goes if P10K is not installed.
@@ -55,15 +32,14 @@ alias ll='ls -l'
 [ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
 if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ] && [ -f "${P10K_THEME}" ]
 then
-    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-    # Initialization code that may require console input (password prompts, [y/n]
-    # confirmations, etc.) must go above this block; everything else may go below.
+    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may
+    # require console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may
+    # go below.
     if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
         source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     fi
 
-    # Interactive prompt settings. To generate a new prompt (located in
-    # ${HOME}/.p10k.zsh), run 'p10k configure'.
+    # Interactive prompt settings. To generate a new prompt (located in ${HOME}/.p10k.zsh), run 'p10k configure'.
     source "${P10K_THEME}"
     source "${HOME}/.p10k.zsh"
 else
@@ -72,9 +48,7 @@ else
     PROMPT="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B %{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
 fi
 
-#
 # Zsh history settings
-#
 export HISTFILE="${HOME}/.config/zsh/.zsh-history"
 export HISTSIZE=5000          # Max events stored in session
 export SAVEHIST=5000          # Max events stored in history file
@@ -88,9 +62,7 @@ bindkey '^[[B' history-beginning-search-forward  # '^[[B' = Down-arrow
 bindkey -a j history-beginning-search-forward
 bindkey -a k history-beginning-search-backward
 
-#
-# Bind HOME, END & DEL keys to get to the begining/end of the current line and for deleting a character
-#
+# Bind HOME/END to 'go to beginig/end of line' and DEL to delete character under cursor
 bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
@@ -105,44 +77,11 @@ else
 fi
 
 #
-# Fast Tmux pane relative directory changes. Example: when in Tmux use 'cddl' in any pane to change directory to the
-# pane located left of the active pane.
-#
-alias cddl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
-alias cddr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
-alias cddu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
-alias cddd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
-
-#
 # Vi keybindings. This is not always loaded by default if not specified
 # explicitly, e.g., on MacOSX iTerm2
 #
 bindkey -v
 bindkey "^?" backward-delete-char
-
-#
-# Change directory fzf style
-#
-if which fzf 1>/dev/null; then
-    alias fzf_cdd_command='fzf --height=15'
-    if which bfs 1>/dev/null; then
-        alias cdd='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cdd_command || echo .)'
-    else
-        echo "[ .zshrc:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
-        alias cdd='cd $(find . -type d 2>/dev/null | fzf_cdd_command || echo .)'
-    fi
-else
-    echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-    alias cdd="echo \"[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
-fi
-
-#
-# Open file with xdg-open fzf style
-#
-if which fzf 1>/dev/null; then
-    alias oo='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
-fi
-
 
 #
 # Enable zsh autocompletion
