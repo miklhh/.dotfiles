@@ -24,6 +24,9 @@
     ~/.zshrc: .zshrc
     ~/.zsh-alias: .zsh-alias
 
+    # Powerlevel10k
+    ~/.powerlevel10k: powerlevel10k
+
     # Misc
     ~/.tmux.conf: .tmux.conf
     ~/.config/zsh: .config/zsh
