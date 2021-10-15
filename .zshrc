@@ -24,28 +24,38 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 # Add ${HOME}.local/bin to path if available
 [ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
 
-#
-# Prompt settings. In a tty environment we use a basic zsh standard prompt. Same thing goes if P10K is not installed.
-# If P10K is installed and this is an interactive shell session, we source P10K profile.
-#
-[ -d "${HOME}/powerlevel10k" ] && P10K_THEME="${HOME}/powerlevel10k/powerlevel10k.zsh-theme"
-[ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
-if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ] && [ -f "${P10K_THEME}" ]
-then
-    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc. Initialization code that may
-    # require console input (password prompts, [y/n] confirmations, etc.) must go above this block; everything else may
-    # go below.
-    if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-        source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    fi
-
-    # Interactive prompt settings. To generate a new prompt (located in ${HOME}/.p10k.zsh), run 'p10k configure'.
-    source "${P10K_THEME}"
-    source "${HOME}/.p10k.zsh"
-else
-    # Non P10K prompt
+# Prompt settings
+function set_prompt_plain {
     autoload -U colors && colors
     PROMPT="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B %{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
+}
+
+function set_prompt_p10k {
+    if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    else
+        echo "[ .zshrc:${LINENO} ]: Warning: could not enable P10k instant prompt"
+    fi
+    source "${P10K_THEME}"
+    source "${HOME}/.p10k.zsh"
+}
+
+if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
+    autoload is-at-least
+    if is-at-least "5.1.0"; then
+        [ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
+        if [ -f "${P10K_THEME}" ]; then
+            set_prompt_p10k
+        else
+            echo "[ .zshrc:${LINENO} ]: Warning: directory ${HOME}/.powerlevel10k unavailable"
+            set_prompt_plain
+        fi
+    else # Zsh version lower than 5.1.0
+        echo "[ .zshrc:${LINENO} ]: Warning: Zsh version (${ZSH_VERSION}) lower than 5.1.0, could not load Powerlevel10k"
+        set_prompt_plain
+    fi
+else
+    set_prompt_plain
 fi
 
 # Zsh history settings
