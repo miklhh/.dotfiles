@@ -9,7 +9,7 @@
 #
 # Alias Vim -> NeoVim
 #
-command -v "nvim" 1>/dev/null 3>&1 && alias vim='nvim' || echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
+command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim' || echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
 
 #
 # Settings for ls
@@ -36,9 +36,9 @@ alias cddd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}
 #
 # Change directory fzf style
 #
-if which fzf 1>/dev/null; then
+if command -v fzf 1>/dev/null 2>&1; then
     alias fzf_cdd_command='fzf --height=15'
-    if which bfs 1>/dev/null; then
+    if command -v bfs 1>/dev/null 2>&1; then
         alias cdd='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cdd_command || echo .)'
     else
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
@@ -52,7 +52,7 @@ fi
 #
 # Open file with xdg-open fzf style
 #
-if which fzf 1>/dev/null; then
+if command -v fzf 1>/dev/null 2>&1; then
     alias oo='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
 fi
 
