@@ -82,6 +82,8 @@ fi
 #
 bindkey -v
 bindkey "^?" backward-delete-char
+bindkey '^R' history-incremental-search-backward
+bindkey '^F' history-incremental-search-forward
 
 #
 # Enable zsh autocompletion
