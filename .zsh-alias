@@ -9,7 +9,7 @@
 #
 # Alias Vim -> NeoVim
 #
-command -v "nvim" 1>/dev/null 3>&1 && alias vim='nvim' || echo "[ .zshrc:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
+command -v "nvim" 1>/dev/null 3>&1 && alias vim='nvim' || echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
 
 #
 # Settings for ls
@@ -41,12 +41,12 @@ if which fzf 1>/dev/null; then
     if which bfs 1>/dev/null; then
         alias cdd='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cdd_command || echo .)'
     else
-        echo "[ .zshrc:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
+        echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
         alias cdd='cd $(find . -type d 2>/dev/null | fzf_cdd_command || echo .)'
     fi
 else
-    echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-    alias cdd="echo \"[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
+    echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
+    alias cdd="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
 fi
 
 #
