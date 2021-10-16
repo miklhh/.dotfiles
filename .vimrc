@@ -245,6 +245,11 @@ lua << EOF
     require('config/keybinds')
 EOF
 
+" [Python] LSP config
+lua << EOF
+    require'lspconfig'.pyright.setup{}
+EOF
+
 " [LaTeX] LSP config
 lua << EOF
     require'lspconfig'.texlab.setup{}
