@@ -6,14 +6,10 @@
 #
 
 
-#
 # Alias Vim -> NeoVim
-#
 command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim' || echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
 
-#
 # Settings for ls
-#
 if [ $(uname -s) = "Darwin" ]
 then
     # MacOS machine with FreeBSD ls
@@ -24,35 +20,35 @@ else
 fi
 alias ll='ls -l'
 
-#
-# Fast Tmux pane relative directory changes. Example: when in Tmux use 'cddl' in any pane to change directory to the
+# Fast Tmux pane relative directory changes. Example: when in Tmux use 'cdl' in any pane to change directory to the
 # pane located left of the active pane.
-#
-alias cddl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
-alias cddr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
-alias cddu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
-alias cddd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
+alias cdl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
+alias cdr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
+alias cdu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
+alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
 
-#
-# Change directory fzf style
-#
+# Change directory fzf style (command: cf)
 if command -v fzf 1>/dev/null 2>&1; then
-    alias fzf_cdd_command='fzf --height=15'
+    alias fzf_cf_command='fzf --height=15'
     if command -v bfs 1>/dev/null 2>&1; then
-        alias cdd='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cdd_command || echo .)'
+        alias cf='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
     else
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
-        alias cdd='cd $(find . -type d 2>/dev/null | fzf_cdd_command || echo .)'
+        alias cf='cd $(find . -type d 2>/dev/null | fzf_cf_command || echo .)'
     fi
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-    alias cdd="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
+    alias cf="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}\""
 fi
 
-#
 # Open file with xdg-open fzf style
-#
 if command -v fzf 1>/dev/null 2>&1; then
     alias oo='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
 fi
 
+# Git aliases
+alias gil='git log --all --decorate --oneline --graph'
+alias gis='git status'
+alias gic='git commit'
+alias gif='git fetch'
+alias gia='git add'
