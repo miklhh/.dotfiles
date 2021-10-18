@@ -59,9 +59,9 @@ else
 fi
 
 # Zsh history settings
-export HISTFILE="${HOME}/.config/zsh/.zsh-history"
-export HISTSIZE=5000          # Max events stored in session
-export SAVEHIST=5000          # Max events stored in history file
+HISTFILE="${HOME}/.config/zsh/.zsh-history"
+HISTSIZE=5000          # Max events stored in session
+SAVEHIST=5000          # Max events stored in history file
 setopt extended_history       # Record timestamp in history file
 setopt hist_expire_dups_first # Delete duplicates first when HISTFILE is full
 setopt hist_ignore_all_dups   # Remove older enties if command is a duplicate
