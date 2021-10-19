@@ -191,6 +191,9 @@ endif
 " --                                Misc                                     --
 " -----------------------------------------------------------------------------
 
+" Enable mouse scrolling
+set mouse=a
+
 " Other settings
 set laststatus=2
 set scrolloff=4
