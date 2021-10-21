@@ -18,6 +18,7 @@
     r = rebase
     m = merge
     d = diff
+    f = fetch
 
 [pager]
     diff = delta
