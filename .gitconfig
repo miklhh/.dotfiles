@@ -1,6 +1,23 @@
 [user]
-    email = mike.zx@hotmail.com
     name = Mikael Henriksson
+    email = mike.zx@hotmail.com
+
+[alias]
+    a = add
+    s = status
+    c = commit
+    ps = push
+    pl = pull
+    co = checkout
+    sw = switch
+    re = restore
+    b = branch
+    l = log --decorate --oneline --graph
+    la = log --all --decorate --oneline --graph
+    sub = submodule
+    r = rebase
+    m = merge
+    d = diff
 
 [pager]
     diff = delta
@@ -19,3 +36,4 @@
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
+

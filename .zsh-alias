@@ -46,9 +46,5 @@ if command -v fzf 1>/dev/null 2>&1; then
     alias oo='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
 fi
 
-# Git aliases
-alias gil='git log --all --decorate --oneline --graph'
-alias gis='git status'
-alias gic='git commit'
-alias gif='git fetch'
-alias gia='git add'
+# Git alias
+alias g='git'
