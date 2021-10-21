@@ -19,6 +19,8 @@
     m = merge
     d = diff
     f = fetch
+    bl = blame
+
 
 [pager]
     diff = delta
