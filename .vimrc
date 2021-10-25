@@ -3,17 +3,16 @@
 """ Author: Mikael Henriksson
 """
 
-" -----------------------------------------------------------------------------
-" --                             Initialization                              --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                                 Initialization                                                 --
+" --------------------------------------------------------------------------------------------------------------------
 
 " Vim != Vi
 set nocompatible
-filetype off
 
 " Enable 24-bit true color support
 if exists('+termguicolors')
-    " Tmux compliance
+    " Tmux true color compliance
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -21,13 +20,13 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-" Enable filetype detection, plugin loading and auto indentation
+" Enable plugin loading, auto indentation and syntax highlighting
 filetype plugin indent on
 syntax on
 
-" -----------------------------------------------------------------------------
-" --                               Vim Plug                                  --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                                    Vim Plug                                                    --
+" --------------------------------------------------------------------------------------------------------------------
 "
 call plug#begin('~/.vim/plugged')
 
@@ -35,9 +34,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-    " UndoTree and NerdTree
+    " UndoTree for easy undo history access
     Plug 'mbbill/undotree'
-    Plug 'preservim/nerdtree'
 
     " Colorscheme
     Plug 'morhetz/gruvbox'
@@ -64,13 +62,16 @@ call plug#begin('~/.vim/plugged')
 
     " Neovim LSP plugins
     if has('nvim')
-        " Good default LSP configurations for common LSP-Servers
+        " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
-        " Auto completion plugin for NVim
-        Plug 'hrsh7th/nvim-compe'
-        Plug 'hrsh7th/vim-vsnip'
-        Plug 'hrsh7th/vim-vsnip-integ'
+        Plug 'hrsh7th/nvim-cmp'         " Autocompletion engine
+        Plug 'hrsh7th/cmp-nvim-lsp'     " Completion support through LSP
+        Plug 'hrsh7th/cmp-buffer'       " Completion support for words in buffer
+        Plug 'onsails/lspkind-nvim'     " Pictograms for NVim-cmp
+
+        Plug 'hrsh7th/vim-vsnip'        " Snippet engine
+        Plug 'hrsh7th/vim-vsnip-integ'  " Snippet support for common LSP-clients
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -82,15 +83,10 @@ call plug#begin('~/.vim/plugged')
 " Initialize plugin system
 call plug#end()
 
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-
-" -----------------------------------------------------------------------------
-" --                              Appearance                                 --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                                  Appearance                                                    --
+" --------------------------------------------------------------------------------------------------------------------
 
 " Gruvbox colorscheme settings
 " More info: https://github.com/morhetz/gruvbox/wiki/Configuration
@@ -120,9 +116,9 @@ set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
 
 
-" -----------------------------------------------------------------------------
-" --                              Keybindings                                --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                                   Keybindings                                                  --
+" --------------------------------------------------------------------------------------------------------------------
 
 " Map leader key to spacebar
 let mapleader = " "
@@ -168,28 +164,15 @@ nnoremap <M-j> <C-W>h
 nnoremap <M-k> <C-W>j
 nnoremap <M-l> <C-W>k
 
-" NerdTree
-let NERDTreeShowLineNumbers=1
-nnoremap <leader>o :NERDTreeToggle<CR>
-
 " UndoTree
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " Redraw
 nnoremap <leader>r :redraw!<CR>
 
-" NVim-Compe keybindings
-if has('nvim')
-    inoremap <silent><expr> <C-Space> compe#complete()
-    inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-    inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-    inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-    inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-endif
-
-" -----------------------------------------------------------------------------
-" --                                Misc                                     --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                                     Misc                                                       --
+" --------------------------------------------------------------------------------------------------------------------
 
 " Enable mouse scrolling
 set mouse=a
@@ -232,25 +215,22 @@ if !exists("g:RegisteredYankRingBuffer")
 endif
 :autocmd VimEnter * let g:last_yank=@"
 
-" -----------------------------------------------------------------------------
-" --                        LSP settings for NeoVim                          --
-" -----------------------------------------------------------------------------
+" --------------------------------------------------------------------------------------------------------------------
+" --                                            LSP settings for NeoVim                                             --
+" --------------------------------------------------------------------------------------------------------------------
 "
 if has('nvim')
 
-" Autocompletion using NVim-Compe. NVim-Compe has been depricated and should
-" be replaced with NVim-Cmp in the future. Although, as writing this note,
-" NVim-Cmp is not yet ready to replace NVim-Compe.
-"   -- Mikael Henriksson [2021-09-15]
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 lua << EOF
-    require('config/compe')
-    require('config/keybinds')
+    require('config/cmp')       -- CMP Autocompletion settings
+    require('config/keybinds')  -- General LSP keybinds
 EOF
 
 " [Python] LSP config
 lua << EOF
-    require'lspconfig'.pyright.setup{}
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    require'lspconfig'.pyright.setup{ capabilities = capabilities }
 EOF
 
 " [LaTeX] LSP config
@@ -260,12 +240,14 @@ EOF
 
 " [C++] Clangd config
 lua << EOF
-    require'lspconfig'.clangd.setup{}
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    require'lspconfig'.clangd.setup{ capabilities = capabilities }
 EOF
 
 " [Rust] Rust Analyzer config
 lua << EOF
-    require'lspconfig'.rust_analyzer.setup{}
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    require'lspconfig'.rust_analyzer.setup{ capabilities = capabilities }
 EOF
 
 " VHDL Language server with VHDL-Tool
@@ -273,6 +255,7 @@ lua << EOF
     local lspconfig = require'lspconfig'
     local configs = require'lspconfig/configs'
     local util = require 'lspconfig/util'
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
     -- Check if it's already defined for when reloading this file.
     if not lspconfig.vhdl_tool then
       configs.vhdl_tool = {
@@ -284,7 +267,7 @@ lua << EOF
         };
       }
     end
-    lspconfig.vhdl_tool.setup{}
+    lspconfig.vhdl_tool.setup{ capabilities = capabilities }
 EOF
 
 endif "if has('nvim')
