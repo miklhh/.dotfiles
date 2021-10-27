@@ -80,6 +80,11 @@ call plug#begin('~/.vim/plugged')
     " Tmux proper syntax highlighting
     Plug 'tmux-plugins/vim-tmux'
 
+    " Fuzzy incsearch
+    Plug 'haya14busa/incsearch.vim'
+    Plug 'haya14busa/incsearch-fuzzy.vim'
+    Plug 'haya14busa/is.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -175,6 +180,9 @@ imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" FZF files in '~/.dotfiles'
+nnoremap <leader>d :FZF ~/.dotfiles<CR>
 
 
 " --------------------------------------------------------------------------------------------------------------------
