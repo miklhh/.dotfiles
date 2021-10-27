@@ -81,9 +81,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'tmux-plugins/vim-tmux'
 
     " Fuzzy incsearch
+    Plug 'haya14busa/is.vim'
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
-    Plug 'haya14busa/is.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -182,7 +182,11 @@ imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " FZF files in '~/.dotfiles'
-nnoremap <leader>d :FZF ~/.dotfiles<CR>
+nnoremap <leader>.e :FZF ~/.dotfiles<CR>
+
+" FZF incsearch
+map <leader>/ <Plug>(incsearch-fuzzy-/)
+map <leader>? <Plug>(incsearch-fuzzy-?)
 
 
 " --------------------------------------------------------------------------------------------------------------------
