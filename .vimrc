@@ -154,6 +154,9 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
+" Use <Ctrl+c> to copy test when in visual mode.
+vnoremap <C-c> "+y
+
 " Pinky friendly substitute for <C-u> and <C-d>
 nnoremap U <C-u>
 nnoremap D <C-d>
