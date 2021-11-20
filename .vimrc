@@ -154,8 +154,12 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
-" Use <Ctrl+c> to copy test when in visual mode.
+" Use <Ctrl+c/x> to copy/cut test when in visual mode
 vnoremap <C-c> "+y
+vnoremap <C-x> "+d
+
+" Use <Ctrl+s> to write when in normal mode
+nnoremap <C-s> :w<CR>
 
 " Pinky friendly substitute for <C-u> and <C-d>
 nnoremap U <C-u>
@@ -257,7 +261,8 @@ EOF
 
 " [LaTeX] LSP config
 lua << EOF
-    require'lspconfig'.texlab.setup{}
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    require'lspconfig'.texlab.setup{ capabilities = capabilities }
 EOF
 
 " [C++] Clangd config
