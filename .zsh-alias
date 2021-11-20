@@ -43,7 +43,9 @@ fi
 
 # Open file with xdg-open fzf style
 if command -v fzf 1>/dev/null 2>&1; then
-    alias o='xdg-open $(fzf --height=15) 1>/dev/null 2>&1'
+    function o {
+        fzf --height=15 --print0 | xargs -r -0 -i sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
+    }
 fi
 
 # Git alias
