@@ -27,18 +27,21 @@ alias cdr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}
 alias cdu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
 alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
 
-# Change directory fzf style (command: cf)
+# Change directory fzf style (command: 'cf') and change directory from home fzf style (command: 'cfh')
 if command -v fzf 1>/dev/null 2>&1; then
     alias fzf_cf_command='fzf --height=15'
     if command -v bfs 1>/dev/null 2>&1; then
-        alias cf='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
+        alias  c='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
+        alias ch='cd $(bfs ~ -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
     else
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs' not in \${PATH}"
-        alias cf='cd $(find . -type d 2>/dev/null | fzf_cf_command || echo .)'
+        alias  c='cd $(find . -type d 2>/dev/null | fzf_cf_command || echo .)'
+        alias ch='cd $(find ~ -type d 2>/dev/null | fzf_cf_command || echo .)'
     fi
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-    alias cf="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
+    alias  c="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
+    alias ch="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
 fi
 
 # Open file with xdg-open fzf style
