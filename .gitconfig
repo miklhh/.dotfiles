@@ -16,6 +16,7 @@
     la = log --all --decorate --oneline --graph
     sub = submodule
     r = rebase
+    rst = reset
     m = merge
     d = diff
     f = fetch
