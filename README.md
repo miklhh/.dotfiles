@@ -1,6 +1,6 @@
-# .dotfiles
+# .dotfiles 🏠
 
-> Truly, there's no place like `${HOME}` 🏠
+> Truly, there's no place like `${HOME}`
 
 This is my dotfiles configuration repository. It uses [dotbot](https://github.com/anishathalye/dotbot) to create
 symlinks from `~` to this repository. Running `./install` should not overwrite or remove any existing dotfiles from
