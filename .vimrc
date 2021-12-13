@@ -65,6 +65,10 @@ call plug#begin('~/.vim/plugged')
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
+        " Jump to any definition
+        Plug 'pechorin/any-jump.vim'
+
+        " Autocompletion & Co
         Plug 'hrsh7th/nvim-cmp'         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'     " Completion support through LSP
         Plug 'hrsh7th/cmp-buffer'       " Completion support for words in buffer
@@ -240,6 +244,9 @@ if !exists("g:RegisteredYankRingBuffer")
     :autocmd TextYankPost * call SaveLastReg()
 endif
 :autocmd VimEnter * let g:last_yank=@"
+
+" Any-Jump settings
+let g:any_jump_list_numbers = 1
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                            LSP settings for NeoVim                                             --
