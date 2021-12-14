@@ -1,6 +1,6 @@
 #
 # Configuration is very miniscule but it does the job both for faint tty sessions and in interactive colored terminal
-# emulators. If Powerlevel10k is available it is sourced. If not fallback prompt is available.
+# emulators. If Powerlevel10k is available it is sourced. If not, a fallback prompt is available.
 #
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
@@ -77,13 +77,18 @@ bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 
-#
 # Use Ripgrep with Fzf if available
-#
 if command -v rg 1>/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs -g '!{node_modules,.git}'"
 else
     echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
+fi
+
+# Man pages coloring and formating using Bat
+if command -v bat 1>/dev/null 2>&1; then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+else
+    echo "[ .zshrc:${LINENO} ]: Warning: 'bat' not in \${PATH}, using regular man-page formating"
 fi
 
 #
@@ -95,9 +100,7 @@ bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 bindkey '^F' history-incremental-search-forward
 
-#
 # Enable zsh autocompletion
-#
 autoload -U compinit
 compinit -d "${HOME}/.config/zsh/.zcompdump"
 
