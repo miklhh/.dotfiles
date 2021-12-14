@@ -89,6 +89,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
 
+    " Minimap
+    "Plug 'wfxr/minimap.vim'
+    "Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+
 " Initialize plugin system
 call plug#end()
 
@@ -247,6 +251,9 @@ endif
 
 " Any-Jump settings
 let g:any_jump_list_numbers = 1
+
+" Minimap settings
+let g:minimap_auto_start = 1
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                            LSP settings for NeoVim                                             --
