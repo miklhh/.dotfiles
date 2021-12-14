@@ -22,7 +22,7 @@ lsp_set_keymap('n', '<space>lgd', '<cmd>lua vim.lsp.buf.definition()<CR>', lsp_o
 lsp_set_keymap('n', '<space>lgi', '<cmd>lua vim.lsp.buf.implementation()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lj', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', lsp_opts)
---lsp_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', lsp_opts)
+lsp_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>lJ', '<cmd>Telescope lsp_workspace_symbols<CR>', lsp_opts)
 --lsp_set_keymap('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', lsp_opts)
