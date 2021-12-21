@@ -24,6 +24,9 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 # Add ${HOME}.local/bin to path if available
 [ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
 
+# Source Zsh+Fzf keybindings if available
+[ -f "${HOME}/.dotfiles/.fzf-key-bindings.zsh" ] && source "${HOME}/.dotfiles/.fzf-key-bindings.zsh"
+
 # Prompt settings
 function set_prompt_plain {
     autoload -U colors && colors
