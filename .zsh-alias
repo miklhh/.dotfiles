@@ -56,7 +56,7 @@ if command -v fzf 1>/dev/null 2>&1; then
             fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
         }
     elif command -v open 1>/dev/null 2>&1; then
-        # MacOS environment: BSD 'xargs' with open
+        # MacOS environment: BSD 'xargs' with 'open'
         function o {
             fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'open "{}" 1>/dev/null 2>&1 &'
         }
@@ -66,6 +66,17 @@ if command -v fzf 1>/dev/null 2>&1; then
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
 fi
+
+# Open current directory with xdg-open/open
+    if command -v xdg-open 1>/dev/null 2>&1; then
+        # Freedesktop environment: GNU 'xdg-open'
+        alias op='xdg-open .'
+    elif command -v open 1>/dev/null 2>&1; then
+        # MacOS environment: BSD 'open'
+        alias op='open .'
+    else
+        echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
+    fi
 
 # Git alias
 alias g='git'
