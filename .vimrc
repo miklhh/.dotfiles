@@ -65,6 +65,9 @@ call plug#begin('~/.vim/plugged')
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
+        " LSP installer helper, trigger with: 'LspInstall' or 'LspInstallInfo'
+        Plug 'williamboman/nvim-lsp-installer'
+
         " Jump to any definition
         Plug 'pechorin/any-jump.vim'
 
@@ -96,7 +99,6 @@ call plug#begin('~/.vim/plugged')
 " Initialize plugin system
 call plug#end()
 
-
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                  Appearance                                                    --
 " --------------------------------------------------------------------------------------------------------------------
@@ -127,7 +129,6 @@ set number
 set relativenumber
 set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
-
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                   Keybindings                                                  --
@@ -203,7 +204,6 @@ nnoremap <leader>.e :FZF ~/.dotfiles<CR>
 map <leader>/ <Plug>(incsearch-fuzzy-/)
 map <leader>? <Plug>(incsearch-fuzzy-?)
 
-
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                     Misc                                                       --
 " --------------------------------------------------------------------------------------------------------------------
@@ -267,49 +267,36 @@ lua << EOF
     require('config/keybinds')  -- General LSP keybinds
 EOF
 
-" [Python] LSP config
+" LSP config for servers installed with nvim-lsp-installer
 lua << EOF
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    require'lspconfig'.pyright.setup{ capabilities = capabilities }
-EOF
-
-" [LaTeX] LSP config
-lua << EOF
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    require'lspconfig'.texlab.setup{ capabilities = capabilities }
-EOF
-
-" [C++] Clangd config
-lua << EOF
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    require'lspconfig'.clangd.setup{ capabilities = capabilities }
-EOF
-
-" [Rust] Rust Analyzer config
-lua << EOF
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    require'lspconfig'.rust_analyzer.setup{ capabilities = capabilities }
+    local lsp_installer = require("nvim-lsp-installer")
+    lsp_installer.on_server_ready(function(server)
+        local opts = {
+            capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        }
+        server:setup(opts)
+    end)
 EOF
 
 " VHDL Language server with VHDL-Tool
-lua << EOF
-    local lspconfig = require'lspconfig'
-    local configs = require'lspconfig/configs'
-    local util = require 'lspconfig/util'
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    -- Check if it's already defined for when reloading this file.
-    if not lspconfig.vhdl_tool then
-      configs.vhdl_tool = {
-        default_config = {
-          cmd = {'vhdl-tool', 'lsp'};
-          filetypes = {'vhdl'};
-          root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
-          settings = {};
-        };
-      }
-    end
-    lspconfig.vhdl_tool.setup{ capabilities = capabilities }
-EOF
+"lua << EOF
+"    local lspconfig = require'lspconfig'
+"    local configs = require'lspconfig/configs'
+"    local util = require 'lspconfig/util'
+"    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+"    -- Check if it's already defined for when reloading this file.
+"    if not lspconfig.vhdl_tool then
+"      configs.vhdl_tool = {
+"        default_config = {
+"          cmd = {'vhdl-tool', 'lsp'};
+"          filetypes = {'vhdl'};
+"          root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
+"          settings = {};
+"        };
+"      }
+"    end
+"    lspconfig.vhdl_tool.setup{ capabilities = capabilities }
+"EOF
 
 endif "if has('nvim')
 
