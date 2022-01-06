@@ -60,7 +60,7 @@ call plug#begin('~/.vim/plugged')
     " LaTeX synctex synchronization through DBus
     Plug 'peterbjorgensen/sved'
 
-    " Neovim LSP plugins
+    " Neovim specific plugins
     if has('nvim')
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
@@ -79,6 +79,10 @@ call plug#begin('~/.vim/plugged')
 
         Plug 'hrsh7th/vim-vsnip'        " Snippet engine
         Plug 'hrsh7th/vim-vsnip-integ'  " Snippet support for common LSP-clients
+
+        " TreeSitter syntax highlighting
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'nvim-treesitter/playground'
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -293,6 +297,37 @@ lua << EOF
         }
     }
     require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
+EOF
+
+
+" --------------------------------------------------------------------------------------------------------------------
+" --                                              TreeSitter settings                                               --
+" --------------------------------------------------------------------------------------------------------------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing
+  --ignore_install = { "javascript" },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    --disable = { "c", "rust" },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 EOF
 
 endif "if has('nvim')
