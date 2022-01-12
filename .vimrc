@@ -285,19 +285,21 @@ EOF
 
 " VHDL Language server with VHDL-Tool
 lua << EOF
-    local configs = require 'lspconfig.configs'
-    local util = require 'lspconfig.util'
     local server_name = 'vhdl_tool'
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    configs[server_name] = {
-        default_config = {
-            cmd = {'vhdl-tool', 'lsp'};
-            filetypes = {'vhdl'};
-            root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
-            settings = {};
+    local configs = require 'lspconfig.configs'
+    if configs[server_name] == nil then
+        local util = require 'lspconfig.util'
+        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        configs[server_name] = {
+            default_config = {
+                cmd = {'vhdl-tool', 'lsp'};
+                filetypes = {'vhdl'};
+                root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
+                settings = {};
+            }
         }
-    }
-    require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
+        require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
+    end
 EOF
 
 
