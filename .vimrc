@@ -97,6 +97,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
 
+    " Maximize Vim splits
+    Plug 'szw/vim-maximizer'
+
     " Minimap
     "Plug 'wfxr/minimap.vim'
     "Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
@@ -190,8 +193,15 @@ nnoremap <M-j> <C-W>h
 nnoremap <M-k> <C-W>j
 nnoremap <M-l> <C-W>k
 
+" Create new splits
+nnoremap <M-i> :vsplit<CR>
+nnoremap <M-u> :split<CR>
+
 " UndoTree
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" Vim Maximizer
+nnoremap <M-f> :MaximizerToggle<CR>
 
 " Redraw
 nnoremap <leader>r :redraw!<CR>
