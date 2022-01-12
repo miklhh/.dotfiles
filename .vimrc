@@ -75,8 +75,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/nvim-cmp'         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'     " Completion support through LSP
         Plug 'hrsh7th/cmp-buffer'       " Completion support for words in buffer
-        Plug 'onsails/lspkind-nvim'     " Pictograms for NVim-cmp
-
+        Plug 'hrsh7th/cmp-path'         " Completion support for paths
+        Plug 'hrsh7th/cmp-cmdline'      " Completion support for command line
+        Plug 'onsails/lspkind-nvim'     " Pictograms for nvim-cmp
         Plug 'hrsh7th/vim-vsnip'        " Snippet engine
         Plug 'hrsh7th/vim-vsnip-integ'  " Snippet support for common LSP-clients
 
