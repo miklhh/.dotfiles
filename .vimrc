@@ -178,12 +178,6 @@ vnoremap <C-x> "+d
 " Use <Ctrl+s> to write when in normal mode
 nnoremap <C-s> :w<CR>
 
-" Pinky friendly substitute for <C-u> and <C-d>
-nnoremap U <C-u>
-nnoremap D <C-d>
-xnoremap U <C-u>
-xnoremap D <C-d>
-
 " No highlight
 nnoremap <leader>n :noh<CR>
 
