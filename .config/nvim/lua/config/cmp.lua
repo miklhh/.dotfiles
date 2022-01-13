@@ -21,6 +21,13 @@ cmp.setup({
       format = lspkind.cmp_format({
         with_text = true,
         maxwidth = 70,
+        menu = ({
+          buffer = "[Buffer]",      
+          nvim_lsp = "[LSP]",       
+          luasnip = "[LuaSnip]",    
+          nvim_lua = "[Lua]",       
+          latex_symbols = "[LaTeX]",
+        }),
       }),
     },
     sources = cmp.config.sources({
