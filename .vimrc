@@ -10,6 +10,10 @@
 " Vim != Vi
 set nocompatible
 
+" Enable plugin loading, auto indentation and syntax highlighting
+filetype plugin indent on
+syntax on
+
 " Enable 24-bit true color support
 if exists('+termguicolors')
     " Tmux true color compliance
@@ -19,10 +23,6 @@ if exists('+termguicolors')
     " Enable true color
     set termguicolors
 endif
-
-" Enable plugin loading, auto indentation and syntax highlighting
-filetype plugin indent on
-syntax on
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                    Vim Plug                                                    --
@@ -48,7 +48,7 @@ call plug#begin('~/.vim/plugged')
     " Clipboard peek-a-boo
     Plug 'junegunn/vim-peekaboo'
 
-    " Gives :Bdetele and :Bwipeout which behaves like well designed citizens
+    " Gives :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
     Plug 'moll/vim-bbye'
 
     " Get Vim startup time with :StartupTime
@@ -257,6 +257,10 @@ if !exists("g:RegisteredYankRingBuffer")
     :autocmd TextYankPost * call SaveLastReg()
 endif
 :autocmd VimEnter * let g:last_yank=@"
+
+
+" Alias bd -> Bd (vim-bbye buffer delete)
+cnoreabbrev bd Bd
 
 " Any-Jump settings
 let g:any_jump_list_numbers = 1
