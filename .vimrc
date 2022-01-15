@@ -181,13 +181,19 @@ nnoremap <C-s> :w<CR>
 " No highlight
 nnoremap <leader>n :noh<CR>
 
-" i3-like binding for switching between splits
+" Switch between panes (i3-like)
 nnoremap <M-ö> <C-W>l
 nnoremap <M-j> <C-W>h
 nnoremap <M-k> <C-W>j
 nnoremap <M-l> <C-W>k
 
-" Create new splits
+" Move current split to the far right/left (i3-like)
+nnoremap <M-Ö> <C-W>L
+nnoremap <M-J> <C-W>H
+nnoremap <M-K> <C-W>J
+nnoremap <M-L> <C-W>L
+
+" Create new splits (tmux-like)
 nnoremap <M-i> :vsplit<CR>
 nnoremap <M-u> :split<CR>
 
