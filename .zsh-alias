@@ -80,3 +80,7 @@ fi
 
 # Git alias
 alias g='git'
+
+# Python calculator
+alias calc='python -i -c "from math import *; import matplotlib.pyplot as plt; import numpy as np"'
+
