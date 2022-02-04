@@ -68,19 +68,23 @@ else
 fi
 
 # Open current directory with xdg-open/open
-    if command -v xdg-open 1>/dev/null 2>&1; then
-        # Freedesktop environment: GNU 'xdg-open'
-        alias op='xdg-open .'
-    elif command -v open 1>/dev/null 2>&1; then
-        # MacOS environment: BSD 'open'
-        alias op='open .'
-    else
-        echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
-    fi
+if command -v xdg-open 1>/dev/null 2>&1; then
+    # Freedesktop environment: GNU 'xdg-open'
+    alias op='xdg-open .'
+elif command -v open 1>/dev/null 2>&1; then
+    # MacOS environment: BSD 'open'
+    alias op='open .'
+else
+    echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
+fi
 
 # Git alias
 alias g='git'
 
 # Python calculator
-alias calc='python -i -c "from math import *; from matplotlib.pyplot import *; from numpy import *"'
+if command -v ipython 1>/dev/null 2>&1; then
+    alias calc='ipython --TerminalInteractiveShell.editing_mode=vi -i -c "from math import *; from matplotlib.pyplot import *; from numpy import *"'
+else
+    alias calc='python -i -c "from math import *; from matplotlib.pyplot import *; from numpy import *"'
+fi
 
