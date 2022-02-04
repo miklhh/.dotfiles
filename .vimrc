@@ -100,6 +100,9 @@ call plug#begin('~/.vim/plugged')
     " Maximize Vim splits
     Plug 'szw/vim-maximizer'
 
+    " Go to file manager or terminal
+    Plug 'justinmk/vim-gtfo'
+
     " Minimap
     "Plug 'wfxr/minimap.vim'
     "Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
