@@ -81,10 +81,13 @@ fi
 # Git alias
 alias g='git'
 
-# Python calculator
+# (i)Python calculator
+PYTHON_CALC_INIT_CMD='from math import *; from matplotlib.pyplot import *; from numpy import *; from numpy.fft import *'
 if command -v ipython 1>/dev/null 2>&1; then
-    alias calc='ipython --TerminalInteractiveShell.editing_mode=vi -i -c "from math import *; from matplotlib.pyplot import *; from numpy import *"'
+    # Ipython with Vim keybindings and _without_ QT backend (nice..)
+    alias calc="XDG_SESSION_TYPE=X11 ipython --TerminalInteractiveShell.editing_mode=vi -i -c '${PYTHON_CALC_INIT_CMD}'"
 else
-    alias calc='python -i -c "from math import *; from matplotlib.pyplot import *; from numpy import *"'
+    # Regular python calculator (lame..)
+    alias calc="python -i -c '${PYTHON_CALC_INIT_CMD}'"
 fi
 
