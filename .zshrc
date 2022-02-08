@@ -10,6 +10,7 @@
 export HOST=$(uname -n)
 export NAME=$(whoami)
 export PAGER="less"
+export DOTFILES="${HOME}/.dotfiles"
 command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
 # Source ${HOME}/.zsh-local which can contain configuration local to the machine
