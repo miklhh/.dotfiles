@@ -100,12 +100,11 @@ call plug#begin('~/.vim/plugged')
     " Maximize Vim splits
     Plug 'szw/vim-maximizer'
 
-    " Go to file manager or terminal
+    " GoTo file manager (gof) or terminal (got)
     Plug 'justinmk/vim-gtfo'
 
-    " Minimap
-    "Plug 'wfxr/minimap.vim'
-    "Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+    " TMux + Vim seamless pane/split jumping
+    Plug 'christoomey/vim-tmux-navigator'
 
 " Initialize plugin system
 call plug#end()
@@ -185,10 +184,15 @@ nnoremap <C-s> :w<CR>
 nnoremap <leader>n :noh<CR>
 
 " Switch between panes (i3-like)
-nnoremap <M-ö> <C-W>l
-nnoremap <M-j> <C-W>h
-nnoremap <M-k> <C-W>j
-nnoremap <M-l> <C-W>k
+"nnoremap <M-ö> <C-W>l
+"nnoremap <M-j> <C-W>h
+"nnoremap <M-k> <C-W>j
+"nnoremap <M-l> <C-W>k
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-j> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-l> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-ö> :TmuxNavigateRight<cr>
 
 " Move current split to the far right/left (i3-like)
 nnoremap <M-Ö> <C-W>L
