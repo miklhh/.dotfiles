@@ -83,7 +83,7 @@ bindkey '^[[3~' delete-char
 
 # Use Ripgrep with Fzf if available
 if command -v rg 1>/dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs -g '!{node_modules,.git}'"
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore-vcs -g '!{node_modules,.git,mikhe33}'"
 else
     echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
 fi
