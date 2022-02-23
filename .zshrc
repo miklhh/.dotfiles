@@ -26,7 +26,11 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 [ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
 
 # Source Zsh+Fzf keybindings if available
+[ -f "${HOME}/.dotfiles/.fzf-completion.zsh" ] && source "${HOME}/.dotfiles/.fzf-completion.zsh"
 [ -f "${HOME}/.dotfiles/.fzf-key-bindings.zsh" ] && source "${HOME}/.dotfiles/.fzf-key-bindings.zsh"
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^T' fzf-completion
+bindkey '^I' $fzf_default_completion
 
 # Prompt settings
 function set_prompt_plain {
