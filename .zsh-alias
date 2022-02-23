@@ -34,17 +34,17 @@ alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"
 
 # Change directory fzf style (command: 'cf') and change directory from home fzf style (command: 'cfh')
 if command -v fzf 1>/dev/null 2>&1; then
-    alias fzf_cf_command='fzf --height=15'
+    alias fzf_c_command='fzf --height=15 --reverse'
     if command -v bfs 1>/dev/null 2>&1; then
-        alias  c='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
-        alias ch='cd $(bfs ~ -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
+        alias  c='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
+        alias ch='cd $(bfs ~ -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
     elif command -v rfs 1>/dev/null 2>&1; then
-        alias  c='cd $(rfs -p . -i .git 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
-        alias ch='cd $(rfs -p ~ -i .bit 2>/dev/null | sed "s/\.\///g" | fzf_cf_command || echo .)'
+        alias  c='cd $(rfs -p . -i .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
+        alias ch='cd $(rfs -p ~ -i .bit 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
     else
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs/rfs' not in \${PATH}"
-        alias  c='cd $(find . -type d 2>/dev/null | fzf_cf_command || echo .)'
-        alias ch='cd $(find ~ -type d 2>/dev/null | fzf_cf_command || echo .)'
+        alias  c='cd $(find . -type d 2>/dev/null | fzf_c_command || echo .)'
+        alias ch='cd $(find ~ -type d 2>/dev/null | fzf_c_command || echo .)'
     fi
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
