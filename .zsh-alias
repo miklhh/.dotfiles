@@ -52,24 +52,35 @@ else
     alias ch="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
 fi
 
-# Fzf-open a file with propriate tool
-if command -v fzf 1>/dev/null 2>&1; then
+# Quick-open files with GNU xdg-open or BSD open
+function o {
     if command -v xdg-open 1>/dev/null 2>&1; then
-        # Freedesktop environment: GNU 'xargs' with 'xdg-open'
-        function o {
-            fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
-        }
+        # Freedesktop (probably GNU/Linux) environment: GNU 'xargs' with 'xdg-open'
+        if [ "$#" -eq 0 ]; then
+            if command -v fzf 1>/dev/null 2>&1; then
+                fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
+            else
+                echo "Error: 'fzf' not in \${PATH}"
+            fi
+        else
+            xdg-open "$1" 1>/dev/null 2>&1
+        fi
     elif command -v open 1>/dev/null 2>&1; then
-        # MacOS environment: BSD 'xargs' with 'open'
-        function o {
-            fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'open "{}" 1>/dev/null 2>&1 &'
-        }
-    else
+        # MacOS/BSD environment: BSD 'xargs' with BSD 'open'
+        if [ "$#" -eq 0 ]; then
+            if command -v fzf 1>/dev/null 2>&1; then
+                fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'open "{}" 1>/dev/null 2>&1 &'
+            else
+                echo "Error: 'fzf' not in \${PATH}"
+            fi
+        else
+            open "$1" 1>/dev/null 2>&1
+        fi
+    else 
+        # No 'xdg-open' or 'open' in $PATH
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
     fi
-else
-    echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-fi
+}
 
 # Open current directory with xdg-open/open
 if command -v xdg-open 1>/dev/null 2>&1; then
