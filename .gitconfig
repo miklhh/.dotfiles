@@ -42,4 +42,7 @@
     file-decoration-style = none
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
+[merge]
+    ff = only
