@@ -79,7 +79,7 @@ if command -v fzf 1>/dev/null 2>&1; then
     if command -v bfs 1>/dev/null 2>&1; then
         # Breadth first search (bfs) available in path, use it for directory list completion in zsh fzf-completion
         _fzf_compgen_dir() {
-            bfs . -type d -exclude -name .git 2>/dev/null "$1"
+            bfs "$1" -type d -exclude -name .git 2>/dev/null
         }
     fi
 else
