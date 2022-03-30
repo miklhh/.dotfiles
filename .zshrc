@@ -107,7 +107,10 @@ function set_prompt_p10k {
 
 if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
     autoload is-at-least
-    if is-at-least "5.1.0"; then
+    if is-at-least "5.3.0"; then
+        # If the dotfiles are bootstraped from 'https://github.com/miklhh/.dotfiles', then '${HOME}/.powerlevel10k'
+        # will be a symlink to '${HOME}/.dotfiles/powerlevel10k'. If this '.zshrc' file is used stand alone, the user
+        # will manually have to install Powerlevel10k into '${HOME}/.powerlevel10k'.
         [ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
         if [ -f "${P10K_THEME}" ]; then
             set_prompt_p10k
@@ -115,8 +118,8 @@ if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
             echo "[ .zshrc:${LINENO} ]: Warning: directory ${HOME}/.powerlevel10k unavailable"
             set_prompt_plain
         fi
-    else # Zsh version lower than 5.1.0
-        echo "[ .zshrc:${LINENO} ]: Warning: Zsh version (${ZSH_VERSION}) lower than 5.1.0, could not load Powerlevel10k"
+    else # Zsh version lower than 5.3.0
+        echo "[ .zshrc:${LINENO} ]: Warning: Zsh version (${ZSH_VERSION}) lower than 5.3.0, could not load Powerlevel10k"
         set_prompt_plain
     fi
 else
