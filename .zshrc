@@ -35,7 +35,7 @@ RG_GLOB='!{node_modules,.git}'
 
 # Preferred number of threads for use by ripgrep (rg) when traversing files and directories. Set to zero (0) to let
 # ripgrep decide using its heuristics.
-RG_THREADS='128'
+RG_THREADS='0'
 
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -67,9 +67,9 @@ if command -v fzf 1>/dev/null 2>&1; then
 
     if command -v rg 1>/dev/null 2>&1; then
         # Ripgrep (rg) available in path, use it for path list completion on zsh fzf-completion and on fzf call
-        export FZF_DEFAULT_COMMAND="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --follow --no-ignore-vcs"
+        export FZF_DEFAULT_COMMAND="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden"
         _fzf_compgen_path() {
-            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --follow --no-ignore-vcs "$1" 2>/dev/null
+            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden "$1" 2>/dev/null
         }
     else
         # Ripgrep (rg) not in $PATH, regular GNU find will be used for command-line completion and on fzf call
