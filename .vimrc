@@ -68,18 +68,19 @@ call plug#begin('~/.vim/plugged')
         " LSP installer helper, trigger with: 'LspInstall' or 'LspInstallInfo'
         Plug 'williamboman/nvim-lsp-installer'
 
-        " Jump to any definition
-        Plug 'pechorin/any-jump.vim'
+        " Autocompletion engine
+        Plug 'hrsh7th/nvim-cmp'
+        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'hrsh7th/cmp-buffer'
+        Plug 'hrsh7th/cmp-path'
+        Plug 'hrsh7th/cmp-cmdline'
 
-        " Autocompletion & Co
-        Plug 'hrsh7th/nvim-cmp'         " Autocompletion engine
-        Plug 'hrsh7th/cmp-nvim-lsp'     " Completion support through LSP
-        Plug 'hrsh7th/cmp-buffer'       " Completion support for words in buffer
-        Plug 'hrsh7th/cmp-path'         " Completion support for paths
-        Plug 'hrsh7th/cmp-cmdline'      " Completion support for command line
-        Plug 'onsails/lspkind-nvim'     " Pictograms for nvim-cmp
-        Plug 'hrsh7th/vim-vsnip'        " Snippet engine
-        Plug 'hrsh7th/vim-vsnip-integ'  " Snippet support for common LSP-clients
+        " Pictograms for nvim-cmp
+        Plug 'onsails/lspkind-nvim'
+
+        " Snippet engine with snippet support for LSP-servers
+        Plug 'hrsh7th/vim-vsnip'
+        Plug 'hrsh7th/vim-vsnip-integ'
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -89,10 +90,10 @@ call plug#begin('~/.vim/plugged')
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
     Plug 'lambdalisue/suda.vim'
 
-    " Tmux proper syntax highlighting
+    " Proper syntax highlighting when editing .tmux.conf
     Plug 'tmux-plugins/vim-tmux'
 
-    " Fuzzy incsearch
+    " Fuzzy incsearch (<leader>/)
     Plug 'haya14busa/is.vim'
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -113,8 +114,7 @@ call plug#end()
 " --                                                  Appearance                                                    --
 " --------------------------------------------------------------------------------------------------------------------
 
-" Gruvbox colorscheme settings
-" More info: https://github.com/morhetz/gruvbox/wiki/Configuration
+" Gruvbox colorscheme settings - more info: https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
 let g:gruvbox_italic='0'
 let g:gruvbox_contrast_dark='hard'
@@ -126,7 +126,6 @@ let g:airline_theme = 'gruvbox'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
@@ -178,16 +177,12 @@ vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 
 " Use <Ctrl+s> to write when in normal mode
-nnoremap <C-s> :w<CR>
+nnoremap <C-s> :w<CR> 
 
 " No highlight
 nnoremap <leader>n :noh<CR>
 
-" Switch between panes (i3-like)
-"nnoremap <M-ö> <C-W>l
-"nnoremap <M-j> <C-W>h
-"nnoremap <M-k> <C-W>j
-"nnoremap <M-l> <C-W>k
+" Switch between panes (i3-like) using TMux Navigator
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-j> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-l> :TmuxNavigateUp<cr>
@@ -230,19 +225,16 @@ map <leader>? <Plug>(incsearch-fuzzy-?)
 " --                                                     Misc                                                       --
 " --------------------------------------------------------------------------------------------------------------------
 
-" Enable mouse scrolling
-set mouse=a
-
-" Other settings
-set laststatus=2
-set scrolloff=4
-set backspace=2
-set hlsearch        " Highlight on search
-set hidden          " Keep buffers open in bg for fast reopening
-set incsearch       " Highlight text when searching
-set signcolumn=no   " No extra linting column
-set cursorline      " Highlight the current line
-set nowrap
+set mouse=a                     " Enable all mouse functionality
+set laststatus=2                " Always show the status line in the last window
+set scrolloff=4                 " Always show four lines above and under cursorline
+set backspace=indent,eol,start  " Insert mode backspace (and <C-W>) settings
+set hlsearch                    " Highlight text on search
+set hidden
+set incsearch                   " Show searches in realtime
+set signcolumn=no               " Extra linting column the the left (yes/no)
+set cursorline                  " Highlight the row under the cursor
+set nowrap                      " Don't wrap very long lines to next row
 
 " Use white space for tabbing
 set tabstop=4
@@ -274,9 +266,6 @@ endif
 
 " Alias bd -> Bd (vim-bbye buffer delete)
 cnoreabbrev bd Bd
-
-" Any-Jump settings
-let g:any_jump_list_numbers = 1
 
 " Minimap settings
 let g:minimap_auto_start = 1
@@ -322,7 +311,6 @@ lua << EOF
         require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
     end
 EOF
-
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                              TreeSitter settings                                               --
