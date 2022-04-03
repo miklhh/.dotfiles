@@ -190,8 +190,8 @@ nnoremap <leader>n :noh<CR>
 "nnoremap <M-l> <C-W>k
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-j> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-l> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-k> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-ö> :TmuxNavigateRight<cr>
 
 " Move current split to the far right/left (i3-like)
