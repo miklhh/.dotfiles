@@ -85,6 +85,12 @@ call plug#begin('~/.vim/plugged')
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'nvim-treesitter/playground'
+
+        " GitHub Co-Pilot
+        Plug 'github/copilot.vim'
+
+        " local
+        Plug 'rhysd/vim-grammarous'
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -94,7 +100,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tmux-plugins/vim-tmux'
 
     " Fuzzy incsearch (<leader>/)
-    Plug 'haya14busa/is.vim'
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
 
@@ -106,6 +111,7 @@ call plug#begin('~/.vim/plugged')
 
     " TMux + Vim seamless pane/split jumping
     Plug 'christoomey/vim-tmux-navigator'
+    
 
 " Initialize plugin system
 call plug#end()
@@ -221,6 +227,10 @@ nnoremap <leader>.e :FZF ~/.dotfiles<CR>
 map <leader>/ <Plug>(incsearch-fuzzy-/)
 map <leader>? <Plug>(incsearch-fuzzy-?)
 
+" Scroll with <C-j/k> when searching
+cnoremap <C-j> <C-g>
+cnoremap <C-k> <C-t>
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                     Misc                                                       --
 " --------------------------------------------------------------------------------------------------------------------
@@ -269,6 +279,30 @@ cnoreabbrev bd Bd
 
 " Minimap settings
 let g:minimap_auto_start = 1
+
+" --------------------------------------------------------------------------------------------------------------------
+" --                                           LaTeX/spellchecking settings                                         --
+" --------------------------------------------------------------------------------------------------------------------
+
+" Newly open .tex-files are LaTeX
+let g:tex_flavor='latex'
+
+" Enable spellcheck for TeX files
+autocmd FileType plaintex,tex,latex syntax spell toplevel
+autocmd FileType plaintex,tex,latex set spell
+
+" BUG: Re-sourcing .vimrc after initially loading a LaTeX file helps to spellcheck only non LaTeX 
+"autocmd FileType plaintex,tex,latex :source ~/.vimrc
+
+" Spellcheck keybindings <leader> + sn: next, sp: previous, sl: list, sa: add to dict, sr: remove from dict
+nnoremap <leader>sn ]s
+nnoremap <leader>sp [s
+nnoremap <leader>sl z=
+nnoremap <leader>sa zg
+nnoremap <leader>sr zw
+
+" Use system install of languagetool
+let g:grammarous#languagetool_cmd = 'languagetool'
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                            LSP settings for NeoVim                                             --
