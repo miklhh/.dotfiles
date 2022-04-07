@@ -67,9 +67,9 @@ if command -v fzf 1>/dev/null 2>&1; then
 
     if command -v rg 1>/dev/null 2>&1; then
         # Ripgrep (rg) available in path, use it for path list completion on zsh fzf-completion and on fzf call
-        export FZF_DEFAULT_COMMAND="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden"
+        export FZF_DEFAULT_COMMAND="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs"
         _fzf_compgen_path() {
-            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden "$1" 2>/dev/null
+            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs "$1" 2>/dev/null
         }
     else
         # Ripgrep (rg) not in $PATH, regular GNU find will be used for command-line completion and on fzf call
