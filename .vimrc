@@ -88,9 +88,6 @@ call plug#begin('~/.vim/plugged')
 
         " GitHub Co-Pilot
         Plug 'github/copilot.vim'
-
-        " local
-        Plug 'rhysd/vim-grammarous'
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -111,6 +108,9 @@ call plug#begin('~/.vim/plugged')
 
     " TMux + Vim seamless pane/split jumping
     Plug 'christoomey/vim-tmux-navigator'
+
+    " Vim Sneak
+    Plug 'justinmk/vim-sneak'
     
 
 " Initialize plugin system
@@ -169,8 +169,9 @@ nnoremap d "_d
 xnoremap d "_d
 nnoremap x "_x
 xnoremap x "_x
-nnoremap s "_s
-xnoremap s "_s
+"nnoremap s "_s
+"xnoremap s "_s
+let g:sneak#label = 1
 nnoremap c "_c
 xnoremap c "_c
 nnoremap C "_C
@@ -202,14 +203,14 @@ nnoremap <M-K> <C-W>J
 nnoremap <M-L> <C-W>L
 
 " Create new splits (tmux-like)
-nnoremap <M-i> :vsplit<CR>
-nnoremap <M-u> :split<CR>
+nnoremap <M-I> :vsplit<CR>
+nnoremap <M-U> :split<CR>
 
 " UndoTree
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " Vim Maximizer
-nnoremap <M-f> :MaximizerToggle<CR>
+nnoremap <M-F> :MaximizerToggle<CR>
 
 " Redraw
 nnoremap <leader>r :redraw!<CR>
@@ -300,9 +301,6 @@ nnoremap <leader>sp [s
 nnoremap <leader>sl z=
 nnoremap <leader>sa zg
 nnoremap <leader>sr zw
-
-" Use system install of languagetool
-let g:grammarous#languagetool_cmd = 'languagetool'
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                            LSP settings for NeoVim                                             --
