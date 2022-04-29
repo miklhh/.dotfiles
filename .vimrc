@@ -88,6 +88,9 @@ call plug#begin('~/.vim/plugged')
 
         " GitHub Co-Pilot
         Plug 'github/copilot.vim'
+
+        " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
+        Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
