@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+# Stop script on command failure
 set -e
 
-# Work directory: .dotfiles/.local/share/fonts
+# Work and download directory: .dotfiles/.local/share/fonts
 BASEDIR=$(dirname "$0")
 cd ${BASEDIR}
 

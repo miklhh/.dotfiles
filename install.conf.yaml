@@ -1,12 +1,12 @@
 - clean: ['~']
 
 - link:
-    # Vim-Plugged for regular Vim
+    # Vim-plug for regular Vim
     ~/.vim/autoload/plug.vim:
       create: true
       path: .vim/autoload/plug.vim
 
-    # Vim Pluged for NeoVim
+    # Vim-plug for NeoVim
     ~/.local/share/nvim/site/autoload/plug.vim:
       create: true
       path: .vim/autoload/plug.vim
@@ -16,24 +16,26 @@
       create: true
       path: .config/nvim/lua
 
-    # Vim config
+    # Vim config for both Vim and NeoVim
     ~/.vimrc: .vimrc
     ~/.config/nvim/init.vim: .vimrc
 
     # Zsh config
     ~/.zshrc: .zshrc
     ~/.zsh-alias: .zsh-alias
+    ~/.config/zsh: .config/zsh
 
     # Powerlevel10k
     ~/.powerlevel10k: powerlevel10k
 
-    # Misc
+    # Tmux config
     ~/.tmux.conf: .tmux.conf
-    ~/.config/zsh: .config/zsh
+
+    # Misc
     ~/.screenrc: .screenrc
-    ~/.Xresources: .Xresources
+    #~/.Xresources: .Xresources
     ~/.ssh/config: .ssh/config
-    ~/.scripts: .scripts
+    #~/.scripts: .scripts
     ~/.gitconfig: .gitconfig
 
 - shell: # Download Meslo LGS Nerd Font
@@ -41,7 +43,7 @@
 
 - link: # Install Meslo LGS Nerd Font
     ~/.local/share/fonts/MesloLGS NF Regular.ttf:
-      create: true
+      create: true # Create directory structure if needed
       path: .local/share/fonts/MesloLGS NF Regular.ttf
     ~/.local/share/fonts/MesloLGS NF Bold.ttf: .local/share/fonts/MesloLGS NF Bold.ttf
     ~/.local/share/fonts/MesloLGS NF Italic.ttf: .local/share/fonts/MesloLGS NF Italic.ttf
