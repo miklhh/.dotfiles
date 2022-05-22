@@ -16,6 +16,11 @@
       create: true
       path: .config/nvim/lua
 
+    # Regular vim configuration scripts
+    ~/.config/vim/config:
+      create: true
+      path: .config/vim/config
+
     # Vim config for both Vim and NeoVim
     ~/.vimrc: .vimrc
     ~/.config/nvim/init.vim: .vimrc

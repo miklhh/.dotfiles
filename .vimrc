@@ -40,12 +40,12 @@ call plug#begin('~/.vim/plugged')
     " Colorscheme
     Plug 'morhetz/gruvbox'
 
-    " Vim FZF
+    " Vim + FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'chengzeyi/fzf-preview.vim'
 
-    " Clipboard peek-a-boo
+    " Clipboard Peek-a-Boo
     Plug 'junegunn/vim-peekaboo'
 
     " Gives :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
@@ -62,11 +62,15 @@ call plug#begin('~/.vim/plugged')
 
     " Neovim specific plugins
     if has('nvim')
+
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
         " LSP installer helper, trigger with: 'LspInstall' or 'LspInstallInfo'
         Plug 'williamboman/nvim-lsp-installer'
+
+        " LSP tree view
+        Plug 'simrat39/symbols-outline.nvim'
 
         " Autocompletion engine
         Plug 'hrsh7th/nvim-cmp'
@@ -91,6 +95,7 @@ call plug#begin('~/.vim/plugged')
 
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
+
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -114,7 +119,9 @@ call plug#begin('~/.vim/plugged')
 
     " Vim Sneak
     Plug 'justinmk/vim-sneak'
-    
+
+    " Vim + Tmux integration
+    Plug 'preservim/vimux'
 
 " Initialize plugin system
 call plug#end()
@@ -167,14 +174,16 @@ map <Leader>f :FZFBLines<CR>
 " Fzf lines in all open buffers
 map <Leader>F :Lines<CR>
 
+" LSP symbols outline
+if has('nvim')
+    map <Leader>S :SymbolsOutline<CR>
+endif 
+
 " No yank on delete. Use <Leader+d> to remove and yank
 nnoremap d "_d
 xnoremap d "_d
 nnoremap x "_x
 xnoremap x "_x
-"nnoremap s "_s
-"xnoremap s "_s
-let g:sneak#label = 1
 nnoremap c "_c
 xnoremap c "_c
 nnoremap C "_C
@@ -249,6 +258,7 @@ set incsearch                   " Show searches in realtime
 set signcolumn=no               " Extra linting column the the left (yes/no)
 set cursorline                  " Highlight the row under the cursor
 set nowrap                      " Don't wrap very long lines to next row
+set ignorecase                  " Ignore casing when searching by default
 
 " Use white space for tabbing
 set tabstop=4
@@ -277,12 +287,11 @@ if !exists("g:RegisteredYankRingBuffer")
 endif
 :autocmd VimEnter * let g:last_yank=@"
 
-
 " Alias bd -> Bd (vim-bbye buffer delete)
 cnoreabbrev bd Bd
 
-" Minimap settings
-let g:minimap_auto_start = 1
+" Vim-Sneak settings
+source ~/.config/vim/config/sneak.vim
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                           LaTeX/spellchecking settings                                         --
@@ -291,9 +300,11 @@ let g:minimap_auto_start = 1
 " Newly open .tex-files are LaTeX
 let g:tex_flavor='latex'
 
+" NOTE: It's better to let LSPs such as ltex handle spelling. The vim built-in spelling can be enabled with 
+"       ':set spell' anyhow.
 " Enable spellcheck for TeX files
-autocmd FileType plaintex,tex,latex syntax spell toplevel
-autocmd FileType plaintex,tex,latex set spell
+"autocmd FileType plaintex,tex,latex syntax spell toplevel
+"autocmd FileType plaintex,tex,latex set spell
 
 " BUG: Re-sourcing .vimrc after initially loading a LaTeX file helps to spellcheck only non LaTeX 
 "autocmd FileType plaintex,tex,latex :source ~/.vimrc
@@ -315,67 +326,19 @@ set completeopt=menu,menuone,noselect
 lua << EOF
     require('config/cmp')       -- CMP Autocompletion settings
     require('config/keybinds')  -- General LSP keybinds
+    require('config/lsp')  -- General LSP keybinds
 EOF
 
-" LSP config for servers installed with nvim-lsp-installer
-lua << EOF
-    local lsp_installer = require("nvim-lsp-installer")
-    lsp_installer.on_server_ready(function(server)
-        local opts = {
-            capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        }
-        server:setup(opts)
-    end)
-EOF
-
-" VHDL Language server with VHDL-Tool
-lua << EOF
-    local server_name = 'vhdl_tool'
-    local configs = require 'lspconfig.configs'
-    if configs[server_name] == nil then
-        local util = require 'lspconfig.util'
-        local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-        configs[server_name] = {
-            default_config = {
-                cmd = {'vhdl-tool', 'lsp'};
-                filetypes = {'vhdl'};
-                root_dir = util.root_pattern('vhdltool-config.yaml', '.git');
-                settings = {};
-            }
-        }
-        require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
-    end
-EOF
+endif "if has('nvim')
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                              TreeSitter settings                                               --
 " --------------------------------------------------------------------------------------------------------------------
+"
+if has('nvim')
 
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "all",
-
-  -- Install languages synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- List of parsers to ignore installing
-  --ignore_install = { "javascript" },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- list of language that will be disabled
-    --disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+    require('config/treesitter')
 EOF
 
 endif "if has('nvim')
