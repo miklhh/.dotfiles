@@ -126,6 +126,8 @@ else
     set_prompt_plain
 fi
 
+source ~/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 
 # --------------------------------------------------------------------------------------------------------------------
 # --                                                 History settings                                               --
