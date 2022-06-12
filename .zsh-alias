@@ -93,6 +93,11 @@ else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
 fi
 
+# Python3 alias. On certain systems, e.g. Ubuntu, python is not linked to either Python2 nor Python3
+if ! command -v python 1>/dev/null 2>&1; then
+    alias python='python3'
+fi
+
 # (i)Python calculator
 PYTHON_CALC_INIT_CMD='from math import *; from matplotlib.pyplot import *; from numpy import *; from numpy.fft import *'
 if command -v ipython 1>/dev/null 2>&1; then
