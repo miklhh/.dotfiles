@@ -19,6 +19,7 @@ else
     alias ls='ls --color=auto --group-directories-first'
 fi
 alias ll='ls -l'
+alias l=ll
 
 # Command line quickies
 alias t='tmux'
