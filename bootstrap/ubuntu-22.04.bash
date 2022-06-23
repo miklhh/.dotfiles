@@ -17,7 +17,7 @@ BUILD_ESSENTIALS_APT_PACKAGES="build-essential manpages-dev git curl"
 apt-get -y install ${BUILD_ESSENTIALS_APT_PACKAGES}
 
 # NeoVim unstable
-apt-get -y install neovim vim
+apt-get -y install neovim vim xclip wl-clipboard
 
 # Rust & Co (un-attended rustup install)
 RUST_APT_PACKAGES="bat ripgrep"
