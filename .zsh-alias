@@ -18,8 +18,8 @@ else
     # Any other machine (probably Linux).
     alias ls='ls --color=auto --group-directories-first'
 fi
-alias ll='ls -l'
-alias l=ll
+alias l='ls -l'
+alias ll='ls -l -a'
 
 # Command line quickies
 alias t='tmux'

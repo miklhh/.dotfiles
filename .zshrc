@@ -169,11 +169,13 @@ bindkey '^[[3~' delete-char
 # --                                                 Misc                                                           --
 # --------------------------------------------------------------------------------------------------------------------
 
-# Man pages coloring and formating using Bat
-if command -v bat 1>/dev/null 2>&1; then
+# Man pages coloring and formating using nvim or bat
+if command -v nvim 1>/dev/null 2>&1; then
+    export MANPAGER='nvim +Man!'
+elif command -v bat 1>/dev/null 2>&1; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 else
-    echo "[ .zshrc:${LINENO} ]: Warning: 'bat' not in \${PATH}, using regular man-page formating"
+    echo "[ .zshrc:${LINENO} ]: Warning: neither 'nvim' nor 'bat' in \${PATH} for man-page formating"
 fi
 
 # Enable zsh autocompletion

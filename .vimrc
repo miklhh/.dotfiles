@@ -132,9 +132,10 @@ call plug#end()
 
 " Gruvbox colorscheme settings - more info: https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
-let g:gruvbox_italic='0'
+let g:gruvbox_italic='1'
 let g:gruvbox_contrast_dark='hard'
-set background=dark
+let g:gruvbox_contrast_light='hard'
+set background=light
 colorscheme gruvbox
 
 " Airline settings
