@@ -1,3 +1,6 @@
+----------------------------------------------------------------------------------------------------------------------
+--                                            NVIM LSP installed configuraitons                                     --
+----------------------------------------------------------------------------------------------------------------------
 -- LSP config for servers installed with nvim-lsp-installer
 local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
@@ -27,3 +30,4 @@ if configs[server_name] == nil then
     }
     require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
 end
+

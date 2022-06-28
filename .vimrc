@@ -294,6 +294,16 @@ cnoreabbrev bd Bd
 " Vim-Sneak settings
 source ~/.config/vim/config/sneak.vim
 
+" FZF create new file quick-action
+function! FzfEditPrompt(file)
+    let cmd = ':e ' . a:file . '/'
+
+    call feedkeys(cmd)
+endfunction
+command! -nargs=1 FzfEditPrompt :call FzfEditPrompt(<f-args>)
+map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEditPrompt'})<CR>
+
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                           LaTeX/spellchecking settings                                         --
 " --------------------------------------------------------------------------------------------------------------------
@@ -325,9 +335,9 @@ if has('nvim')
 
 set completeopt=menu,menuone,noselect
 lua << EOF
-    require('config/cmp')       -- CMP Autocompletion settings
+    require('config/cmp')       -- CMP autocompletion settings
     require('config/keybinds')  -- General LSP keybinds
-    require('config/lsp')  -- General LSP keybinds
+    require('config/lsp')       -- LSP settings
 EOF
 
 endif "if has('nvim')
