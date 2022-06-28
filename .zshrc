@@ -7,7 +7,7 @@
 
 
 # --------------------------------------------------------------------------------------------------------------------
-# --                                              Environment Settings                                              --
+# --                                              Environment settings                                              --
 # --------------------------------------------------------------------------------------------------------------------
 
 # Export base env-variables.
@@ -17,6 +17,12 @@ export PAGER="less"
 export DOTFILES="${HOME}/.dotfiles"
 command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
+# Add ${HOME}.local/bin to path if available
+[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
+
+# Add ${HOME}/.cargo/bin to path if available
+[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:${PATH}"
+
 # Source ${HOME}/.zsh-local which can contain machine/system specific zsh settings
 [ -f "${HOME}/.zsh-local" ] && source "${HOME}/.zsh-local"
 
@@ -24,19 +30,12 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
 [ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
-# Add ${HOME}/.cargo/bin to path if available
-[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:${PATH}"
-
-# Add ${HOME}.local/bin to path if available
-[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
-
 # Global glob-settings for ripgrep (rg)
 RG_GLOB='!{node_modules,.git}'
 
 # Preferred number of threads for use by ripgrep (rg) when traversing files and directories. Set to zero (0) to let
 # ripgrep decide using its heuristics.
 RG_THREADS='0'
-
 
 # --------------------------------------------------------------------------------------------------------------------
 # --                                                 FZF settings                                                   --
@@ -127,7 +126,6 @@ else
 fi
 
 source ~/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 
 # --------------------------------------------------------------------------------------------------------------------
 # --                                                 History settings                                               --
