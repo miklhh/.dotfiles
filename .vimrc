@@ -96,6 +96,10 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
+        " NeoVim tree view
+        Plug 'kyazdani42/nvim-web-devicons'
+        Plug 'kyazdani42/nvim-tree.lua'
+
     endif
 
     " NeoVim sudo read/write (:SudaRead, :SudaWrite)
@@ -245,6 +249,11 @@ map <leader>? <Plug>(incsearch-fuzzy-?)
 cnoremap <C-j> <C-g>
 cnoremap <C-k> <C-t>
 
+" NeoVim tree toggle
+if has('nvim')
+    nnoremap <leader>, :NvimTreeToggle<CR>
+endif
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                     Misc                                                       --
 " --------------------------------------------------------------------------------------------------------------------
@@ -302,6 +311,13 @@ function! FzfEditPrompt(file)
 endfunction
 command! -nargs=1 FzfEditPrompt :call FzfEditPrompt(<f-args>)
 map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEditPrompt'})<CR>
+
+" NeoVim tree
+if has('nvim')
+lua << EOF
+    require("nvim-tree").setup()
+EOF
+endif
 
 
 " --------------------------------------------------------------------------------------------------------------------
