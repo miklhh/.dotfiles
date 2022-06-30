@@ -37,6 +37,11 @@ RG_GLOB='!{node_modules,.git}'
 # ripgrep decide using its heuristics.
 RG_THREADS='0'
 
+# Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables. More key binding are found 
+# below under 'Key bindings'. The 'bindkey -v' option must be set before the FZF settings are loaded, as FZF depends
+# on it being set properly.
+bindkey -v
+
 # --------------------------------------------------------------------------------------------------------------------
 # --                                                 FZF settings                                                   --
 # --------------------------------------------------------------------------------------------------------------------
@@ -71,7 +76,7 @@ if command -v fzf 1>/dev/null 2>&1; then
             rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs "$1" 2>/dev/null
         }
     else
-        # Ripgrep (rg) not in $PATH, regular GNU find will be used for command-line completion and on fzf call
+        # Ripgrep (rg) not in $PATH, regular GNU (or BSD) find will be used for command-line completion with fzf
         echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
     fi
 
@@ -144,8 +149,7 @@ setopt hist_verify              # Upon hitting enter, reload line into edit buf
 # --                                                 Key bindings                                                   --
 # --------------------------------------------------------------------------------------------------------------------
 
-# Vi keybindings. This is not always loaded by default if not specified explicitly, e.g., on MacOSX iTerm2
-bindkey -v
+# History search with <CTRL-R> and <CTRL-F>
 bindkey "^?" backward-delete-char
 bindkey '^R' history-incremental-search-backward
 bindkey '^F' history-incremental-search-forward
