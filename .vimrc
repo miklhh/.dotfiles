@@ -124,9 +124,6 @@ call plug#begin('~/.vim/plugged')
     " Vim Sneak
     Plug 'justinmk/vim-sneak'
 
-    " Vim + Tmux integration
-    Plug 'preservim/vimux'
-
 " Initialize plugin system
 call plug#end()
 
@@ -274,6 +271,11 @@ set ignorecase                  " Ignore casing when searching by default
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Automatically re-read files that changes on disk, but only if they are
+" marked as non-modified in their associated buffer
+set autoread
+au CursorHold * checktime
 
 " Cycle numbered registers when yanking. This allow the numbered registers to
 " act like a ring buffer when performing the yank operation (just like delete
