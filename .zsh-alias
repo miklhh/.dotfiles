@@ -12,11 +12,17 @@ command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim' || echo "[ .zsh-alias:${L
 # Settings for ls
 if [ $(uname -s) = "Darwin" ]
 then
-    # MacOS machine with FreeBSD ls
-    alias ls='ls -G'
+    if command -v gls 1>/dev/null 2>&1; then
+        # MacOS machine with GNU coreutils installed, use GNU ls
+        alias ls='gls --color=auto --group-directories-first --classify --human-readable'
+    else
+        # MacOS machine with BSD ls
+        echo "[ .zsh-alias:${LINENO} ]: Warning: 'GNU coreutils' not installed, using 'BSD ls'"
+        alias ls='ls -G'
+    fi
 else
     # Any other machine (probably Linux).
-    alias ls='ls --color=auto --group-directories-first'
+    alias ls='ls --color=auto --group-directories-first --classify --human-readable'
 fi
 alias l='ls -l'
 alias ll='ls -l -a'
