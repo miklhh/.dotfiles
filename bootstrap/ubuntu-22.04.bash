@@ -26,7 +26,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user=${SUDOER
 sudo --user=${SUDOER_USER} -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
 apt-get -y install ${RUST_APT_PACKAGES}
 
-# Ubuntu: symbolic link batcat -> cat
+# Ubuntu: symbolic link batcat -> bat
 sudo --user=${SUDOER_USER} mkdir -p "${SUDOER_USER_HOME}/.local/bin"
 sudo --user=${SUDOER_USER} ln -s /usr/bin/batcat "${SUDOER_USER_HOME}/.local/bin/bat"
 

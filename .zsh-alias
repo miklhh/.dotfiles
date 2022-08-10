@@ -112,6 +112,7 @@ if command -v ipython 1>/dev/null 2>&1; then
     alias calc="XDG_SESSION_TYPE=X11 ipython --TerminalInteractiveShell.editing_mode=vi -i -c '${PYTHON_CALC_INIT_CMD}'"
 else
     # Regular python calculator (lame..)
-    alias calc="python -i -c '${PYTHON_CALC_INIT_CMD}'"
+    echo "[ .zsh-alias:${LINENO} ]: Warning: 'ipython' not in \${PATH}"
+    alias calc="python3 -i -c '${PYTHON_CALC_INIT_CMD}'"
 fi
 
