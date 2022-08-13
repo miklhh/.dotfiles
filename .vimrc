@@ -66,6 +66,10 @@ call plug#begin('~/.vim/plugged')
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
+        " LSP diagnostics highlight group for colorschemes that don't yet
+        " support them
+        Plug 'folke/lsp-colors.nvim'
+
         " LSP installer helper, trigger with: 'LspInstall' or 'LspInstallInfo'
         Plug 'williamboman/nvim-lsp-installer'
 
