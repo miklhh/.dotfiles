@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'neovim/nvim-lspconfig'
 
         " LSP diagnostics highlight group for colorschemes that don't yet
-        " support them
+        " support them. Prerequisite of folke/trouble.nvim.
         Plug 'folke/lsp-colors.nvim'
 
         " LSP server package manager Mason, replacing the depricated
@@ -103,8 +103,13 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-        " NeoVim tree view
+        " NeoVim devicons (needed by ex: nvim-tree and trouble.nvim)
         Plug 'kyazdani42/nvim-web-devicons'
+
+        " NeoVim LSP diagnostics prettifier and telescope
+        Plug 'folke/trouble.nvim'
+
+        " NeoVim tree view
         Plug 'kyazdani42/nvim-tree.lua'
 
     endif
@@ -363,6 +368,11 @@ lua << EOF
     require('config/cmp')       -- CMP autocompletion settings
     require('config/keybinds')  -- General LSP keybinds
     require('config/lsp')       -- LSP settings
+    require('trouble').setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+    }
 EOF
 
 endif "if has('nvim')
