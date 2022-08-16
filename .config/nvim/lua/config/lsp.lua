@@ -1,14 +1,27 @@
+
 ----------------------------------------------------------------------------------------------------------------------
---                                            NVIM LSP installed configuraitons                                     --
+--                                          NVIM LSP package manager Mason                                          --
 ----------------------------------------------------------------------------------------------------------------------
--- LSP config for servers installed with nvim-lsp-installer
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
-    server:setup(opts)
-end)
+require("mason").setup({
+    -- Mason package manager settings go here
+})
+require("mason-lspconfig").setup({
+    -- Mason + LspConfig bridge settings go here
+    ensure_installed = { "pyright", "clangd" }
+})
+require("mason-lspconfig").setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function (server_name) -- default handler (optional)
+        require("lspconfig")[server_name].setup {}
+    end,
+    -- Next, you can provide targeted overrides for specific servers.
+    -- For example, a handler override for the `rust_analyzer`:
+    --["rust_analyzer"] = function ()
+    --    require("rust-tools").setup {}
+    --end
+}
 
 ----------------------------------------------------------------------------------------------------------------------
 --                                            Custom LSP configurations                                             --

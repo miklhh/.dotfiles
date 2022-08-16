@@ -70,8 +70,11 @@ call plug#begin('~/.vim/plugged')
         " support them
         Plug 'folke/lsp-colors.nvim'
 
-        " LSP installer helper, trigger with: 'LspInstall' or 'LspInstallInfo'
-        Plug 'williamboman/nvim-lsp-installer'
+        " LSP server package manager Mason, replacing the depricated
+        " nvim-lsp-installer
+        " Trigger with: 'Mason', 'MasonInstall <package>', MasonLog'
+        Plug 'williamboman/mason.nvim'
+        Plug 'williamboman/mason-lspconfig.nvim'
 
         " LSP tree view
         Plug 'simrat39/symbols-outline.nvim'

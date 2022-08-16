@@ -38,13 +38,16 @@
 
     # Misc
     ~/.screenrc: .screenrc
-    #~/.Xresources: .Xresources
     ~/.ssh/config: .ssh/config
-    #~/.scripts: .scripts
     ~/.gitconfig: .gitconfig
 
-- shell: # Download Meslo LGS Nerd Font
+- shell:
+  # Download Meslo LGS Nerd Font
   - command: .local/share/fonts/download-meslo-font.bash
+
+  # Create/touch the NeoVim LSP package manager Mason cache file
+  - command: mkdir -p ~/.cache/nvim
+  - command: touch ~/.cache/nvim/mason.log
 
 - link: # Install Meslo LGS Nerd Font
     ~/.local/share/fonts/MesloLGS NF Regular.ttf:
