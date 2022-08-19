@@ -41,7 +41,7 @@ alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"
 
 # Change directory fzf style (command: 'cf') and change directory from home fzf style (command: 'cfh')
 if command -v fzf 1>/dev/null 2>&1; then
-    alias fzf_c_command="fzf --height=20 --reverse --border --info=inline --preview 'tree -C {} | head -200'"
+    alias fzf_c_command="fzf --height=50% --reverse --border --info=inline --preview 'tree -C {} | head -200'"
     if command -v bfs 1>/dev/null 2>&1; then
         alias  c='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
         alias ch='cd $(bfs ~ -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
