@@ -41,5 +41,5 @@ apt-get -y install ${PYTHON_APT_PACKAGES}
 sudo --user=${SUDOER_USER} -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
 
 # Other packages
-apt-get -y install htop inkscape texlive-full fuse3 libfuse2
+apt-get -y install htop inkscape texlive-full fuse3 libfuse2 xdg-desktop-portal xdg-desktop-portal-gnome xdg-desktop-portal-gtk
 
