@@ -75,6 +75,7 @@ call plug#begin('~/.vim/plugged')
         " Trigger with: 'Mason', 'MasonInstall <package>', MasonLog'
         Plug 'williamboman/mason.nvim'
         Plug 'williamboman/mason-lspconfig.nvim'
+        Plug 'mfussenegger/nvim-lint'
 
         " LSP tree view
         Plug 'simrat39/symbols-outline.nvim'
@@ -373,6 +374,17 @@ lua << EOF
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
     }
+
+    require('lint').linters_by_ft = {
+        markdown = {'vale'};
+        sh = {'shellcheck'};
+    }
+
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+      callback = function()
+        require("lint").try_lint()
+      end,
+    })
 EOF
 
 endif "if has('nvim')
