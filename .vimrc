@@ -98,9 +98,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'nvim-treesitter/playground'
 
-        " GitHub Co-Pilot 
-        " Plug 'github/copilot.vim'
-
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
@@ -112,6 +109,9 @@ call plug#begin('~/.vim/plugged')
 
         " NeoVim tree view
         Plug 'kyazdani42/nvim-tree.lua'
+
+        " NeoVims which-key
+        Plug 'folke/which-key.nvim'
 
     endif
 
@@ -339,24 +339,8 @@ endif
 " --                                           LaTeX/spellchecking settings                                         --
 " --------------------------------------------------------------------------------------------------------------------
 
-" Newly open .tex-files are LaTeX
+" Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
-
-" NOTE: It's better to let LSPs such as ltex handle spelling. The vim built-in spelling can be enabled with 
-"       ':set spell' anyhow.
-" Enable spellcheck for TeX files
-"autocmd FileType plaintex,tex,latex syntax spell toplevel
-"autocmd FileType plaintex,tex,latex set spell
-
-" BUG: Re-sourcing .vimrc after initially loading a LaTeX file helps to spellcheck only non LaTeX 
-"autocmd FileType plaintex,tex,latex :source ~/.vimrc
-
-" Spellcheck keybindings <leader> + sn: next, sp: previous, sl: list, sa: add to dict, sr: remove from dict
-nnoremap <leader>sn ]s
-nnoremap <leader>sp [s
-nnoremap <leader>sl z=
-nnoremap <leader>sa zg
-nnoremap <leader>sr zw
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                            LSP settings for NeoVim                                             --
@@ -370,9 +354,9 @@ lua << EOF
     require('config/keybinds')  -- General LSP keybinds
     require('config/lsp')       -- LSP settings
     require('trouble').setup {
-        -- your configuration comes here
+        -- trouble configuration comes here
         -- or leave it empty to use the default settings
-        -- refer to the configuration section below
+        -- refer to the configuration: 'help trouble'
     }
 
     require('lint').linters_by_ft = {
@@ -390,13 +374,14 @@ EOF
 endif "if has('nvim')
 
 " --------------------------------------------------------------------------------------------------------------------
-" --                                              TreeSitter settings                                               --
+" --                                        Other external NeoVim configurations                                    --
 " --------------------------------------------------------------------------------------------------------------------
-"
+
 if has('nvim')
 
 lua <<EOF
     require('config/treesitter')
+    require('config/which-key')
 EOF
 
 endif "if has('nvim')
