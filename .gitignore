@@ -1,1 +1,4 @@
 .vim/plugged
+
+# No MacOS .DS_Store files
+*.DS_Store

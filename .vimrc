@@ -1,6 +1,9 @@
 """
-""" True-hearted .vimrc for quick and easy navigation and file editing
-""" Author: Mikael Henriksson
+""" True-hearted .vimrc (and init.nvim) for quick and easy navigation and file editing. All of the cross-configuration
+""" files loaded by this configuration are available under 'https://github.com/miklhh/.dotfiles'.
+""" Happy go lucky as this configuration is licensed under the premisive MIT License. Have at it.
+"""
+""" Author: Mikael Henriksson (2015 - 2022)
 """
 
 " --------------------------------------------------------------------------------------------------------------------
@@ -30,55 +33,75 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-    " Airline Vim tray
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    " Vim Sneak
+    Plug 'justinmk/vim-sneak'
 
-    " UndoTree for easy undo history access
-    Plug 'mbbill/undotree'
-
-    " Colorscheme
-    Plug 'morhetz/gruvbox'
-
-    " Vim + FZF
+    " Vim <3 FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'chengzeyi/fzf-preview.vim'
 
-    " Clipboard Peek-a-Boo
-    Plug 'junegunn/vim-peekaboo'
-
-    " Gives :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
+    " Gives access to :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
     Plug 'moll/vim-bbye'
 
-    " Get Vim startup time with :StartupTime
-    Plug 'dstein64/vim-startuptime'
+    " UndoTree for easy undo history access
+    Plug 'mbbill/undotree'
 
-    " Vim fugitive (Git integration)
+    " Clipboard peek-a-boo
+    Plug 'junegunn/vim-peekaboo'
+
+    " Git integration in Vim with vim-fugitive
     Plug 'tpope/vim-fugitive'
+
+    " Maximize Vim splits
+    Plug 'szw/vim-maximizer'
+
+    " Go-to file manager (gof) or go-to terminal (got)
+    Plug 'justinmk/vim-gtfo'
+
+    " TMux + Vim seamless pane/split navigation
+    Plug 'christoomey/vim-tmux-navigator'
+
+    " Gruvbox clolorscheme
+    Plug 'morhetz/gruvbox'
+
+    " Airline tray
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    " Get (Neo)Vim startup time with :StartupTime
+    Plug 'dstein64/vim-startuptime'
 
     " LaTeX synctex synchronization through DBus
     Plug 'peterbjorgensen/sved'
 
-    " Neovim specific plugins
+    " Plugins specific to NeoVim starts here
     if has('nvim')
 
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
-        " LSP diagnostics highlight group for colorschemes that don't yet
-        " support them. Prerequisite of folke/trouble.nvim.
-        Plug 'folke/lsp-colors.nvim'
-
-        " LSP server package manager Mason, replacing the depricated
-        " nvim-lsp-installer
-        " Trigger with: 'Mason', 'MasonInstall <package>', MasonLog'
+        " LSP server package manager Mason, replacing the depricated nvim-lsp-installer. Trigger with: 'Mason',
+        " 'MasonInstall <package>' and 'MasonLog'
         Plug 'williamboman/mason.nvim'
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
 
         " LSP tree view
         Plug 'simrat39/symbols-outline.nvim'
+
+        " NeoVim devicons (needed by ex: nvim-tree and trouble.nvim)
+        Plug 'kyazdani42/nvim-web-devicons'
+
+        " NeoVim tree view
+        Plug 'kyazdani42/nvim-tree.lua'
+
+        " LSP diagnostics highlight group for colorschemes that don't yet support them. Prerequisite of 
+        " folke/trouble.nvim.
+        Plug 'folke/lsp-colors.nvim'
+
+        " NeoVim LSP diagnostics prettifier and telescope
+        Plug 'folke/trouble.nvim'
 
         " Autocompletion engine
         Plug 'hrsh7th/nvim-cmp'
@@ -101,22 +124,13 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-        " NeoVim devicons (needed by ex: nvim-tree and trouble.nvim)
-        Plug 'kyazdani42/nvim-web-devicons'
-
-        " NeoVim LSP diagnostics prettifier and telescope
-        Plug 'folke/trouble.nvim'
-
-        " NeoVim tree view
-        Plug 'kyazdani42/nvim-tree.lua'
-
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
 
-    endif
+        " NeoVim sudo read/write (:SudaRead, :SudaWrite)
+        Plug 'lambdalisue/suda.vim'
 
-    " NeoVim sudo read/write (:SudaRead, :SudaWrite)
-    Plug 'lambdalisue/suda.vim'
+    endif " -- End of NeoVim specific plugins
 
     " Proper syntax highlighting when editing .tmux.conf
     Plug 'tmux-plugins/vim-tmux'
@@ -124,18 +138,6 @@ call plug#begin('~/.vim/plugged')
     " Fuzzy incsearch (<leader>/)
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
-
-    " Maximize Vim splits
-    Plug 'szw/vim-maximizer'
-
-    " GoTo file manager (gof) or terminal (got)
-    Plug 'justinmk/vim-gtfo'
-
-    " TMux + Vim seamless pane/split jumping
-    Plug 'christoomey/vim-tmux-navigator'
-
-    " Vim Sneak
-    Plug 'justinmk/vim-sneak'
 
 " Initialize plugin system
 call plug#end()
@@ -206,12 +208,9 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
-" Use <Ctrl+c/x> to copy/cut test when in visual mode
+" Use <Ctrl+c/x> to copy/cut into register + when in visual mode
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
-
-" Use <Ctrl+s> to write when in normal mode
-nnoremap <C-s> :w<CR> 
 
 " No highlight
 nnoremap <leader>n :noh<CR>
@@ -272,7 +271,7 @@ set mouse=a                     " Enable all mouse functionality
 set laststatus=2                " Always show the status line in the last window
 set scrolloff=4                 " Always show four lines above and under cursorline
 set backspace=indent,eol,start  " Insert mode backspace (and <C-W>) settings
-set hlsearch                    " Highlight text on search
+"set hlsearch                    " Highlight text on search
 set hidden
 set incsearch                   " Show searches in realtime
 set signcolumn=no               " Extra linting column the the left (yes/no)
@@ -285,14 +284,13 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" Automatically re-read files that changes on disk, but only if they are
-" marked as non-modified in their associated buffer
+" Automatically re-read files that changes on disk, but only if they are marked as non-modified in their associated
+" buffer
 set autoread
 au CursorHold * checktime
 
-" Cycle numbered registers when yanking. This allow the numbered registers to
-" act like a ring buffer when performing the yank operation (just like delete
-" already does!)
+" Cycle numbered registers when yanking. This allow the numbered registers to act like a ring buffer when performing
+" the yank operation (just like delete already does!)
 function! SaveLastReg()
     if v:event['regname']==""
         if v:event['operator']=='y'
@@ -318,32 +316,19 @@ cnoreabbrev bd Bd
 " Vim-Sneak settings
 source ~/.config/vim/config/sneak.vim
 
-" FZF create new file quick-action
+" FZF create new file quick-action (thank you Frans Skarman for this quickie) bound to <leader>E
 function! FzfEditPrompt(file)
     let cmd = ':e ' . a:file . '/'
-
     call feedkeys(cmd)
 endfunction
 command! -nargs=1 FzfEditPrompt :call FzfEditPrompt(<f-args>)
 map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEditPrompt'})<CR>
 
-" NeoVim tree
-if has('nvim')
-lua << EOF
-    require("nvim-tree").setup()
-EOF
-endif
-
-
-" --------------------------------------------------------------------------------------------------------------------
-" --                                           LaTeX/spellchecking settings                                         --
-" --------------------------------------------------------------------------------------------------------------------
-
 " Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
 
 " --------------------------------------------------------------------------------------------------------------------
-" --                                            LSP settings for NeoVim                                             --
+" --                                             LSP settings for NeoVim                                            --
 " --------------------------------------------------------------------------------------------------------------------
 
 if has('nvim')
@@ -360,6 +345,8 @@ lua << EOF
     }
 
     require('lint').linters_by_ft = {
+        -- Filetypes and associated linters that are to execute
+        -- when buffer is written
         markdown = {'vale'};
         sh = {'shellcheck'};
     }
@@ -380,6 +367,7 @@ endif "if has('nvim')
 if has('nvim')
 
 lua <<EOF
+    require('nvim-tree').setup()
     require('config/treesitter')
     require('config/which-key')
 EOF
