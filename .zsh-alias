@@ -32,30 +32,59 @@ alias t='tmux'
 alias g='git'
 alias v='vim'
 
-# Fast Tmux pane relative directory changes. Example: when in Tmux use 'cdl' in any pane to change directory to the
-# pane located left of the active pane.
+# Fast Tmux current directory changes, based on working directories of adjacent Tmux panes. Example usage: when in any
+# Tmux pane, use 'cdl' on the Zsh command line to change the current working directory to that of the working directory
+# of the Tmux pane located left of the active pane.
 alias cdl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
 alias cdr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
 alias cdu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
 alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
 
-# Change directory fzf style (command: 'cf') and change directory from home fzf style (command: 'cfh')
+#
+# Change directory FZF style
+# * Command 'c'  : Use FZF to change directory forward, from the current directory
+# * Command 'C'  : Use FZF to change directory backward, from the current directory
+# * Command 'ch' : Use FZF to change directory forward, from $USER´s home directory
+#
 if command -v fzf 1>/dev/null 2>&1; then
-    alias fzf_c_command="fzf --height=50% --reverse --border --info=inline --preview 'tree -C {} | head -200'"
+    alias _FZF_CD_PREVIEW="fzf --height=50% --reverse --border --info=inline --preview 'tree -C {} | head -200'"
+    function _GENERATE_BACKWARD_DIR_LIST() {
+        REM="$(pwd)"
+        PART=""
+        while [ ! -z "$REM" ]; do
+            IFS="/" read CUR REM <<< "$REM"
+            PART="${PART}${CUR}/"
+            echo "$PART"
+        done
+    }
+    function _BFS_DIR_SEARCH() {
+        bfs "$1" -type d -exclude -name .git 2>/dev/null | sed "s|\./||g"
+    }
+    function _RFS_DIR_SEARCH() {
+        rfs -p "$1" -i .git 2>/dev/null | sed "s|\./||g"
+    }
+    function _FIND_DIR_SEARCH() {
+        find . -type d 2>/dev/null | sed "s|\./||g"
+    }
     if command -v bfs 1>/dev/null 2>&1; then
-        alias  c='cd $(bfs . -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
-        alias ch='cd $(bfs ~ -type d -exclude -name .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
+        # Prio 1: Breadth first directory search using 'bfs', has top priority of the directory search utilities as it
+        #         tends to find the desiered directory the fastest.
+        alias _DIR_SEARCH='_BFS_DIR_SEARCH'
     elif command -v rfs 1>/dev/null 2>&1; then
-        alias  c='cd $(rfs -p . -i .git 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
-        alias ch='cd $(rfs -p ~ -i .bit 2>/dev/null | sed "s/\.\///g" | fzf_c_command || echo .)'
+        # Prio 2: Directory search using the Rust first search utility. Not as good as 'bfs', but it supports
+        #         multithreaded depth first search, so it has the potential to perform better than the find utility.
+        alias _DIR_SEARCH='_RFS_DIR_SEARCH'
     else
-        echo "[ .zsh-alias:${LINENO} ]: Warning: 'bfs/rfs' not in \${PATH}"
-        alias  c='cd $(find . -type d 2>/dev/null | fzf_c_command || echo .)'
-        alias ch='cd $(find ~ -type d 2>/dev/null | fzf_c_command || echo .)'
+        # Prio 3 (fallback): Directory search using the common 'find' utility. Slow and ugly, but gets the job done.
+        alias _DIR_SEARCH='_FIND_DIR_SEARCH'
     fi
+    alias  C='cd "$(_GENERATE_BACKWARD_DIR_LIST | _FZF_CD_PREVIEW --tac || echo .)"'
+    alias  c='cd "$(_DIR_SEARCH . | _FZF_CD_PREVIEW || echo .)"'
+    alias ch='cd "$(_DIR_SEARCH ~ | _FZF_CD_PREVIEW || echo .)"'
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
     alias  c="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
+    alias  C="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
     alias ch="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
 fi
 
@@ -83,7 +112,7 @@ function o {
         else
             open "$1" 1>/dev/null 2>&1
         fi
-    else 
+    else
         # No 'xdg-open' or 'open' in $PATH
         echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
     fi
