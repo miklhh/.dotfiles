@@ -36,10 +36,11 @@ apt-get -y install ${SHELL_APT_PACKAGES}
 
 # Python packages
 PYTHON_APT_PACKAGES="pip"
-PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython"
+PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim"
 apt-get -y install ${PYTHON_APT_PACKAGES}
 sudo --user=${SUDOER_USER} -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
 
 # Other packages
-apt-get -y install htop inkscape texlive-full fuse3 libfuse2 xdg-desktop-portal xdg-desktop-portal-gnome xdg-desktop-portal-gtk
+apt-get -y install htop inkscape texlive-full fuse3 libfuse2 xdg-desktop-portal xdg-desktop-portal-gnome \
+                   xdg-desktop-portal-gtk
 
