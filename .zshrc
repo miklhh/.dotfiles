@@ -50,6 +50,7 @@ if command -v fzf 1>/dev/null 2>&1; then
     # Source fzf command line completion scripts
     source "${HOME}/.dotfiles/.fzf-completion.zsh"
     source "${HOME}/.dotfiles/.fzf-key-bindings.zsh"
+    source "${HOME}/.dotfiles/.fzf-git.sh"
     FZF_COMPLETION_TRIGGER=''
     FZF_COMPLETION_OPTS='--border --info=inline' 
     bindkey '^T' fzf-completion
