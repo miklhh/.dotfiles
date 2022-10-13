@@ -47,7 +47,8 @@ alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"
 # * Command 'ch' : Use FZF to change directory forward, from $USER´s home directory
 #
 if command -v fzf 1>/dev/null 2>&1; then
-    alias _FZF_CD_PREVIEW="fzf --height=50% --reverse --border --info=inline --preview 'tree -C {} | head -200'"
+    _TREE_PREVIEW='tree --dirsfirst -L 1 -C {} | head -200'
+    alias _FZF_CD_PREVIEW="fzf --height=50% --reverse --border --info=inline --preview '${_TREE_PREVIEW}'"
     function _GENERATE_BACKWARD_DIR_LIST() {
         REM="$(pwd)"
         PART=""
