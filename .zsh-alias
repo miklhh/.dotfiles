@@ -50,13 +50,22 @@ if command -v fzf 1>/dev/null 2>&1; then
     _TREE_PREVIEW='tree --dirsfirst -L 1 -C {} | head -200'
     alias _FZF_CD_PREVIEW="fzf --height=50% --reverse --border --info=inline --preview '${_TREE_PREVIEW}'"
     function _GENERATE_BACKWARD_DIR_LIST() {
-        REM="$(pwd)"
-        PART=""
-        while [ ! -z "$REM" ]; do
-            IFS="/" read CUR REM <<< "$REM"
-            PART="${PART}${CUR}/"
-            echo "$PART"
-        done
+        local PARAM="$1"
+        local REM="$(pwd)"
+        local PART=""
+        if [ "$PARAM" = "--exclude" ]; then
+            while [ ! -z "$REM" ]; do
+                echo "$PART"
+                IFS="/" read CUR REM <<< "$REM"
+                local PART="${PART}${CUR}/"
+            done
+        else
+            while [ ! -z "$REM" ]; do
+                IFS="/" read CUR REM <<< "$REM"
+                local PART="${PART}${CUR}/"
+                echo "$PART"
+            done
+        fi
     }
     function _BFS_DIR_SEARCH() {
         bfs "$1" -type d -exclude -name .git 2>/dev/null | sed "s|\./||g"
@@ -79,7 +88,7 @@ if command -v fzf 1>/dev/null 2>&1; then
         # Prio 3 (fallback): Directory search using the common 'find' utility. Slow and ugly, but gets the job done.
         alias _DIR_SEARCH='_FIND_DIR_SEARCH'
     fi
-    alias  C='cd "$(_GENERATE_BACKWARD_DIR_LIST | _FZF_CD_PREVIEW --tac || echo .)"'
+    alias  C='cd "$(_GENERATE_BACKWARD_DIR_LIST --exclude | _FZF_CD_PREVIEW --tac || echo .)"'
     alias  c='cd "$(_DIR_SEARCH . | _FZF_CD_PREVIEW || echo .)"'
     alias ch='cd "$(_DIR_SEARCH ~ | _FZF_CD_PREVIEW || echo .)"'
 else
