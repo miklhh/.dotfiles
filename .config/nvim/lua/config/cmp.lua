@@ -17,24 +17,43 @@ cmp.setup({
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
-    formatting = {
-      format = lspkind.cmp_format({
-        with_text = true,
-        maxwidth = 70,
-        menu = ({
-          buffer = "[Buffer]",      
-          nvim_lsp = "[LSP]",       
-          luasnip = "[LuaSnip]",    
-          nvim_lua = "[Lua]",       
-          latex_symbols = "[LaTeX]",
-        }),
-      }),
+    --formatting = {
+    --  format = lspkind.cmp_format({
+    --    mode = 'symbol',
+    --    with_text = true,
+    --    maxwidth = 70,
+    --    menu = ({
+    --      buffer = "[Buffer]",      
+    --      nvim_lsp = "[LSP]",       
+    --      luasnip = "[LuaSnip]",    
+    --      nvim_lua = "[Lua]",       
+    --      latex_symbols = "[LaTeX]",
+    --    }),
+    --  }),
+    --},
+    window = {
+      completion = {
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        col_offset = 0,
+        side_padding = 0,
+      },
     },
+    formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. strings[1] .. " "
+          kind.menu = "    (" .. strings[2] .. ")"
+
+          return kind
+        end,
+  },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },  -- NVim LSP autocompletions
         { name = 'vsnip' },     -- VSnip autocompletions
         { name = 'path' },      -- cmp-path autocompletions
-        { name = 'buffer' },    -- cmp-buffer autocompletions
+        --{ name = 'buffer' },    -- cmp-buffer autocompletions
     }),
 })
 

@@ -64,6 +64,7 @@ call plug#begin('~/.vim/plugged')
 
     " Gruvbox clolorscheme
     Plug 'morhetz/gruvbox'
+    Plug 'junegunn/seoul256.vim'
 
     " Airline tray
     Plug 'vim-airline/vim-airline'
@@ -326,6 +327,10 @@ map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEdit
 
 " Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
+
+" Update colorscheme on signal
+autocmd Signal SIGUSR1 :set background=dark | redraw!
+autocmd Signal SIGWINCH :set background=light | redraw!
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                             LSP settings for NeoVim                                            --
