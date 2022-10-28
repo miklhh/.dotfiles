@@ -17,7 +17,13 @@ echo " * Using mount point: ${MOUNT_POINT}"
 [ -d "${MOUNT_POINT}" ] || mkdir -v "${MOUNT_POINT}"
 
 echo " * Connecting to ${FILUR_SERVER}"
-sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
+
+### Do not reconnect on connection failure
+sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
+
+### Automatic reconnect (seems to cause problem on the LiU-IT side after a connectection is broken)
+#sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
+
 SSHFS_RETURNCODE="${?}"
 
 if [ "${SSHFS_RETURNCODE}" -eq 0 ]; then
