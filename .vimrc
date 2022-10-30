@@ -227,7 +227,7 @@ nnoremap <silent> <M-ö> :TmuxNavigateRight<cr>
 nnoremap <M-Ö> <C-W>L
 nnoremap <M-J> <C-W>H
 nnoremap <M-K> <C-W>J
-nnoremap <M-L> <C-W>L
+nnoremap <M-L> <C-W>K
 
 " Create new splits (tmux-like)
 nnoremap <M-I> :vsplit<CR>
