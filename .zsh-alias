@@ -144,6 +144,11 @@ if ! command -v python 1>/dev/null 2>&1; then
     alias python='python3'
 fi
 
+# On MacOS Darwin: make an alias python->python3
+if [ "$(uname -s)" = "Darwin" ]; then
+    alias python='python3'
+fi
+
 # (i)Python calculator
 PYTHON_CALC_INIT_CMD='from math import *; from matplotlib.pyplot import *; from numpy import *; from numpy.fft import *'
 if command -v ipython 1>/dev/null 2>&1; then
