@@ -59,6 +59,9 @@ call plug#begin('~/.vim/plugged')
     " Go-to file manager (gof) or go-to terminal (got)
     Plug 'justinmk/vim-gtfo'
 
+    " Easy Vim alignment
+    Plug 'junegunn/vim-easy-align'
+
     " TMux + Vim seamless pane/split navigation
     Plug 'christoomey/vim-tmux-navigator'
 
@@ -191,6 +194,12 @@ map <Leader>f :FZFBLines<CR>
 
 " Fzf lines in all open buffers
 map <Leader>F :Lines<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " LSP symbols outline
 if has('nvim')
