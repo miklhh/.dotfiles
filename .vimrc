@@ -251,12 +251,6 @@ nnoremap <M-F> :MaximizerToggle<CR>
 " Redraw
 nnoremap <leader>r :redraw!<CR>
 
-" Jump forward and backward in VSnip snippets
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
 " FZF files in '~/.dotfiles'
 nnoremap <leader>.e :FZF ~/.dotfiles<CR>
 
@@ -323,9 +317,6 @@ endif
 " Alias bd -> Bd (vim-bbye buffer delete)
 cnoreabbrev bd Bd
 
-" Vim-Sneak settings
-source ~/.config/vim/config/sneak.vim
-
 " FZF create new file quick-action (thank you Frans Skarman for this quickie) bound to <leader>E
 function! FzfEditPrompt(file)
     let cmd = ':e ' . a:file . '/'
@@ -375,8 +366,14 @@ EOF
 endif "if has('nvim')
 
 " --------------------------------------------------------------------------------------------------------------------
-" --                                        Other external NeoVim configurations                                    --
+" --                                       Other external (Neo)Vim configurations                                   --
 " --------------------------------------------------------------------------------------------------------------------
+
+" Vim-Sneak settings
+source ~/.config/vim/config/sneak.vim
+
+" Vsnip keybindings
+source ~/.config/vim/config/vsnip.vim
 
 if has('nvim')
 
