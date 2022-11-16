@@ -3,9 +3,11 @@ local lspkind = require('lspkind')
 
 -- Completion engine setup.
 cmp.setup({
+    preselect = "None",
     snippet = {
         expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            --require('lauasnip').lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
     mapping = {
@@ -17,20 +19,6 @@ cmp.setup({
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
-    --formatting = {
-    --  format = lspkind.cmp_format({
-    --    mode = 'symbol',
-    --    with_text = true,
-    --    maxwidth = 70,
-    --    menu = ({
-    --      buffer = "[Buffer]",      
-    --      nvim_lsp = "[LSP]",       
-    --      luasnip = "[LuaSnip]",    
-    --      nvim_lua = "[Lua]",       
-    --      latex_symbols = "[LaTeX]",
-    --    }),
-    --  }),
-    --},
     window = {
       completion = {
         winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
@@ -51,6 +39,7 @@ cmp.setup({
   },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },  -- NVim LSP autocompletions
+        { name = 'luasnip' },  -- For Luasnip users
         { name = 'vsnip' },     -- VSnip autocompletions
         { name = 'path' },      -- cmp-path autocompletions
         --{ name = 'buffer' },    -- cmp-buffer autocompletions
@@ -58,11 +47,11 @@ cmp.setup({
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
+-- cmp.setup.cmdline('/', {
+--   sources = {
+--     { name = 'buffer' }
+--   }
+-- })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
