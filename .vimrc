@@ -143,6 +143,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'
     Plug 'haya14busa/incsearch-fuzzy.vim'
 
+    " Jupyter Vim support
+    Plug 'jupyter-vim/jupyter-vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -267,6 +270,9 @@ if has('nvim')
     nnoremap <leader>, :NvimTreeToggle<CR>
 endif
 
+" Do not use default jupyter-vim keybindings
+let g:jupyter_mapkeys = 0
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                     Misc                                                       --
 " --------------------------------------------------------------------------------------------------------------------
@@ -374,6 +380,9 @@ source ~/.config/vim/config/sneak.vim
 
 " Vsnip keybindings
 source ~/.config/vim/config/vsnip.vim
+
+" Jupyther keybindings <leader+j>
+source ~/.config/vim/config/jupyter-vim.vim
 
 if has('nvim')
 
