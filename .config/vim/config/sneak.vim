@@ -1,6 +1,9 @@
-" Use sneak labeling mode, i.e., label sneak matches when performing a sneak
+" Use Sneak labeling mode, i.e., label sneak matches when performing a sneak
 " operation
 let g:sneak#label = 1
+
+" Only exit Sneak labeling mode using <Esc> (not <Space> as is default).
+let g:sneak#label_esc = "\<Esc>"
 
 " Case insensitive sneaking
 let g:sneak#use_ic_scs = 1
