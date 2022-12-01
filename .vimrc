@@ -146,6 +146,9 @@ call plug#begin('~/.vim/plugged')
     " Jupyter Vim support
     Plug 'jupyter-vim/jupyter-vim'
 
+    " Colorizer
+    Plug 'norcalli/nvim-colorizer.lua'
+
 " Initialize plugin system
 call plug#end()
 
@@ -178,6 +181,11 @@ set number
 set relativenumber
 set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
+
+" Colorization for all filetypes
+if has('nvim')
+    lua require'colorizer'.setup()
+endif
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                   Keybindings                                                  --
