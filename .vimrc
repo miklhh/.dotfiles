@@ -128,6 +128,10 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
+        " FZF LSP things
+        Plug 'gfanto/fzf-lsp.nvim'
+        Plug 'nvim-lua/plenary.nvim'
+
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
 
@@ -161,7 +165,7 @@ let g:gruvbox_bold='1'
 let g:gruvbox_italic='1'
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
-set background=light
+set background=dark
 colorscheme gruvbox
 
 " Airline settings
@@ -341,10 +345,6 @@ map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEdit
 
 " Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
-
-" Update colorscheme on signal
-autocmd Signal SIGUSR1 :set background=dark | redraw!
-autocmd Signal SIGWINCH :set background=light | redraw!
 
 " --------------------------------------------------------------------------------------------------------------------
 " --                                             LSP settings for NeoVim                                            --

@@ -18,12 +18,13 @@ local lsp_opts =  { noremap=true, silent=true }
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 lsp_set_keymap('n', '<space>i', '<cmd>lua vim.lsp.buf.hover()<CR>', lsp_opts)
-lsp_set_keymap('n', '<space>lw', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lgd', '<cmd>lua vim.lsp.buf.definition()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lgi', '<cmd>lua vim.lsp.buf.implementation()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lj', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', lsp_opts)
+lsp_set_keymap('n', '<space>ld', '<cmd>DocumentSymbols<CR>', lsp_opts)
+lsp_set_keymap('n', '<space>lw', '<cmd>WorkspaceSymbols<CR>', lsp_opts)
 
 -- Toggle LSP diagnostics through plugin Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 lsp_set_keymap('n', '<space>lt', '<cmd>ToggleDiag<CR>', lsp_opts)
@@ -31,4 +32,5 @@ lsp_set_keymap('n', '<space>lt', '<cmd>ToggleDiag<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>lJ', '<cmd>Telescope lsp_workspace_symbols<CR>', lsp_opts)
 --lsp_set_keymap('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', lsp_opts)
+--lsp_set_keymap('n', '<space>lw', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', lsp_opts)
 

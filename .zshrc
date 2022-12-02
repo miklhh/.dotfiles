@@ -173,7 +173,7 @@ bindkey '^[[3~' delete-char
 # --------------------------------------------------------------------------------------------------------------------
 
 # Bat colorscheme. Available bat colorschemes can be listed with 'bat --list-themes'.
-export BAT_THEME="gruvbox-light"
+export BAT_THEME="gruvbox-dark"
 
 # Man pages coloring and formating using nvim or bat
 if command -v nvim 1>/dev/null 2>&1; then
