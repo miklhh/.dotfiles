@@ -29,6 +29,7 @@ alias ll='ls -l -a'
 
 # Command line quickies
 alias t='tmux'
+alias ta='tmux attach -t'
 alias g='git'
 alias v='vim'
 
