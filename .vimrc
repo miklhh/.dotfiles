@@ -253,9 +253,11 @@ nnoremap <M-J> <C-W>H
 nnoremap <M-K> <C-W>J
 nnoremap <M-L> <C-W>K
 
-" Create new splits (tmux-like)
-nnoremap <M-I> :vsplit<CR>
-nnoremap <M-U> :split<CR>
+" Create new (empty) splits (tmux-like)
+set splitright
+set splitbelow
+nnoremap <M-I> :vnew<CR>
+nnoremap <M-U> :new<CR>
 
 " UndoTree
 nnoremap <leader>u :UndotreeToggle<CR>
