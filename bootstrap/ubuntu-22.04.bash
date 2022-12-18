@@ -42,5 +42,5 @@ sudo --user=${SUDOER_USER} -- bash -c "pip install --upgrade --user ${PYTHON_PIP
 
 # Other packages
 apt-get -y install htop inkscape texlive-full fuse3 libfuse2 xdg-desktop-portal xdg-desktop-portal-gnome \
-                   xdg-desktop-portal-gtk
+                   xdg-desktop-portal-gtk npm tree
 
