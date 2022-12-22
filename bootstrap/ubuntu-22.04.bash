@@ -36,7 +36,7 @@ apt-get -y install ${SHELL_APT_PACKAGES}
 
 # Python packages
 PYTHON_APT_PACKAGES="pip"
-PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim"
+PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
 apt-get -y install ${PYTHON_APT_PACKAGES}
 sudo --user=${SUDOER_USER} -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
 

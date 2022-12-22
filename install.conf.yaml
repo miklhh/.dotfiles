@@ -36,6 +36,9 @@
     # Tmux config
     ~/.tmux.conf: .tmux.conf
 
+    # GDB dashboard
+    ~/.gdbinit: gdb-dashboard/.gdbinit
+
     # Misc
     ~/.screenrc: .screenrc
     ~/.ssh/config: .ssh/config

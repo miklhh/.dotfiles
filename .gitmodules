@@ -8,3 +8,6 @@
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "gdb-dashboard"]
+	path = gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard.git
