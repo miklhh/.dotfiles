@@ -13,6 +13,14 @@
 --vim.api.nvim_set_keymap('i', '<C-l>', 'v:lua.jump_next()', { expr = true })
 --vim.api.nvim_set_keymap('s', '<C-l>', 'v:lua.jump_next()', { expr = true })
 
+-- Modes
+--   'n' := normal mode
+--   'i' := insert mode
+--   'v' := visual mode
+--   'x' := visual block mode
+--   't' := terminal mode
+--   'c' := command mode
+
 local function lsp_set_keymap(...) vim.api.nvim_set_keymap(...) end
 local lsp_opts =  { noremap=true, silent=true }
 
