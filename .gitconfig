@@ -22,7 +22,6 @@
     f = fetch
     bl = blame
 
-
 [pager]
     diff = delta
     log = delta
@@ -46,3 +45,4 @@
 
 [merge]
     ff = only
+

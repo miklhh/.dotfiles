@@ -7,7 +7,10 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup({
     -- Mason + LspConfig bridge settings go here
-    ensure_installed = { "pyright", "clangd" }
+    ensure_installed = { 
+        "pyright",
+        "clangd",
+    }
 })
 require("mason-lspconfig").setup_handlers {
     -- The first entry (without a key) will be the default handler
@@ -16,6 +19,7 @@ require("mason-lspconfig").setup_handlers {
     function (server_name) -- default handler (optional)
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         require("lspconfig")[server_name].setup {
+            -- Forward nvim-cmp capabilities to server
             capabilities = capabilities
         }
     end,

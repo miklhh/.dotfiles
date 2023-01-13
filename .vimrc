@@ -108,16 +108,17 @@ call plug#begin('~/.vim/plugged')
         Plug 'folke/trouble.nvim'
 
         " Autocompletion engine
-        Plug 'hrsh7th/nvim-cmp'
         Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-buffer'
         Plug 'hrsh7th/cmp-path'
         Plug 'hrsh7th/cmp-cmdline'
+        Plug 'hrsh7th/nvim-cmp'
 
         " Pictograms for nvim-cmp
         Plug 'onsails/lspkind-nvim'
 
         " Snippet engine with snippet support for LSP-servers
+        Plug 'hrsh7th/cmp-vsnip'
         Plug 'hrsh7th/vim-vsnip'
         Plug 'hrsh7th/vim-vsnip-integ'
 
@@ -393,6 +394,9 @@ source ~/.config/vim/config/vsnip.vim
 
 " Jupyther keybindings <leader+j>
 source ~/.config/vim/config/jupyter-vim.vim
+
+" Additional coloring settings
+source ~/.config/vim/config/additional-color.vim
 
 if has('nvim')
 

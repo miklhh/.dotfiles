@@ -33,13 +33,12 @@ cmp.setup({
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
           kind.kind = " " .. strings[1] .. " "
           kind.menu = "    (" .. strings[2] .. ")"
-
           return kind
         end,
   },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },  -- NVim LSP autocompletions
-        { name = 'luasnip' },  -- For Luasnip users
+        { name = 'luasnip' },   -- For Luasnip users
         { name = 'vsnip' },     -- VSnip autocompletions
         { name = 'path' },      -- cmp-path autocompletions
         --{ name = 'buffer' },    -- cmp-buffer autocompletions
@@ -55,10 +54,12 @@ cmp.setup({
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+    {
+      { name = 'path' }
+    },
+    {
+      { name = 'cmdline' }
+    })
 })
-
