@@ -109,6 +109,8 @@ call plug#begin('~/.vim/plugged')
 
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+        Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
         Plug 'hrsh7th/cmp-buffer'
         Plug 'hrsh7th/cmp-path'
         Plug 'hrsh7th/cmp-cmdline'
