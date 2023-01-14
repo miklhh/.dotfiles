@@ -6,9 +6,9 @@ existing configuration from the home directory and will instead warn that one or
 executing.
 
 > *Look again at that dot. That's here. That's home. That's us.* 🌍  
-> \- Arvid Larsson  
-> \- - Erik Bjäreholt  
-> \- - - Carl Sagan
+> – Arvid Larsson  
+> –– Erik Bjäreholt  
+> ––– Carl Sagan
 
 
 ## Initialize
