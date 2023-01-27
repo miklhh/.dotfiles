@@ -51,3 +51,10 @@ if configs[server_name] == nil then
     require'lspconfig'.vhdl_tool.setup{ capabilities = capabilities }
 end
 
+----------------------------------------------------------------------------------------------------------------------
+--                                            Others                                                                --
+----------------------------------------------------------------------------------------------------------------------
+
+-- Initialize toggle-lsp-diagnostics plugin
+require('toggle_lsp_diagnostics').init()
+
