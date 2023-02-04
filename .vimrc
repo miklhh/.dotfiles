@@ -1,7 +1,7 @@
 """
 """ True-hearted .vimrc (and init.nvim) for quick and easy navigation and file editing. All of the cross-configuration
 """ files loaded by this configuration are available under 'https://github.com/miklhh/.dotfiles'.
-""" Happy go lucky as this configuration is licensed under the premisive MIT License. Have at it.
+""" Happy go lucky as this configuration is licensed under the permissive MIT License. Have at it.
 """
 """ Author: Mikael Henriksson (2015 - 2022)
 """
