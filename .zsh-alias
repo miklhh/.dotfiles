@@ -27,11 +27,27 @@ fi
 alias l='ls -l'
 alias ll='ls -l -a'
 
+# Open Vim in Tmux function
+function _VIM_IN_TMUX() {
+    if command -v "tmux" 1>/dev/null 2>&1; then
+        if [ -z "${TMUX}" ]; then
+            tmux new-session -d
+            tmux send-keys 'nvim' Enter
+            tmux attach
+        else
+            nvim
+        fi
+    else
+        nvim
+    fi
+}
+
 # Command line quickies
 alias t='tmux'
 alias ta='tmux attach -t'
 alias g='git'
-alias v='vim'
+alias vim='_VIM_IN_TMUX'
+alias v='_VIM_IN_TMUX'
 
 # Fast Tmux current directory changes, based on working directories of adjacent Tmux panes. Example usage: when in any
 # Tmux pane, use 'cdl' on the Zsh command line to change the current working directory to that of the working directory
