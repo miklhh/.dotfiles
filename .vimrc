@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
     " Vim <3 FZF
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    "Plug 'mracos/fzf.vim', { 'branch': 'mf-add-delete-option-to-buffers-command' }
     Plug 'chengzeyi/fzf-preview.vim'
 
     " Gives access to :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
@@ -79,6 +80,9 @@ call plug#begin('~/.vim/plugged')
     " LaTeX synctex synchronization through DBus
     Plug 'peterbjorgensen/sved'
 
+    " Vim surround
+    Plug 'tpope/vim-surround'
+
     " Plugins specific to NeoVim starts here
     if has('nvim')
 
@@ -107,6 +111,9 @@ call plug#begin('~/.vim/plugged')
         " NeoVim LSP diagnostics prettifier and telescope
         Plug 'folke/trouble.nvim'
 
+        " Telescope
+        Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -123,6 +130,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/cmp-vsnip'
         Plug 'hrsh7th/vim-vsnip'
         Plug 'hrsh7th/vim-vsnip-integ'
+
+        " LSP fidget spinner
+        Plug 'j-hui/fidget.nvim'
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -155,6 +165,9 @@ call plug#begin('~/.vim/plugged')
 
     " Colorizer
     Plug 'norcalli/nvim-colorizer.lua'
+
+    " Numpy docstring generation
+    Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
 " Initialize plugin system
 call plug#end()
@@ -407,6 +420,8 @@ lua <<EOF
     require('config/treesitter')
     require('config/which-key')
 EOF
+
+let g:pydocstring_formatter = 'numpy'
 
 endif "if has('nvim')
 

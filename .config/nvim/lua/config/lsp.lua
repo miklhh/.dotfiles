@@ -7,7 +7,7 @@ require("mason").setup({
 })
 require("mason-lspconfig").setup({
     -- Mason + LspConfig bridge settings go here
-    ensure_installed = { 
+    ensure_installed = {
         "pyright",
         "clangd",
     }
@@ -57,4 +57,10 @@ end
 
 -- Initialize toggle-lsp-diagnostics plugin
 require('toggle_lsp_diagnostics').init()
+
+-- Initialize symbols-outline.nvim
+require("symbols-outline").setup()
+
+-- Initialize LSP fidget spinner
+require("fidget").setup()
 
