@@ -3,7 +3,7 @@
 """ files loaded by this configuration are available under 'https://github.com/miklhh/.dotfiles'.
 """ Happy go lucky as this configuration is licensed under the permissive MIT License. Have at it.
 """
-""" Author: Mikael Henriksson (2015 - 2022)
+""" Author: Mikael Henriksson (2015 - 2023)
 """
 
 " --------------------------------------------------------------------------------------------------------------------
