@@ -350,8 +350,8 @@ if !exists("g:RegisteredYankRingBuffer")
 endif
 :autocmd VimEnter * let g:last_yank=@"
 
-" Alias bd -> Bd (vim-bbye buffer delete)
-cnoreabbrev bd Bd
+" Alias bd -> :Bwipeout (vim-bbye buffer delete)
+cnoreabbrev bd Bwipeout
 
 " FZF create new file quick-action (thank you Frans Skarman for this quickie) bound to <leader>E
 function! FzfEditPrompt(file)
