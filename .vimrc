@@ -156,10 +156,6 @@ call plug#begin('~/.vim/plugged')
     " Proper syntax highlighting when editing .tmux.conf
     Plug 'tmux-plugins/vim-tmux'
 
-    " Fuzzy incsearch (<leader>/)
-    Plug 'haya14busa/incsearch.vim'
-    Plug 'haya14busa/incsearch-fuzzy.vim'
-
     " Jupyter Vim support
     Plug 'jupyter-vim/jupyter-vim'
 
@@ -286,10 +282,6 @@ nnoremap <leader>r :redraw!<CR>
 
 " FZF files in '~/.dotfiles'
 nnoremap <leader>.e :FZF ~/.dotfiles<CR>
-
-" FZF incsearch
-map <leader>/ <Plug>(incsearch-fuzzy-/)
-map <leader>? <Plug>(incsearch-fuzzy-?)
 
 " Scroll with <C-j/k> when searching
 cnoremap <C-j> <C-g>

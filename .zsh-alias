@@ -32,13 +32,13 @@ function _VIM_IN_TMUX() {
     if command -v "tmux" 1>/dev/null 2>&1; then
         if [ -z "${TMUX}" ]; then
             tmux new-session -d
-            tmux send-keys 'nvim' Enter
+            tmux send-keys "nvim $@" Enter
             tmux attach
         else
-            nvim
+            nvim "$@"
         fi
     else
-        nvim
+        nvim "$@"
     fi
 }
 
