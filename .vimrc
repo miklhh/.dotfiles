@@ -136,6 +136,7 @@ call plug#begin('~/.vim/plugged')
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'nvim-treesitter/nvim-treesitter-context'
         Plug 'nvim-treesitter/playground'
 
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
