@@ -42,12 +42,20 @@ function _VIM_IN_TMUX() {
     fi
 }
 
+# Create a new directory and change to it
+function _MKDIR_AND_CD() {
+    local MKPATH="${1}"
+    mkdir -p "${MKPATH}"
+    cd "${MKPATH}"
+}
+
 # Command line quickies
 alias t='tmux'
 alias ta='tmux attach -t'
 alias g='git'
 alias vim='_VIM_IN_TMUX'
 alias v='_VIM_IN_TMUX'
+alias m='_MKDIR_AND_CD'
 
 # Fast Tmux current directory changes, based on working directories of adjacent Tmux panes. Example usage: when in any
 # Tmux pane, use 'cdl' on the Zsh command line to change the current working directory to that of the working directory

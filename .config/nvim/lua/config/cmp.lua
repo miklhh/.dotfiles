@@ -22,7 +22,7 @@ cmp.setup({
     window = {
       completion = {
         winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-        col_offset = 0,
+        col_offset = -3,
         side_padding = 0,
       },
     },
@@ -31,11 +31,11 @@ cmp.setup({
         format = function(entry, vim_item)
           local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
           local strings = vim.split(kind.kind, "%s", { trimempty = true })
-          kind.kind = " " .. strings[1] .. " "
-          kind.menu = "    (" .. strings[2] .. ")"
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
           return kind
         end,
-  },
+    },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },                  -- NVim LSP autocompletions
         { name = 'luasnip' },                   -- For Luasnip users
