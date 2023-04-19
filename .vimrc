@@ -71,8 +71,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/seoul256.vim'
 
     " Airline tray
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    "Plug 'vim-airline/vim-airline'
+    "Plug 'vim-airline/vim-airline-themes'
 
     " Get (Neo)Vim startup time with :StartupTime
     Plug 'dstein64/vim-startuptime'
@@ -182,15 +182,15 @@ set background=dark
 colorscheme gruvbox
 
 " Airline settings
-let g:airline_theme = 'gruvbox'
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ' :'
-let g:airline_symbols.maxlinenr = ' '
-let g:airline_symbols.column = '➔'
+"let g:airline_theme = 'gruvbox'
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ' :'
+"let g:airline_symbols.maxlinenr = ' '
+"let g:airline_symbols.column = '➔'
 set noshowmode
 
 " Line and column numbering
@@ -387,6 +387,24 @@ lua << EOF
       end,
     })
 EOF
+
+" LSP Context helper menu (list available LSP options)
+let g:lsp_context_menu_commands = [
+            \    'vim.lsp.buf.document_symbol()',
+            \    'vim.lsp.buf.declaration()',
+            \    'vim.lsp.buf.definition()',
+            \    'vim.lsp.buf.implementation()',
+            \    'vim.lsp.buf.type_definition()',
+            \    'vim.lsp.buf.hover()',
+            \    'vim.lsp.buf.references()',
+            \    'vim.lsp.buf.formatting()',
+            \    'vim.lsp.buf.outgoing_calls()',
+            \    'vim.lsp.buf.incoming_calls()',
+            \ ]
+function Fzf_lsp_context_menu()
+    call fzf#run({'sink': 'lua', 'source': g:lsp_context_menu_commands, 'down': 10})
+endf
+nmap <Leader>lc :call g:Fzf_lsp_context_menu()<cr>
 
 endif "if has('nvim')
 
