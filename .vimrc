@@ -1,7 +1,7 @@
 """
 """ True-hearted .vimrc (and init.nvim) for quick and easy navigation and file editing. All of the cross-configuration
 """ files loaded by this configuration are available under 'https://github.com/miklhh/.dotfiles'.
-""" Happy go lucky as this configuration is licensed under the permissive MIT License. Have at it.
+""" Happy go lucky as this configuration is licensed under the permissive MIT License. Have at it!
 """
 """ Author: Mikael Henriksson (2015 - 2023)
 """
@@ -33,16 +33,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-    " Vim Sneak
+    " Sneak motions
     Plug 'justinmk/vim-sneak'
 
-    " Vim <3 FZF
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    "Plug 'mracos/fzf.vim', { 'branch': 'mf-add-delete-option-to-buffers-command' }
-    Plug 'chengzeyi/fzf-preview.vim'
-
-    " Gives access to :Bdelete and :Bwipeout; like :bdelete and :bwipeout but without closing the pane
+    " Wipeout like well behaved citizens (:Bwipeout,:Bdelete)
     Plug 'moll/vim-bbye'
 
     " UndoTree for easy undo history access
@@ -70,10 +64,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'junegunn/seoul256.vim'
 
-    " Airline tray
-    "Plug 'vim-airline/vim-airline'
-    "Plug 'vim-airline/vim-airline-themes'
-
     " Get (Neo)Vim startup time with :StartupTime
     Plug 'dstein64/vim-startuptime'
 
@@ -83,23 +73,30 @@ call plug#begin('~/.vim/plugged')
     " Vim surround
     Plug 'tpope/vim-surround'
 
+    " Vim <3 FZF
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'chengzeyi/fzf-preview.vim'
+
     " Plugins specific to NeoVim starts here
     if has('nvim')
+
+        " All the Lua function I don't want to write twice
+        Plug 'nvim-lua/plenary.nvim'
+
+        " NeoVim devicons
+        Plug 'nvim-tree/nvim-web-devicons'
 
         " Good default LSP server configurations
         Plug 'neovim/nvim-lspconfig'
 
-        " LSP server package manager Mason, replacing the depricated nvim-lsp-installer. Trigger with: 'Mason',
-        " 'MasonInstall <package>' and 'MasonLog'
+        " LSP server package manager Mason
         Plug 'williamboman/mason.nvim'
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
 
         " LSP tree view
         Plug 'simrat39/symbols-outline.nvim'
-
-        " NeoVim devicons (needed by ex: nvim-tree and trouble.nvim)
-        Plug 'kyazdani42/nvim-web-devicons'
 
         " NeoVim tree view
         Plug 'kyazdani42/nvim-tree.lua'
@@ -113,6 +110,9 @@ call plug#begin('~/.vim/plugged')
 
         " Telescope
         Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+
+        " Lua command line
+        Plug 'nvim-lualine/lualine.nvim'
 
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
@@ -144,7 +144,6 @@ call plug#begin('~/.vim/plugged')
 
         " FZF LSP things
         Plug 'gfanto/fzf-lsp.nvim'
-        Plug 'nvim-lua/plenary.nvim'
 
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
@@ -173,24 +172,13 @@ call plug#end()
 " --                                                  Appearance                                                    --
 " --------------------------------------------------------------------------------------------------------------------
 
-" Gruvbox colorscheme settings - more info: https://github.com/morhetz/gruvbox/wiki/Configuration
+" Gruvbox color scheme settings - more info: https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
 let g:gruvbox_italic='1'
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
 set background=dark
 colorscheme gruvbox
-
-" Airline settings
-"let g:airline_theme = 'gruvbox'
-"if !exists('g:airline_symbols')
-"    let g:airline_symbols = {}
-"endif
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ' :'
-"let g:airline_symbols.maxlinenr = ' '
-"let g:airline_symbols.column = '➔'
 set noshowmode
 
 " Line and column numbering
@@ -430,6 +418,7 @@ lua <<EOF
     require('nvim-tree').setup()
     require('config/treesitter')
     require('config/which-key')
+    require('config/lualine')
 EOF
 
 let g:pydocstring_formatter = 'numpy'
