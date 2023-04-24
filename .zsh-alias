@@ -50,6 +50,7 @@ function _MKDIR_AND_CD() {
 }
 
 # Command line quickies
+alias ca='cargo'
 alias t='tmux'
 alias ta='tmux attach -t'
 alias g='git'
