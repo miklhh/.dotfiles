@@ -58,9 +58,6 @@ end
 -- Initialize toggle-lsp-diagnostics plugin
 require('toggle_lsp_diagnostics').init()
 
--- Initialize symbols-outline.nvim
-require("symbols-outline").setup()
-
 -- Initialize LSP fidget spinner
 require("fidget").setup()
 

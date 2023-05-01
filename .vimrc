@@ -87,7 +87,10 @@ call plug#begin('~/.vim/plugged')
         " NeoVim devicons
         Plug 'nvim-tree/nvim-web-devicons'
 
-        " Good default LSP server configurations
+        " Lua command line
+        Plug 'nvim-lualine/lualine.nvim'
+
+        " Quickstart configs for Nvim LSP
         Plug 'neovim/nvim-lspconfig'
 
         " LSP server package manager Mason
@@ -95,11 +98,8 @@ call plug#begin('~/.vim/plugged')
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
 
-        " LSP tree view
-        Plug 'simrat39/symbols-outline.nvim'
-
-        " NeoVim tree view
-        Plug 'kyazdani42/nvim-tree.lua'
+        " NeoVim tree file manager
+        Plug 'nvim-tree/nvim-tree.lua'
 
         " LSP diagnostics highlight group for colorschemes that don't yet support them. Prerequisite of 
         " folke/trouble.nvim.
@@ -110,9 +110,6 @@ call plug#begin('~/.vim/plugged')
 
         " Telescope
         Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
-
-        " Lua command line
-        Plug 'nvim-lualine/lualine.nvim'
 
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
@@ -216,11 +213,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-" LSP symbols outline
-if has('nvim')
-    map <Leader>S :SymbolsOutline<CR>
-endif 
 
 " No yank on delete. Use <Leader+d> to remove and yank
 nnoremap d "_d
