@@ -93,6 +93,9 @@ call plug#begin('~/.vim/plugged')
         " Quickstart configs for Nvim LSP
         Plug 'neovim/nvim-lspconfig'
 
+        " Indentation blankline
+        Plug 'lukas-reineke/indent-blankline.nvim'
+
         " LSP server package manager Mason
         Plug 'williamboman/mason.nvim'
         Plug 'williamboman/mason-lspconfig.nvim'
@@ -411,6 +414,7 @@ lua <<EOF
     require('config/treesitter')
     require('config/which-key')
     require('config/lualine')
+    require('config/indent-blankline')
 EOF
 
 let g:pydocstring_formatter = 'numpy'
