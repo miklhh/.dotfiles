@@ -229,6 +229,18 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
+" Jump 10 characters with K and J
+nnoremap K 10k
+vnoremap K 10k
+nnoremap J 10j
+vnoremap J 10j
+
+" Jump paragraphs with capital U and D
+nnoremap U {
+vnoremap U {
+nnoremap D }
+vnoremap D }
+
 " Use <Ctrl+c/x> to copy/cut into register + when in visual mode
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
