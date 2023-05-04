@@ -18,11 +18,14 @@ echo " * Using mount point: ${MOUNT_POINT}"
 
 echo " * Connecting to ${FILUR_SERVER}"
 
+# SAMBA mount
+#sudo mount -t cifs -o vers=3.1.1,cifsacl,username=mikhe33,domain=AD,uid=mikl,gid=mikl //ad.liu.se/home/mikhe33 mikhe33
+
 ### Do not reconnect on connection failure
-sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
+#sshfs -o ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
 
 ### Automatic reconnect (seems to cause problem on the LiU-IT side after a connectection is broken)
-#sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
+sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,uid="${MOUNT_UID}",gid="${MOUNT_GID}" "${LIU_ID}@${FILUR_SERVER}.it.liu.se:/staff/${LIU_ID}" "${MOUNT_POINT}"
 
 SSHFS_RETURNCODE="${?}"
 
