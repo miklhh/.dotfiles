@@ -192,6 +192,8 @@ if has('nvim')
     lua require'colorizer'.setup()
 endif
 
+set colorcolumn=88
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                   Keybindings                                                  --
 " --------------------------------------------------------------------------------------------------------------------
@@ -229,17 +231,17 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
-" Jump 10 characters with K and J
-nnoremap K 10k
-vnoremap K 10k
-nnoremap J 10j
-vnoremap J 10j
+" Jump 15 characters with K and J
+nnoremap K 15k
+vnoremap K 15k
+nnoremap J 15j
+vnoremap J 15j
 
 " Jump paragraphs with capital U and D
-nnoremap U {
-vnoremap U {
-nnoremap D }
-vnoremap D }
+nnoremap U <C-u>
+vnoremap U <C-u>
+nnoremap D <C-d>
+vnoremap D <C-d>
 
 " Use <Ctrl+c/x> to copy/cut into register + when in visual mode
 vnoremap <C-c> "+y
