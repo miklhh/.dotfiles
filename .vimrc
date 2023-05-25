@@ -90,6 +90,9 @@ call plug#begin('~/.vim/plugged')
         " Lua command line
         Plug 'nvim-lualine/lualine.nvim'
 
+        " Oil file manager
+        Plug 'stevearc/oil.nvim'
+
         " Quickstart configs for Nvim LSP
         Plug 'neovim/nvim-lspconfig'
 
@@ -429,6 +432,7 @@ lua <<EOF
     require('config/which-key')
     require('config/lualine')
     require('config/indent-blankline')
+    require('config/oil')
 EOF
 
 let g:pydocstring_formatter = 'numpy'
