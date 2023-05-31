@@ -104,6 +104,10 @@ call plug#begin('~/.vim/plugged')
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
 
+        " LSP signature help
+        " plug
+        Plug 'ray-x/lsp_signature.nvim'
+
         " NeoVim tree file manager
         Plug 'nvim-tree/nvim-tree.lua'
 
@@ -119,7 +123,6 @@ call plug#begin('~/.vim/plugged')
 
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
-        Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
         Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
         Plug 'hrsh7th/cmp-buffer'
         Plug 'hrsh7th/cmp-path'
@@ -433,6 +436,7 @@ lua <<EOF
     require('config/lualine')
     require('config/indent-blankline')
     require('config/oil')
+    require('config/lsp_signature')
 EOF
 
 let g:pydocstring_formatter = 'numpy'

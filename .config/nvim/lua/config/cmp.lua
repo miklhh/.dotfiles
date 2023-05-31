@@ -41,7 +41,7 @@ cmp.setup({
         { name = 'luasnip' },                   -- For Luasnip users
         { name = 'vsnip' },                     -- VSnip autocompletions
         { name = 'path' },                      -- cmp-path autocompletions
-        { name = 'nvim_lsp_signature_help' },   -- LSP signatures
+        --{ name = 'nvim_lsp_signature_help' },   -- LSP signatures
         --{ name = 'buffer' },                    -- cmp-buffer autocompletions
     }),
 })
