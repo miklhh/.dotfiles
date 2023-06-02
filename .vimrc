@@ -100,12 +100,11 @@ call plug#begin('~/.vim/plugged')
         Plug 'lukas-reineke/indent-blankline.nvim'
 
         " LSP server package manager Mason
-        Plug 'williamboman/mason.nvim'
+        Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
 
         " LSP signature help
-        " plug
         Plug 'ray-x/lsp_signature.nvim'
 
         " NeoVim tree file manager
