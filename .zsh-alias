@@ -176,10 +176,10 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 # (i)Python calculator
-PYTHON_CALC_INIT_CMD='from math import *; from matplotlib.pyplot import *; from numpy import *; from numpy.fft import *'
+PYTHON_CALC_INIT_CMD='import math; import matplotlib.pyplot as plt; import numpy as np;'
 if command -v ipython 1>/dev/null 2>&1; then
     # Ipython with Vim keybindings and _without_ QT backend (nice..)
-    alias calc="XDG_SESSION_TYPE=X11 ipython --TerminalInteractiveShell.editing_mode=vi -i -c '${PYTHON_CALC_INIT_CMD}'"
+    alias calc="ipython -i -c '${PYTHON_CALC_INIT_CMD}'"
 else
     # Regular python calculator (lame..)
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'ipython' not in \${PATH}"
