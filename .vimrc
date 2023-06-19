@@ -137,7 +137,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/vim-vsnip-integ'
 
         " LSP fidget spinner
-        Plug 'j-hui/fidget.nvim'
+        Plug 'j-hui/fidget.nvim', { 'branch': 'legacy' }
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
