@@ -147,8 +147,6 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-        " FZF LSP things
-        Plug 'gfanto/fzf-lsp.nvim'
 
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
@@ -237,10 +235,10 @@ nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
 " Jump 15 characters with K and J
-nnoremap K 15k
-vnoremap K 15k
-nnoremap J 15j
-vnoremap J 15j
+nnoremap K 20k
+vnoremap K 20k
+nnoremap J 20j
+vnoremap J 20j
 
 " Jump paragraphs with capital U and D
 nnoremap U <C-u>
