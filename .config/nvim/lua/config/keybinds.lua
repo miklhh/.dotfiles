@@ -30,10 +30,15 @@ lsp_set_keymap('n', '<space>lgd', '<cmd>lua vim.lsp.buf.definition()<CR>', lsp_o
 lsp_set_keymap('n', '<space>lgi', '<cmd>lua vim.lsp.buf.implementation()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', lsp_opts)
+--lsp_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', lsp_opts)
+--lsp_set_keymap('n', '<space>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', lsp_opts)
+
+-- Provided by: fzf-lsp.nvim
 lsp_set_keymap('n', '<space>ld', '<cmd>DocumentSymbols<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>lw', '<cmd>WorkspaceSymbols<CR>', lsp_opts)
+
+-- Provided by: Telescope
 lsp_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_workspace_symbols<CR>', lsp_opts)
---lsp_set_keymap('n', '<space>lw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', lsp_opts)
 
 -- Toggle LSP diagnostics through plugin Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 lsp_set_keymap('n', '<space>lt', '<cmd>ToggleDiag<CR>', lsp_opts)

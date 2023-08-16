@@ -27,6 +27,12 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
+" Disable built-in NeoVim netrw plugin 
+if has('nvim')
+    lua vim.g.loaded_netrw = 1
+    lua vim.g.loaded_netrwPlugin = 1
+endif
+
 " --------------------------------------------------------------------------------------------------------------------
 " --                                                    Vim Plug                                                    --
 " --------------------------------------------------------------------------------------------------------------------
@@ -147,6 +153,8 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
+        " Fuzzy-find LSP items (gives :DocumentSymbols and :WorkspaceSymbols
+        Plug 'gfanto/fzf-lsp.nvim'
 
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
@@ -189,11 +197,6 @@ set number
 set relativenumber
 set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
-
-" Colorization for all filetypes
-if has('nvim')
-    lua require'colorizer'.setup()
-endif
 
 set colorcolumn=88
 
@@ -290,7 +293,7 @@ cnoremap <C-k> <C-t>
 
 " NeoVim tree toggle
 if has('nvim')
-    nnoremap <leader>, :NvimTreeToggle<CR>
+    nnoremap <leader>, :NvimTreeFindFileToggle<CR>
 endif
 
 " Do not use default jupyter-vim keybindings
@@ -304,7 +307,6 @@ set mouse=a                     " Enable all mouse functionality
 set laststatus=2                " Always show the status line in the last window
 set scrolloff=4                 " Always show four lines above and under cursorline
 set backspace=indent,eol,start  " Insert mode backspace (and <C-W>) settings
-"set hlsearch                    " Highlight text on search
 set hidden
 set incsearch                   " Show searches in realtime
 set signcolumn=no               " Extra linting column the the left (yes/no)
@@ -406,6 +408,9 @@ function Fzf_lsp_context_menu()
 endf
 nmap <Leader>lc :call g:Fzf_lsp_context_menu()<cr>
 
+" FZF window layout
+let g:fzf_layout = { 'down': '~40%' }
+
 endif "if has('nvim')
 
 " --------------------------------------------------------------------------------------------------------------------
@@ -427,16 +432,16 @@ source ~/.config/vim/config/additional-color.vim
 if has('nvim')
 
 lua <<EOF
-    require('nvim-tree').setup()
+    require('config/nvim-tree')
     require('config/treesitter')
     require('config/which-key')
     require('config/lualine')
     require('config/indent-blankline')
     require('config/oil')
     require('config/lsp_signature')
+    require('colorizer').setup()
 EOF
 
 let g:pydocstring_formatter = 'numpy'
 
-endif "if has('nvim')
-
+endif "has('nvim')
