@@ -10,6 +10,7 @@ require("fzf-lua").setup({
         layout = 'horizontal',
         vertical = 'up:60%',
         horizontal = 'right:50%',
+        hidden = '',
       },
   }
 })
