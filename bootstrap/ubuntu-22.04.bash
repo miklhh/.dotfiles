@@ -21,7 +21,7 @@ apt-get -y install neovim vim xclip wl-clipboard
 
 # Rust & Co (un-attended rustup install)
 RUST_APT_PACKAGES="bat ripgrep"
-RUST_CARGO_PACKAGES="git-delta"
+RUST_CARGO_PACKAGES="git-delta fd-find"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user=${SUDOER_USER} bash -s -- -y
 sudo --user=${SUDOER_USER} -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
 apt-get -y install ${RUST_APT_PACKAGES}

@@ -120,7 +120,7 @@ call plug#begin('~/.vim/plugged')
         " folke/trouble.nvim.
         Plug 'folke/lsp-colors.nvim'
 
-        " NeoVim LSP diagnostics prettifier and telescope
+        " NeoVim LSP diagnostics trouble finder
         Plug 'folke/trouble.nvim'
 
         " Telescope
@@ -153,8 +153,8 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-        " Fuzzy-find LSP items (gives :DocumentSymbols and :WorkspaceSymbols
-        Plug 'gfanto/fzf-lsp.nvim'
+        " Fuzzy-find more stuff
+        Plug 'ibhagwan/fzf-lua', { 'branch': 'main' }
 
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
@@ -439,6 +439,7 @@ lua <<EOF
     require('config/indent-blankline')
     require('config/oil')
     require('config/lsp_signature')
+    require('config/fzf-lua')
     require('colorizer').setup()
 EOF
 

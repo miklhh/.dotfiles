@@ -32,10 +32,8 @@ lsp_set_keymap('n', '<space>lr', '<cmd>lua vim.lsp.buf.rename()<CR>', lsp_opts)
 lsp_set_keymap('n', '<space>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>ld', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', lsp_opts)
 --lsp_set_keymap('n', '<space>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', lsp_opts)
-
--- Provided by: fzf-lsp.nvim
-lsp_set_keymap('n', '<space>ld', '<cmd>DocumentSymbols<CR>', lsp_opts)
-lsp_set_keymap('n', '<space>lw', '<cmd>WorkspaceSymbols<CR>', lsp_opts)
+lsp_set_keymap('n', '<space>ld', '<cmd>FzfLua lsp_document_symbols<CR>', lsp_opts)
+lsp_set_keymap('n', '<space>lw', '<cmd>FzfLua lsp_workspace_symbols<CR>', lsp_opts)
 
 -- Provided by: Telescope
 lsp_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_workspace_symbols<CR>', lsp_opts)
