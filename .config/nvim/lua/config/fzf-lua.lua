@@ -3,6 +3,9 @@
 -- https://github.com/ibhagwan/fzf-lua
 --
 require("fzf-lua").setup({
+  fzf_opts = {
+    ['--layout'] = 'default',
+  },
   winopts = {
       height = 0.60,
       width = 0.85,
@@ -12,7 +15,23 @@ require("fzf-lua").setup({
         horizontal = 'right:50%',
         hidden = '',
       },
-  }
+  },
+  file_ignore_patterns = {
+    '.cache/',
+    '.cargo/',
+    '.git/',
+    '.local/',
+    '.matlab/',
+    '.platformio/',
+    '.rustup/',
+    '.venv/',
+    '.vscode/',
+    '.wine/',
+    'node_modules/',
+    'opt/',
+    'snap/',
+    'target/',
+  },
 })
 
 

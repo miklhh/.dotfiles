@@ -31,7 +31,26 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
 # Global glob-settings for ripgrep (rg)
-RG_GLOB='!{node_modules/,.git/,target/}'
+GLOBAL_FILES_IGNORE_PATTERNS=(
+    '.cache/'
+    '.cargo/'
+    '.git/'
+    '.local/'
+    '.matlab/'
+    '.platformio/'
+    '.rustup/'
+    '.venv/'
+    '.vscode/'
+    '.wine/'
+    'node_modules/'
+    'opt/'
+    'snap/'
+    'target/'
+)
+RG_GLOB="!{${(j:,:)GLOBAL_FILES_IGNORE_PATTERNS}}"
+# FD_EXCLUDE="${(j: -E :)GLOBAL_FILES_IGNORE_PATTERNS}"
+export RG_GLOB
+# export FD_EXCLUDE
 
 # Preferred number of threads for use by ripgrep (rg) when traversing files and directories. Set to zero (0) to let
 # ripgrep decide using its heuristics.
