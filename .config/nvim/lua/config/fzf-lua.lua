@@ -7,7 +7,7 @@ require("fzf-lua").setup({
     ['--layout'] = 'default',
   },
   winopts = {
-      height = 0.60,
+      height = 0.80,
       width = 0.85,
       preview = {
         layout = 'horizontal',
