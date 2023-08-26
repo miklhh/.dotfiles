@@ -5,42 +5,59 @@
 #
 
 set -e
-SUDOER_USER="${SUDO_USER}"
-SUDOER_USER_HOME="$(eval echo ~${SUDOER_USER})"
+SUDO_USER_HOME="$(eval echo "~${SUDO_USER}")"
 
 # Add Ubuntu external repositories (to only run apt update once)
 add-apt-repository -y ppa:neovim-ppa/unstable
 apt update
 
-# Build essentials
-BUILD_ESSENTIALS_APT_PACKAGES="build-essential manpages-dev git curl"
-apt-get -y install ${BUILD_ESSENTIALS_APT_PACKAGES}
-
 # NeoVim unstable
 apt-get -y install neovim vim xclip wl-clipboard
 
+# Build essentials
+apt-get -y install  \
+    build-essential \
+    curl            \
+    git             \
+    manpages-dev
+
+# Python3
+apt-get -y install  \
+    pip             \
+    python3         \
+    python3-venv    \
+PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
+sudo --user="${SUDO_USER}" -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
+
 # Rust & Co (un-attended rustup install)
-RUST_APT_PACKAGES="bat ripgrep"
+apt-get -y install  \
+    bat             \
+    ripgrep
 RUST_CARGO_PACKAGES="git-delta fd-find"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user=${SUDOER_USER} bash -s -- -y
-sudo --user=${SUDOER_USER} -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
-apt-get -y install ${RUST_APT_PACKAGES}
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user="${SUDO_USER}" bash -s -- -y
+sudo --user="${SUDO_USER}" -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
 
 # Ubuntu: symbolic link batcat -> bat
-sudo --user=${SUDOER_USER} mkdir -p "${SUDOER_USER_HOME}/.local/bin"
-sudo --user=${SUDOER_USER} ln -s /usr/bin/batcat "${SUDOER_USER_HOME}/.local/bin/bat"
+sudo --user="${SUDO_USER}" mkdir -p "${SUDO_USER_HOME}/.local/bin"
+sudo --user="${SUDO_USER}" ln -s /usr/bin/batcat "${SUDO_USER_HOME}/.local/bin/bat"
 
-# Shell & Co
-SHELL_APT_PACKAGES="zsh tmux bfs fzf"
-apt-get -y install ${SHELL_APT_PACKAGES}
-
-# Python packages
-PYTHON_APT_PACKAGES="pip"
-PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
-apt-get -y install ${PYTHON_APT_PACKAGES}
-sudo --user=${SUDOER_USER} -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
+# (Z)Shell and company
+apt-get -y install  \
+    bfs             \
+    fzf             \
+    tmux            \
+    zsh
 
 # Other packages
-apt-get -y install htop inkscape texlive-full fuse3 libfuse2 xdg-desktop-portal xdg-desktop-portal-gnome \
-                   xdg-desktop-portal-gtk npm tree
+apt-get -y install              \
+    fuse3                       \
+    htop                        \
+    inkscape                    \
+    libfuse2                    \
+    npm                         \
+    texlive-full                \
+    tree                        \
+    xdg-desktop-portal          \
+    xdg-desktop-portal-gnome    \
+    xdg-desktop-portal-gtk
 

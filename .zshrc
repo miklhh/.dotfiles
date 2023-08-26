@@ -1,14 +1,14 @@
 #
-# Configuration is very miniscule but it does the job both for faint tty sessions and in interactive colored terminal
-# emulators. If Powerlevel10k is available it is sourced. If not, a fallback prompt is available.
+# Configuration is very miniscule but it does the job both for faint tty sessions and in
+# interactive colored terminal emulators. If Powerlevel10k is available it is sourced.
+# If not, a fallback prompt is available.
 #
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
 
-
-# --------------------------------------------------------------------------------------------------------------------
-# --                                              Environment settings                                              --
-# --------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------ #
+# --                              Environment settings                              -- #
+# ------------------------------------------------------------------------------------ #
 
 # Export base env-variables.
 export HOST=$(uname -n)
@@ -31,7 +31,7 @@ command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
 # Global glob-settings for ripgrep (rg)
-GLOBAL_FILES_IGNORE_PATTERNS=(
+export GLOBAL_FILES_IGNORE_PATTERNS=(
     '.cache/'
     '.cargo/'
     '.git/'
@@ -47,23 +47,23 @@ GLOBAL_FILES_IGNORE_PATTERNS=(
     'snap/'
     'target/'
 )
-RG_GLOB="!{${(j:,:)GLOBAL_FILES_IGNORE_PATTERNS}}"
+export RG_GLOB="!{${(j:,:)GLOBAL_FILES_IGNORE_PATTERNS}}"
 # FD_EXCLUDE="${(j: -E :)GLOBAL_FILES_IGNORE_PATTERNS}"
-export RG_GLOB
 # export FD_EXCLUDE
 
-# Preferred number of threads for use by ripgrep (rg) when traversing files and directories. Set to zero (0) to let
-# ripgrep decide using its heuristics.
+# Preferred number of threads for use by ripgrep (rg) when traversing files and
+# directories. Set to zero (0) to let ripgrep decide using its heuristics.
 RG_THREADS='0'
 
-# Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables. More key binding are found 
-# below under 'Key bindings'. The 'bindkey -v' option must be set before the FZF settings are loaded, as FZF depends
-# on it being set properly.
+# Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
+# More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be
+# set before the FZF settings are loaded, as FZF depends on it being set properly.
 bindkey -v
 
-# --------------------------------------------------------------------------------------------------------------------
-# --                                                 FZF settings                                                   --
-# --------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------ #
+# --                                  FZF settings                                  -- #
+# ------------------------------------------------------------------------------------ #
+
 if command -v fzf 1>/dev/null 2>&1; then
     # Fuzzy finder 'fzf' available
     # Source fzf command line completion scripts
@@ -90,18 +90,26 @@ if command -v fzf 1>/dev/null 2>&1; then
     }
 
     if command -v rg 1>/dev/null 2>&1; then
-        # Ripgrep (rg) available in path, use it for path list completion on zsh fzf-completion and on fzf call
-        export FZF_DEFAULT_COMMAND="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs"
+        # Ripgrep (rg) available in path, use it for path list completion on zsh fzf
+        # completion and on fzf call
+        local RG_CMD="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs"
+        export FZF_DEFAULT_COMMAND="${RG_CMD}"
         _fzf_compgen_path() {
-            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs "$1" 2>/dev/null
+            rg -j${RG_THREADS} -g${RG_GLOB} \
+                --files         \
+                --hidden        \
+                --no-ignore-vcs \
+                "$1" 2>/dev/null
         }
     else
-        # Ripgrep (rg) not in $PATH, regular GNU (or BSD) find will be used for command-line completion with fzf
+        # Ripgrep (rg) not in $PATH, regular GNU (or BSD) find will be used for
+        # command-line completion with fzf
         echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
     fi
 
     if command -v bfs 1>/dev/null 2>&1; then
-        # Breadth first search (bfs) available in path, use it for directory list completion in zsh fzf-completion
+        # Breadth first search (bfs) available in path, use it for directory list
+        # completion in zsh fzf-completion
         _fzf_compgen_dir() {
             bfs "$1" -type d -exclude -name .git 2>/dev/null
         }
@@ -111,50 +119,62 @@ else
     echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
 fi
 
-# --------------------------------------------------------------------------------------------------------------------
-# --                                                Prompt settings                                                 --
-# --------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------ #
+# --                              Prompt settings                                   -- #
+# ------------------------------------------------------------------------------------ #
+
 function set_prompt_plain {
     autoload -U colors && colors
-    PROMPT="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B %{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
+    PROMPT=""
+    PROMPT+="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B "
+    PROMPT+="%{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
 }
 
 function set_prompt_p10k {
-    if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
+    then
         source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     else
         echo "[ .zshrc:${LINENO} ]: Warning: could not enable P10k instant prompt"
     fi
     source "${P10K_THEME}"
     source "${HOME}/.p10k.zsh"
+
+    # zsh autosuggestions
+    [ -f "${HOME}/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
+        source "${HOME}/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
 }
 
 if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
     autoload is-at-least
     if is-at-least "5.3.0"; then
-        # If the dotfiles are bootstraped from 'https://github.com/miklhh/.dotfiles', then '${HOME}/.powerlevel10k'
-        # will be a symlink to '${HOME}/.dotfiles/powerlevel10k'. If this '.zshrc' file is used stand alone, the user
-        # will manually have to install Powerlevel10k into '${HOME}/.powerlevel10k'.
-        [ -d "${HOME}/.powerlevel10k" ] && P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
+        # If dotfiles are bootstraped from 'https://github.com/miklhh/.dotfiles', then
+        # '${HOME}/.powerlevel10k' is symlinked to '${HOME}/.dotfiles/powerlevel10k'.
+        # If this '.zshrc' file is used stand alone, users will manually have to install
+        # Powerlevel10k into '${HOME}/.powerlevel10k'.
+        [ -d "${HOME}/.powerlevel10k" ] &&
+            P10K_THEME="${HOME}/.powerlevel10k/powerlevel10k.zsh-theme"
         if [ -f "${P10K_THEME}" ]; then
             set_prompt_p10k
         else
-            echo "[ .zshrc:${LINENO} ]: Warning: directory ${HOME}/.powerlevel10k unavailable"
+            echo "[ .zshrc:${LINENO} ]:"                                            \
+                 "Warning: directory '${HOME}/.powerlevel10k' unavailable, falling" \
+                 "back to plain prompt"
             set_prompt_plain
         fi
-    else # Zsh version lower than 5.3.0
-        echo "[ .zshrc:${LINENO} ]: Warning: Zsh version (${ZSH_VERSION}) lower than 5.3.0, could not load Powerlevel10k"
+    else  # Zsh version lower than 5.3.0
+        echo "[ .zshrc:${LINENO} ]: Warning zsh version (${ZSH_VERSION}) is lower"  \
+             "than the required 5.3.0, could not load Powerlevel10k"
         set_prompt_plain
     fi
 else
     set_prompt_plain
 fi
 
-source ~/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ------------------------------------------------------------------------------------ #
+# --                               History settings                                 -- #
+# ------------------------------------------------------------------------------------ #
 
-# --------------------------------------------------------------------------------------------------------------------
-# --                                                 History settings                                               --
-# --------------------------------------------------------------------------------------------------------------------
 HISTFILE="${HOME}/.config/zsh/.zsh-history"
 HISTSIZE=5000                   # Max events stored in session
 SAVEHIST=5000                   # Max events stored in history file
@@ -165,9 +185,9 @@ setopt inc_append_history       # Load history only on startup but append in rea
 setopt hist_verify              # Upon hitting enter, reload line into edit buf
 
 
-# --------------------------------------------------------------------------------------------------------------------
-# --                                                 Key bindings                                                   --
-# --------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------ #
+# --                               Key bindings                                     -- #
+# ------------------------------------------------------------------------------------ #
 
 # History search with <CTRL-R> and <CTRL-F>
 bindkey "^?" backward-delete-char
@@ -187,9 +207,9 @@ bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
 
-# --------------------------------------------------------------------------------------------------------------------
-# --                                                 Misc                                                           --
-# --------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------ #
+# --                                    Misc                                        -- #
+# ------------------------------------------------------------------------------------ #
 
 # Bat colorscheme. Available bat colorschemes can be listed with 'bat --list-themes'.
 export BAT_THEME="gruvbox-dark"
@@ -200,7 +220,8 @@ if command -v nvim 1>/dev/null 2>&1; then
 elif command -v bat 1>/dev/null 2>&1; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 else
-    echo "[ .zshrc:${LINENO} ]: Warning: neither 'nvim' nor 'bat' in \${PATH} for man-page formating"
+    echo "[ .zshrc:${LINENO} ]:" \
+         "Warning: neither 'nvim' nor 'bat' in \${PATH} for man-page formating"
 fi
 
 # Enable zsh autocompletion
