@@ -1,81 +1,96 @@
 #
-# Configuration is very miniscule but it does the job both for faint tty sessions and in interactive colored terminal
-# emulators. If Powerlevel10k is available it is sourced. If not fallback prompt is available.
+# Configuration is very miniscule but it does the job both for faint tty sessions and in
+# interactive colored terminal emulators. If Powerlevel10k is available it is sourced.
+# If not fallback prompt is available.
 #
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
 
 
-# Alias Vim -> NeoVim
-command -v "nvim" 1>/dev/null 2>&1 && alias vim='nvim' || echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
+# ------------------------------------------------------------------------------------ #
+# --                                Settings for ls                                 -- #
+# ------------------------------------------------------------------------------------ #
 
-# Settings for ls
+function _ls_gnu {
+    ls                              \
+        --classify                  \
+        --color                     \
+        --group-directories-first   \
+        --human-readable            
+}
+function _ls_bsd {
+    ls -G
+}
+
 if [ $(uname -s) = "Darwin" ]
 then
     if command -v gls 1>/dev/null 2>&1; then
-        # MacOS machine with GNU coreutils installed, use GNU ls
-        alias ls='gls --color=auto --group-directories-first --classify --human-readable'
+        alias ls=_ls_gnu
     else
-        # MacOS machine with BSD ls
-        echo "[ .zsh-alias:${LINENO} ]: Warning: 'GNU coreutils' not installed, using 'BSD ls'"
-        alias ls='ls -G'
+        echo "[ .zsh-alias:${LINENO} ]:" \
+             "Warning: 'GNU coreutils' not installed, using 'BSD ls'"
+        alias ls=_ls_bsd
     fi
 else
-    # Any other machine (probably Linux).
-    alias ls='ls --color=auto --group-directories-first --classify --human-readable'
+    alias ls=_ls_gnu
 fi
+
 alias l='ls -l'
 alias ll='ls -l -a'
 
-# Open Vim in Tmux function
-function _VIM_IN_TMUX() {
+# ------------------------------------------------------------------------------------ #
+# --                              NeoVim+Tmux integration                           -- #
+# ------------------------------------------------------------------------------------ #
+
+if command -v "nvim" 1>/dev/null; then
     if command -v "tmux" 1>/dev/null 2>&1; then
-        if [ -z "${TMUX}" ]; then
-            tmux new-session -d
-            tmux send-keys "nvim $@" Enter
-            tmux attach
-        else
-            nvim "$@"
-        fi
+        function _nvim_in_tmux() {
+            if [ -z "${TMUX}" ]; then
+                tmux new-session -d
+                tmux send-keys "nvim $@" Enter
+                tmux attach
+            else
+                nvim "$@"
+            fi
+        }
+        alias vim=_nvim_in_tmux
     else
-        nvim "$@"
+        alias vim=nvim
     fi
+else
+    echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
+fi
+
+function _tmux_cd_relative {
+    local target=${1}
+    cd $(tmux display-message -p -F "#{pane_current_path}" -t "{$target}"  || echo ".")
 }
+alias cdl='_tmux_cd_relative left-of'
+alias cdr='_tmux_cd_relative right-of'
+alias cdu='_tmux_cd_relative up-of'
+alias cdd='_tmux_cd_relative down-lf'
 
-# Create a new directory and change to it
-function _MKDIR_AND_CD() {
-    local MKPATH="${1}"
-    mkdir -p "${MKPATH}"
-    cd "${MKPATH}"
-}
 
-# Command line quickies
-alias ca='cargo'
-alias t='tmux'
-alias ta='tmux attach -t'
-alias g='git'
-alias vim='_VIM_IN_TMUX'
-alias v='_VIM_IN_TMUX'
-alias m='_MKDIR_AND_CD'
+# ------------------------------------------------------------------------------------ #
+# --                            Change dir FZF style                                -- #
+# ------------------------------------------------------------------------------------ #
 
-# Fast Tmux current directory changes, based on working directories of adjacent Tmux panes. Example usage: when in any
-# Tmux pane, use 'cdl' on the Zsh command line to change the current working directory to that of the working directory
-# of the Tmux pane located left of the active pane.
-alias cdl='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{left-of}"  || echo ".")'
-alias cdr='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{right-of}" || ehco ".")'
-alias cdu='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{up-of}"    || echo ".")'
-alias cdd='cd $(tmux display-message -p -F "#{pane_current_path}" -t "{down-of}"  || echo ".")'
-
-#
-# Change directory FZF style
 # * Command 'c'  : Use FZF to change directory forward, from the current directory
 # * Command 'C'  : Use FZF to change directory backward, from the current directory
-# * Command 'ch' : Use FZF to change directory forward, from $USER´s home directory
-#
+# * Command 'ch' : Use FZF to change directory forward, from $USER's home directory
+
 if command -v fzf 1>/dev/null 2>&1; then
-    _TREE_PREVIEW='tree --dirsfirst -L 1 -C {} | head -200'
-    alias _FZF_CD_PREVIEW="fzf --height=50% --reverse --border --info=inline --preview '${_TREE_PREVIEW}'"
-    function _GENERATE_BACKWARD_DIR_LIST() {
+    function _fzf_cd_preview {
+        local extra_cmd="${1}"
+        fzf                 \
+            --border        \
+            --height=50%    \
+            --info=inline   \
+            --reverse       \
+            ${extra_cmd}    \
+            --preview 'tree --dirsfirst -L 1 -C {} | head -200'
+    }
+    function _generate_backward_dir_list() {
         local PARAM="$1"
         local REM="$(pwd)"
         local PART=""
@@ -93,30 +108,40 @@ if command -v fzf 1>/dev/null 2>&1; then
             done
         fi
     }
-    function _BFS_DIR_SEARCH() {
+    function _bfs_dir_search() {
         bfs "$1" -type d -exclude -name .git 2>/dev/null | sed "s|\./||g"
     }
-    function _RFS_DIR_SEARCH() {
+    function _rfs_dir_search() {
         rfs -p "$1" -i .git 2>/dev/null | sed "s|\./||g"
     }
-    function _FIND_DIR_SEARCH() {
+    function _find_dir_search() {
         find . -type d 2>/dev/null | sed "s|\./||g"
     }
     if command -v bfs 1>/dev/null 2>&1; then
-        # Prio 1: Breadth first directory search using 'bfs', has top priority of the directory search utilities as it
-        #         tends to find the desiered directory the fastest.
-        alias _DIR_SEARCH='_BFS_DIR_SEARCH'
+        # Prio 1: Breadth first directory search using 'bfs', has top priority of the 
+        #         directory search utilities as it tends to find the desiered directory
+        #         the fastest.
+        alias _dir_search=_bfs_dir_search
     elif command -v rfs 1>/dev/null 2>&1; then
-        # Prio 2: Directory search using the Rust first search utility. Not as good as 'bfs', but it supports
-        #         multithreaded depth first search, so it has the potential to perform better than the find utility.
-        alias _DIR_SEARCH='_RFS_DIR_SEARCH'
+        # Prio 2: Directory search using the Rust first search utility. Not as good as
+        #         bfs, but it supports multithreaded depth first search, so it has the
+        #         potential to perform better than the find utility.
+        alias _dir_search=_rfs_dir_search
     else
-        # Prio 3 (fallback): Directory search using the common 'find' utility. Slow and ugly, but gets the job done.
-        alias _DIR_SEARCH='_FIND_DIR_SEARCH'
+        # Prio 3: Directory search using the common 'find' utility. Slow and
+        #         ugly, but gets the job done.
+        alias _dir_search=_find_dir_search
     fi
-    alias  C='cd "$(_GENERATE_BACKWARD_DIR_LIST --exclude | _FZF_CD_PREVIEW --tac || echo .)"'
-    alias  c='cd "$(_DIR_SEARCH . | _FZF_CD_PREVIEW || echo .)"'
-    alias ch='cd "$(_DIR_SEARCH ~ | _FZF_CD_PREVIEW || echo .)"'
+    function _fzf_cd_backward {
+        cd "$(_generate_backward_dir_list --exclude | _fzf_cd_preview --tac || echo .)"
+    }
+    function _fzf_cd_forward {
+        local start_dir="${1}"
+        cd "$(_dir_search ${start_dir} | _fzf_cd_preview || echo .)"
+    }
+    alias  C=_fzf_cd_backward
+    alias  c='_fzf_cd_forward .'
+    alias ch='_fzf_cd_forward ~'
 else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
     alias  c="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
@@ -124,13 +149,19 @@ else
     alias ch="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
 fi
 
+
+# ------------------------------------------------------------------------------------ #
+# --                                    Misc                                        -- #
+# ------------------------------------------------------------------------------------ #
+
 # Quick-open files with GNU xdg-open or BSD open
 function o {
     if command -v xdg-open 1>/dev/null 2>&1; then
         # Freedesktop (probably GNU/Linux) environment: GNU 'xargs' with 'xdg-open'
         if [ "$#" -eq 0 ]; then
             if command -v fzf 1>/dev/null 2>&1; then
-                fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
+                fzf --height=15 --print0 |
+                    xargs -r -0 -I"{}" sh -c 'xdg-open "{}" 1>/dev/null 2>&1 &'
             else
                 echo "Error: 'fzf' not in \${PATH}"
             fi
@@ -141,7 +172,8 @@ function o {
         # MacOS/BSD environment: BSD 'xargs' with BSD 'open'
         if [ "$#" -eq 0 ]; then
             if command -v fzf 1>/dev/null 2>&1; then
-                fzf --height=15 --print0 | xargs -r -0 -I"{}" sh -c 'open "{}" 1>/dev/null 2>&1 &'
+                fzf --height=15 --print0 |
+                    xargs -r -0 -I"{}" sh -c 'open "{}" 1>/dev/null 2>&1 &'
             else
                 echo "Error: 'fzf' not in \${PATH}"
             fi
@@ -165,7 +197,8 @@ else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'xdg-open/open' not in \${PATH}"
 fi
 
-# Python3 alias. On certain systems, e.g. Ubuntu, python is not linked to either Python2 nor Python3
+# Python 3 alias. On certain systems, e.g. Ubuntu, python is not linked to either
+# Python 2 nor Python 3
 if ! command -v python 1>/dev/null 2>&1; then
     alias python='python3'
 fi
@@ -185,4 +218,18 @@ else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'ipython' not in \${PATH}"
     alias calc="python3 -i -c '${PYTHON_CALC_INIT_CMD}'"
 fi
+
+# Create a new directory and change to it
+function _mkdir_and_cd() {
+    local MKPATH="${1}"
+    mkdir -p "${MKPATH}"
+    cd "${MKPATH}"
+}
+
+# Command line quickies
+alias ca=cargo
+alias t=tmux
+alias ta='tmux attach -t'
+alias g=git
+alias m=_mkdir_and_cd
 
