@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 #
-# Ubuntu 22.04: Unattended bootstraper for freshly installed system
+# Ubuntu 22.04 unattended bootstraper for freshly installed system
 # Author: Mikael Henriksson (2022)
 #
 
 set -e
 SUDO_USER_HOME="$(eval echo "~${SUDO_USER}")"
+BOOTSTRAP_PATH="$(dirname "$(readlink -f "$0")")"
 
 # Add Ubuntu external repositories (to only run apt update once)
 add-apt-repository -y ppa:neovim-ppa/unstable
@@ -25,7 +26,7 @@ apt-get -y install  \
 apt-get -y install  \
     pip             \
     python3         \
-    python3-venv    \
+    python3-venv
 PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
 sudo --user="${SUDO_USER}" -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
 
@@ -34,12 +35,25 @@ apt-get -y install  \
     bat             \
     ripgrep
 RUST_CARGO_PACKAGES="git-delta fd-find"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user="${SUDO_USER}" bash -s -- -y
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user="${SUDO_USER}" bash -s -- -y
+sudo --user="${SUDO_USER}"                              \
+    bash "${BOOTSTRAP_PATH}/rustup-init-1.26.0.sh"      \
+        --default-host="x86_64-unknown-linux-gnu"       \
+        --default-toolchain="stable"                    \
+        --profile="default"                             \
+        --no-modify-path                                \
+        -y
 sudo --user="${SUDO_USER}" -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
+# Triple: x86_64-unknown-linux-gnu
+# Toolchain: stable
+# Profile: default
+# Modify PATH: no
 
 # Ubuntu: symbolic link batcat -> bat
-sudo --user="${SUDO_USER}" mkdir -p "${SUDO_USER_HOME}/.local/bin"
-sudo --user="${SUDO_USER}" ln -s /usr/bin/batcat "${SUDO_USER_HOME}/.local/bin/bat"
+if [ ! -f "${SUDO_USER_HOME}/.local/bin/bat" ]; then
+    sudo --user="${SUDO_USER}" mkdir -p "${SUDO_USER_HOME}/.local/bin"
+    sudo --user="${SUDO_USER}" ln -s /usr/bin/batcat "${SUDO_USER_HOME}/.local/bin/bat"
+fi
 
 # (Z)Shell and company
 apt-get -y install  \
