@@ -17,11 +17,20 @@ export PAGER="less"
 export DOTFILES="${HOME}/.dotfiles"
 command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
+# Prepend to PATH if not already in PATH
+function prepend_path {
+    local to_add_path="${1}"
+    case ":${PATH}:" in
+        *:"${to_add_path}":*) ;;
+        *) export PATH="${to_add_path}:$PATH" ;;
+    esac
+}
+
 # Add ${HOME}.local/bin to path if available
-[ -d "${HOME}/.local/bin" ] && export PATH="${HOME}/.local/bin:${PATH}"
+[ -d "${HOME}/.local/bin" ] && prepend_path "${HOME}/.local/bin"
 
 # Add ${HOME}/.cargo/bin to path if available
-[ -d "${HOME}/.cargo/bin" ] && export PATH="${HOME}/.cargo/bin:${PATH}"
+[ -d "${HOME}/.cargo/bin" ] && prepend_path "${HOME}/.cargo/bin"
 
 # Source ${HOME}/.zsh-local which can contain machine/system specific zsh settings
 [ -f "${HOME}/.zsh-local" ] && source "${HOME}/.zsh-local"
