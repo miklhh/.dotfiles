@@ -6,6 +6,9 @@ require("fzf-lua").setup({
   fzf_opts = {
     ['--layout'] = 'default',
   },
+  files = {
+    fd_opts = "--color=never --type f --hidden --no-ignore-vcs --follow",
+  },
   winopts = {
       height = 0.80,
       width = 0.85,
@@ -15,22 +18,6 @@ require("fzf-lua").setup({
         horizontal = 'right:50%',
         hidden = '',
       },
-  },
-  file_ignore_patterns = {
-    '.cache/',
-    '.cargo/',
-    '.git/',
-    '.local/',
-    '.matlab/',
-    '.platformio/',
-    '.rustup/',
-    '.venv/',
-    '.vscode/',
-    '.wine/',
-    'node_modules/',
-    'opt/',
-    'snap/',
-    'target/',
   },
 })
 
@@ -45,6 +32,10 @@ vim.keymap.set(
 vim.keymap.set(
     "n", "<leader>.e",
     "<cmd>lua require('fzf-lua').files({ cwd = '~/.dotfiles/' })<CR>"
+)
+vim.keymap.set(
+    "n", "<leader>.f",
+    "<cmd>lua require('fzf-lua').files({ cwd = '~' })<CR>"
 )
 vim.keymap.set(
     "n", "<leader>e",
