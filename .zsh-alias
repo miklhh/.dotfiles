@@ -16,10 +16,11 @@ function _ls_gnu {
         --classify                  \
         --color                     \
         --group-directories-first   \
-        --human-readable            
+        --human-readable            \
+        "${@}" # Forward arguments
 }
 function _ls_bsd {
-    ls -G
+    ls -G "${@}" # Forward arguments
 }
 
 if [ $(uname -s) = "Darwin" ]
