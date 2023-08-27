@@ -1,0 +1,6 @@
+#
+# Global ignore for relative searches with fd
+#
+.git/
+node_modules/
+target/

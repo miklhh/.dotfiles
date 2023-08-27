@@ -1,0 +1,18 @@
+# 
+# $HOME directory ripgrep and fd ignores
+#
+
+.cache/
+.cargo/
+.local/
+.matlab/
+.minecraft/
+.npm/
+.platformio/
+.rustup/
+.steam/
+.venv/
+.vscode/
+.wine/
+opt/
+snap/

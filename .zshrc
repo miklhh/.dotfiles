@@ -39,21 +39,10 @@ function prepend_path {
 [ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
-# Global glob-settings for ripgrep (rg)
+# Global ignore glob-settings for ripgrep and fd
 export GLOBAL_FILES_IGNORE_PATTERNS=(
-    '.cache/'
-    '.cargo/'
     '.git/'
-    '.local/'
-    '.matlab/'
-    '.platformio/'
-    '.rustup/'
-    '.venv/'
-    '.vscode/'
-    '.wine/'
     'node_modules/'
-    'opt/'
-    'snap/'
     'target/'
 )
 export RG_GLOB="!{${(j:,:)GLOBAL_FILES_IGNORE_PATTERNS}}"
@@ -80,7 +69,12 @@ if command -v fzf 1>/dev/null 2>&1; then
     source "${HOME}/.dotfiles/.fzf-key-bindings.zsh"
     source "${HOME}/.dotfiles/.fzf-git.sh"
     FZF_COMPLETION_TRIGGER=''
-    FZF_COMPLETION_OPTS='--border --info=inline' 
+    FZF_DEFAULT_OPTS='
+        --border --info=inline
+        --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+        --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
+        --color marker:#fe8019,header:#665c54
+    '
     bindkey '^T' fzf-completion
     bindkey '^I' $fzf_default_completion
 
@@ -98,17 +92,21 @@ if command -v fzf 1>/dev/null 2>&1; then
       esac
     }
 
-    if command -v rg 1>/dev/null 2>&1; then
-        # Ripgrep (rg) available in path, use it for path list completion on zsh fzf
-        # completion and on fzf call
+    if command -v fd 1>/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore-vcs ."
+        export FZF_CTRL_T_COMMAND="fd --hidden --no-ignore-vcs . ${HOME}"
+        export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
+        export FZF_ALT_C_COMMAND="fd --hidden --no-ignore-vcs --type d . ${HOME}"
+        export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
+        _fzf_compgen_path() {
+            fd --type file --hidden --no-ignore-vcs "$1" 2>/dev/null
+        }
+    elif command -v rg 1>/dev/null 2>&1; then
         local RG_CMD="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs"
         export FZF_DEFAULT_COMMAND="${RG_CMD}"
         _fzf_compgen_path() {
-            rg -j${RG_THREADS} -g${RG_GLOB} \
-                --files         \
-                --hidden        \
-                --no-ignore-vcs \
-                "$1" 2>/dev/null
+            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs "$1" \
+                2>/dev/null
         }
     else
         # Ripgrep (rg) not in $PATH, regular GNU (or BSD) find will be used for
