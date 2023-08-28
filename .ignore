@@ -2,6 +2,8 @@
 # $HOME directory ripgrep and fd ignores
 #
 
+.Xil
+.Xilinx
 .cache/
 .cargo/
 .local/
