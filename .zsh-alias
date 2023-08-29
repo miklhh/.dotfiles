@@ -11,29 +11,33 @@
 # --                                Settings for ls                                 -- #
 # ------------------------------------------------------------------------------------ #
 
-function _ls_gnu {
-    ls                              \
-        --classify                  \
-        --color                     \
-        --group-directories-first   \
-        --human-readable            \
-        "${@}" # Forward arguments
+local _GNU_LS_FLAGS=(
+    '--classify'
+    '--color'
+    '--group-directories-first'
+    '--human-readable'
+)
+function _ls_gnu_linux {
+    ls ${_GNU_LS_FLAGS[@]} "${@}"
+}
+function _ls_gnu_darwin {
+    gls ${_GNU_LS_FLAGS[@]} "${@}"
 }
 function _ls_bsd {
-    ls -G "${@}" # Forward arguments
+    ls -G "${@}"
 }
 
 if [ $(uname -s) = "Darwin" ]
 then
     if command -v gls 1>/dev/null 2>&1; then
-        alias ls=_ls_gnu
+        alias ls=_ls_gnu_darwin
     else
         echo "[ .zsh-alias:${LINENO} ]:" \
              "Warning: 'GNU coreutils' not installed, using 'BSD ls'"
         alias ls=_ls_bsd
     fi
 else
-    alias ls=_ls_gnu
+    alias ls=_ls_gnu_linux
 fi
 
 alias l='ls -l'
