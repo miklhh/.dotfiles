@@ -39,20 +39,6 @@ function prepend_path {
 [ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
-# Global ignore glob-settings for ripgrep and fd
-export GLOBAL_FILES_IGNORE_PATTERNS=(
-    '.git/'
-    'node_modules/'
-    'target/'
-)
-export RG_GLOB="!{${(j:,:)GLOBAL_FILES_IGNORE_PATTERNS}}"
-# FD_EXCLUDE="${(j: -E :)GLOBAL_FILES_IGNORE_PATTERNS}"
-# export FD_EXCLUDE
-
-# Preferred number of threads for use by ripgrep (rg) when traversing files and
-# directories. Set to zero (0) to let ripgrep decide using its heuristics.
-RG_THREADS='0'
-
 # Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
 # More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be
 # set before the FZF settings are loaded, as FZF depends on it being set properly.
@@ -93,33 +79,22 @@ if command -v fzf 1>/dev/null 2>&1; then
     }
 
     if command -v fd 1>/dev/null 2>&1; then
-        export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore-vcs ."
-        export FZF_CTRL_T_COMMAND="fd --hidden --no-ignore-vcs . ${HOME}"
+        export FD_DEFAULT="fd --hidden --no-ignore-vcs"
+        export FZF_DEFAULT_COMMAND="${FD_DEFAULT} ."
+        export FZF_CTRL_T_COMMAND="${FD_DEFAULT} . ${HOME}"
         export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
-        export FZF_ALT_C_COMMAND="fd --hidden --no-ignore-vcs --type d . ${HOME}"
+        export FZF_ALT_C_COMMAND="(echo ${HOME}/; ${FD_DEFAULT} --type d . ${HOME})"
         export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
         _fzf_compgen_path() {
             fd --type file --hidden --no-ignore-vcs "$1" 2>/dev/null
         }
-    elif command -v rg 1>/dev/null 2>&1; then
-        local RG_CMD="rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs"
-        export FZF_DEFAULT_COMMAND="${RG_CMD}"
-        _fzf_compgen_path() {
-            rg -j${RG_THREADS} -g${RG_GLOB} --files --hidden --no-ignore-vcs "$1" \
-                2>/dev/null
+        _fzf_compgen_dir() {
+            fd --type directory --hidden --no-ignore-vcs "$1"
         }
     else
-        # Ripgrep (rg) not in $PATH, regular GNU (or BSD) find will be used for
-        # command-line completion with fzf
-        echo "[ .zshrc:${LINENO} ]: Warning: 'rg' not in \${PATH}"
-    fi
-
-    if command -v bfs 1>/dev/null 2>&1; then
-        # Breadth first search (bfs) available in path, use it for directory list
-        # completion in zsh fzf-completion
-        _fzf_compgen_dir() {
-            bfs "$1" -type d -exclude -name .git 2>/dev/null
-        }
+        # Fd not in path, falling back to regular GNU (or BSD) find for command-line
+        # completion with fzf
+        echo "[ .zshrc:${LINENO} ]: Warning: 'fd' not in \${PATH}"
     fi
 else
     # Fuzzy finder 'fzf' unavailable
