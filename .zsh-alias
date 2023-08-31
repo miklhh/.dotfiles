@@ -113,6 +113,9 @@ if command -v fzf 1>/dev/null 2>&1; then
             done
         fi
     }
+    function _fd_dir_search() {
+        (echo .; fd --hidden --no-ignore-vcs --type directory . "${1}")
+    }
     function _bfs_dir_search() {
         bfs "$1" -type d -exclude -name .git 2>/dev/null | sed "s|\./||g"
     }
@@ -122,19 +125,17 @@ if command -v fzf 1>/dev/null 2>&1; then
     function _find_dir_search() {
         find . -type d 2>/dev/null | sed "s|\./||g"
     }
-    if command -v bfs 1>/dev/null 2>&1; then
-        # Prio 1: Breadth first directory search using 'bfs', has top priority of the 
-        #         directory search utilities as it tends to find the desiered directory
-        #         the fastest.
+    if command -v fd 1>/dev/null 2>&1; then
+        # Priority 1: Search using FD
+        alias _dir_search=_fd_dir_search
+    elif command -v bfs 1>/dev/null 2>&1; then
+        # Priority 2: Search using BFS
         alias _dir_search=_bfs_dir_search
     elif command -v rfs 1>/dev/null 2>&1; then
-        # Prio 2: Directory search using the Rust first search utility. Not as good as
-        #         bfs, but it supports multithreaded depth first search, so it has the
-        #         potential to perform better than the find utility.
+        # Priority 3: Search using RFS (depricated)
         alias _dir_search=_rfs_dir_search
     else
-        # Prio 3: Directory search using the common 'find' utility. Slow and
-        #         ugly, but gets the job done.
+        # Priority 4: Search using regular find
         alias _dir_search=_find_dir_search
     fi
     function _fzf_cd_backward {
