@@ -48,58 +48,53 @@ bindkey -v
 # --                                  FZF settings                                  -- #
 # ------------------------------------------------------------------------------------ #
 
-if command -v fzf 1>/dev/null 2>&1; then
-    # Fuzzy finder 'fzf' available
-    # Source fzf command line completion scripts
-    source "${HOME}/.dotfiles/.fzf-completion.zsh"
-    source "${HOME}/.dotfiles/.fzf-key-bindings.zsh"
-    source "${HOME}/.dotfiles/.fzf-git.sh"
-    FZF_COMPLETION_TRIGGER=''
-    FZF_DEFAULT_OPTS='
-        --border --info=inline
-        --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
-        --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
-        --color marker:#fe8019,header:#665c54
-    '
-    bindkey '^T' fzf-completion
-    bindkey '^I' $fzf_default_completion
+FZF_COMPLETION_TRIGGER=''
+FZF_DEFAULT_OPTS='
+    --border --info=inline
+    --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+    --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
+    --color marker:#fe8019,header:#665c54
+'
 
-    # (EXPERIMENTAL) Advanced customization of fzf options via _fzf_comprun function
-    # - The first argument to the function is the name of the command.
-    # - You should make sure to pass the rest of the arguments to fzf.
-    _fzf_comprun() {
-      local command=$1
-      shift
-      case "$command" in
-        cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
-        export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
-        ssh)          fzf "$@" --preview 'dig {}' ;;
-        *)            fzf "$@" ;;
-      esac
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'    "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"          "$@" ;;
+    ssh)          fzf --preview 'dig {}'                    "$@" ;;
+    *)            fzf                                       "$@" ;;
+  esac
+}
+
+if command -v fd 1>/dev/null 2>&1; then
+    export FD_DEFAULT="fd --hidden --no-ignore-vcs"
+    export FZF_DEFAULT_COMMAND="${FD_DEFAULT} ."
+    export FZF_CTRL_T_COMMAND="${FD_DEFAULT} . ${HOME}"
+    export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
+    export FZF_ALT_C_COMMAND="(echo ${HOME}/; ${FD_DEFAULT} --type d . ${HOME})"
+    export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
+    _fzf_compgen_path() {
+        fd --type file --hidden --no-ignore-vcs . "$1" 2>/dev/null
     }
-
-    if command -v fd 1>/dev/null 2>&1; then
-        export FD_DEFAULT="fd --hidden --no-ignore-vcs"
-        export FZF_DEFAULT_COMMAND="${FD_DEFAULT} ."
-        export FZF_CTRL_T_COMMAND="${FD_DEFAULT} . ${HOME}"
-        export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
-        export FZF_ALT_C_COMMAND="(echo ${HOME}/; ${FD_DEFAULT} --type d . ${HOME})"
-        export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
-        _fzf_compgen_path() {
-            fd --type file --hidden --no-ignore-vcs "$1" 2>/dev/null
-        }
-        _fzf_compgen_dir() {
-            fd --type directory --hidden --no-ignore-vcs "$1"
-        }
-    else
-        # Fd not in path, falling back to regular GNU (or BSD) find for command-line
-        # completion with fzf
-        echo "[ .zshrc:${LINENO} ]: Warning: 'fd' not in \${PATH}"
-    fi
+    _fzf_compgen_dir() {
+        fd --type directory --hidden --no-ignore-vcs . "$1"
+    }
 else
-    # Fuzzy finder 'fzf' unavailable
-    echo "[ .zshrc:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
+    # Fd not in path, falling back to regular GNU (or BSD) find for command-line
+    # completion with fzf
+    echo "[ .zshrc:${LINENO} ]: Warning: 'fd' not in \${PATH}"
 fi
+
+# Source FZF settings
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"                              \
+    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.fzf.zsh not found"
+
+[ -f "${HOME}/.dotfiles/.fzf-git.sh" ] && source "${HOME}/.dotfiles/.fzf-git.sh"    \
+    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.dotfiles/.fzf-git.sh"
 
 # ------------------------------------------------------------------------------------ #
 # --                              Prompt settings                                   -- #
@@ -171,10 +166,8 @@ setopt hist_verify              # Upon hitting enter, reload line into edit buf
 # --                               Key bindings                                     -- #
 # ------------------------------------------------------------------------------------ #
 
-# History search with <CTRL-R> and <CTRL-F>
+# Detele a single character with DEL
 bindkey "^?" backward-delete-char
-bindkey '^R' history-incremental-search-backward
-bindkey '^F' history-incremental-search-forward
 
 # History back/forward search with up/down arrow
 bindkey '^[[A' history-beginning-search-backward # '^[[A' = Up-arrow

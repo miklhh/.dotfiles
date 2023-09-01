@@ -80,80 +80,29 @@ alias cdd='_tmux_cd_relative down-lf'
 # --                            Change dir FZF style                                -- #
 # ------------------------------------------------------------------------------------ #
 
-# * Command 'c'  : Use FZF to change directory forward, from the current directory
 # * Command 'C'  : Use FZF to change directory backward, from the current directory
-# * Command 'ch' : Use FZF to change directory forward, from $USER's home directory
-
-if command -v fzf 1>/dev/null 2>&1; then
-    function _fzf_cd_preview {
-        local extra_cmd="${1}"
-        fzf                 \
-            --border        \
-            --height=50%    \
-            --info=inline   \
-            --reverse       \
-            ${extra_cmd}    \
-            --preview 'tree --dirsfirst -L 1 -C {} | head -200'
-    }
-    function _generate_backward_dir_list() {
-        local PARAM="$1"
-        local REM="$(pwd)"
-        local PART=""
-        if [ "$PARAM" = "--exclude" ]; then
-            while [ ! -z "$REM" ]; do
-                echo "$PART"
-                IFS="/" read CUR REM <<< "$REM"
-                local PART="${PART}${CUR}/"
-            done
-        else
-            while [ ! -z "$REM" ]; do
-                IFS="/" read CUR REM <<< "$REM"
-                local PART="${PART}${CUR}/"
-                echo "$PART"
-            done
-        fi
-    }
-    function _fd_dir_search() {
-        (echo .; fd --hidden --no-ignore-vcs --type directory . "${1}")
-    }
-    function _bfs_dir_search() {
-        bfs "$1" -type d -exclude -name .git 2>/dev/null | sed "s|\./||g"
-    }
-    function _rfs_dir_search() {
-        rfs -p "$1" -i .git 2>/dev/null | sed "s|\./||g"
-    }
-    function _find_dir_search() {
-        find . -type d 2>/dev/null | sed "s|\./||g"
-    }
-    if command -v fd 1>/dev/null 2>&1; then
-        # Priority 1: Search using FD
-        alias _dir_search=_fd_dir_search
-    elif command -v bfs 1>/dev/null 2>&1; then
-        # Priority 2: Search using BFS
-        alias _dir_search=_bfs_dir_search
-    elif command -v rfs 1>/dev/null 2>&1; then
-        # Priority 3: Search using RFS (depricated)
-        alias _dir_search=_rfs_dir_search
+function _generate_backward_dir_list() {
+    local PARAM="$1"
+    local REM="$(pwd)"
+    local PART=""
+    if [ "$PARAM" = "--exclude" ]; then
+        while [ ! -z "$REM" ]; do
+            echo "$PART"
+            IFS="/" read CUR REM <<< "$REM"
+            local PART="${PART}${CUR}/"
+        done
     else
-        # Priority 4: Search using regular find
-        alias _dir_search=_find_dir_search
+        while [ ! -z "$REM" ]; do
+            IFS="/" read CUR REM <<< "$REM"
+            local PART="${PART}${CUR}/"
+            echo "$PART"
+        done
     fi
-    function _fzf_cd_backward {
-        cd "$(_generate_backward_dir_list --exclude | _fzf_cd_preview --tac || echo .)"
-    }
-    function _fzf_cd_forward {
-        local start_dir="${1}"
-        cd "$(_dir_search ${start_dir} | _fzf_cd_preview || echo .)"
-    }
-    alias  C=_fzf_cd_backward
-    alias  c='_fzf_cd_forward .'
-    alias ch='_fzf_cd_forward ~'
-else
-    echo "[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \${PATH}"
-    alias  c="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
-    alias  C="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
-    alias ch="echo \"[ .zsh-alias:${LINENO} ]: Warning: 'fzf' not in \\\${PATH}\""
-fi
+}
+function _fzf_cd_backward {
+    cd $(_generate_backward_dir_list --exclude | fzf --tac || echo .)
+}
+alias  C=_fzf_cd_backward
 
 
 # ------------------------------------------------------------------------------------ #
