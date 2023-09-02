@@ -48,7 +48,7 @@ bindkey -v
 # --                                  FZF settings                                  -- #
 # ------------------------------------------------------------------------------------ #
 
-FZF_COMPLETION_TRIGGER=''
+FZF_COMPLETION_TRIGGER='**'
 FZF_DEFAULT_OPTS='
     --border --info=inline
     --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
