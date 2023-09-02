@@ -48,8 +48,8 @@ bindkey -v
 # --                                  FZF settings                                  -- #
 # ------------------------------------------------------------------------------------ #
 
-FZF_COMPLETION_TRIGGER='**'
-FZF_DEFAULT_OPTS='
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_DEFAULT_OPTS='
     --border --info=inline
     --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
     --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
