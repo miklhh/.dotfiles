@@ -1,14 +1,15 @@
 """
-""" True-hearted .vimrc (and init.nvim) for quick and easy navigation and file editing. All of the cross-configuration
-""" files loaded by this configuration are available under 'https://github.com/miklhh/.dotfiles'.
-""" Happy go lucky as this configuration is licensed under the permissive MIT License. Have at it!
+""" True-hearted .vimrc (and init.nvim) for quick and easy navigation and file editing.
+""" All of the cross-configuration files loaded by this configuration are available
+""" under 'https://github.com/miklhh/.dotfiles'. Happy go lucky as this configuration
+""" is licensed under the permissive MIT License. Have at it!
 """
 """ Author: Mikael Henriksson (2015 - 2023)
 """
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                                 Initialization                                                 --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ "
+" --                                Initialization                                  -- "
+" ------------------------------------------------------------------------------------ "
 
 " Vim != Vi
 set nocompatible
@@ -33,9 +34,9 @@ if has('nvim')
     lua vim.g.loaded_netrwPlugin = 1
 endif
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                                    Vim Plug                                                    --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                                    Vim Plug                                    -- #
+" ------------------------------------------------------------------------------------ #
 
 call plug#begin('~/.vim/plugged')
 
@@ -116,8 +117,8 @@ call plug#begin('~/.vim/plugged')
         " NeoVim tree file manager
         Plug 'nvim-tree/nvim-tree.lua'
 
-        " LSP diagnostics highlight group for colorschemes that don't yet support them. Prerequisite of 
-        " folke/trouble.nvim.
+        " LSP diagnostics highlight group for colorschemes that don't yet support them.
+        " Prerequisite of folke/trouble.nvim.
         Plug 'folke/lsp-colors.nvim'
 
         " NeoVim LSP diagnostics trouble finder
@@ -179,11 +180,12 @@ call plug#begin('~/.vim/plugged')
 " Initialize plugin system
 call plug#end()
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                                  Appearance                                                    --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                                 Appearance                                     -- #
+" ------------------------------------------------------------------------------------ #
 
-" Gruvbox color scheme settings - more info: https://github.com/morhetz/gruvbox/wiki/Configuration
+" Gruvbox color scheme settings - more info:
+" https://github.com/morhetz/gruvbox/wiki/Configuration
 let g:gruvbox_bold='1'
 let g:gruvbox_italic='1'
 let g:gruvbox_contrast_dark='hard'
@@ -200,9 +202,9 @@ nmap <C-L><C-L> :set invrelativenumber<CR>
 
 set colorcolumn=88
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                                   Keybindings                                                  --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                                  Keybindings                                   -- #
+" ------------------------------------------------------------------------------------ #
 
 " Map leader key to spacebar
 let mapleader = " "
@@ -299,9 +301,9 @@ endif
 " Do not use default jupyter-vim keybindings
 let g:jupyter_mapkeys = 0
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                                     Misc                                                       --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                                      Misc                                      -- #
+" ------------------------------------------------------------------------------------ #
 
 set mouse=a                     " Enable all mouse functionality
 set laststatus=2                " Always show the status line in the last window
@@ -319,13 +321,13 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" Automatically re-read files that changes on disk, but only if they are marked as non-modified in their associated
-" buffer
+" Automatically re-read files that changes on disk, but only if they are marked as
+" non-modified in their associated buffer
 set autoread
 au CursorHold * checktime
 
-" Cycle numbered registers when yanking. This allow the numbered registers to act like a ring buffer when performing
-" the yank operation (just like delete already does!)
+" Cycle numbered registers when yanking. This allow the numbered registers to act like
+" a ring buffer when performing the yank operation (just like delete already does!)
 function! SaveLastReg()
     if v:event['regname']==""
         if v:event['operator']=='y'
@@ -348,7 +350,8 @@ endif
 " Alias bd -> :Bwipeout (vim-bbye buffer delete)
 cnoreabbrev bd Bwipeout
 
-" FZF create new file quick-action (thank you Frans Skarman for this quickie) bound to <leader>E
+" FZF create new file quick-action (thank you Frans Skarman for this quickie) bound to
+" <leader>E
 function! FzfEditPrompt(file)
     let cmd = ':e ' . a:file . '/'
     call feedkeys(cmd)
@@ -359,9 +362,9 @@ map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEdit
 " Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                             LSP settings for NeoVim                                            --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                             LSP settings for NeoVim                            -- #
+" ------------------------------------------------------------------------------------ #
 
 if has('nvim')
 
@@ -413,9 +416,9 @@ let g:fzf_layout = { 'down': '~40%' }
 
 endif "if has('nvim')
 
-" --------------------------------------------------------------------------------------------------------------------
-" --                                       Other external (Neo)Vim configurations                                   --
-" --------------------------------------------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------------ #
+" --                    Other external (Neo)Vim configurations                      -- #
+" ------------------------------------------------------------------------------------ #
 
 " Vim-Sneak settings
 source ~/.config/vim/config/sneak.vim
