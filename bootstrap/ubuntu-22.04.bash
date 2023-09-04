@@ -28,14 +28,14 @@ apt-get -y install  \
     python3         \
     python3-venv
 PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
-sudo --user="${SUDO_USER}" -- bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
+sudo --user="${SUDO_USER}" -- \
+    bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
 
 # Rust & Co (un-attended rustup install)
 apt-get -y install  \
     bat             \
     ripgrep
 RUST_CARGO_PACKAGES="git-delta fd-find"
-#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sudo --user="${SUDO_USER}" bash -s -- -y
 sudo --user="${SUDO_USER}"                              \
     bash "${BOOTSTRAP_PATH}/rustup-init-1.26.0.sh"      \
         --default-host="x86_64-unknown-linux-gnu"       \
@@ -43,7 +43,8 @@ sudo --user="${SUDO_USER}"                              \
         --profile="default"                             \
         --no-modify-path                                \
         -y
-sudo --user="${SUDO_USER}" -- bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
+sudo --user="${SUDO_USER}" -- \
+    bash -c ". ~/.cargo/env && cargo install ${RUST_CARGO_PACKAGES}"
 # Triple: x86_64-unknown-linux-gnu
 # Toolchain: stable
 # Profile: default
@@ -55,10 +56,9 @@ if [ ! -f "${SUDO_USER_HOME}/.local/bin/bat" ]; then
     sudo --user="${SUDO_USER}" ln -s /usr/bin/batcat "${SUDO_USER_HOME}/.local/bin/bat"
 fi
 
-# (Z)Shell and company
+# (Z)Shell and company (fzf is installed from git)
 apt-get -y install  \
     bfs             \
-    fzf             \
     tmux            \
     zsh
 
