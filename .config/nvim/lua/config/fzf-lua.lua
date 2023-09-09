@@ -34,7 +34,7 @@ vim.keymap.set(
     "<cmd>lua require('fzf-lua').files({ cwd = '~/.dotfiles/' })<CR>"
 )
 vim.keymap.set(
-    "n", "<leader>.f",
+    "n", "<leader>,e",
     "<cmd>lua require('fzf-lua').files({ cwd = '~' })<CR>"
 )
 vim.keymap.set(

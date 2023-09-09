@@ -43,7 +43,7 @@ call plug#begin('~/.vim/plugged')
     " Sneak motions
     Plug 'justinmk/vim-sneak'
 
-    " Wipeout like well behaved citizens (:Bwipeout,:Bdelete)
+    " Wipeout like well behaved citizens (':Bwipeout', ':Bdelete')
     Plug 'moll/vim-bbye'
 
     " UndoTree for easy undo history access
@@ -67,7 +67,10 @@ call plug#begin('~/.vim/plugged')
     " TMux + Vim seamless pane/split navigation
     Plug 'christoomey/vim-tmux-navigator'
 
-    " Gruvbox clolorscheme
+    " Proper syntax highlighting when editing .tmux.conf
+    Plug 'tmux-plugins/vim-tmux'
+
+    " Colorscheme
     Plug 'morhetz/gruvbox'
     Plug 'junegunn/seoul256.vim'
 
@@ -96,6 +99,9 @@ call plug#begin('~/.vim/plugged')
 
         " Lua command line
         Plug 'nvim-lualine/lualine.nvim'
+
+        " Fuzzy-find more stuff with fzf-lua
+        Plug 'ibhagwan/fzf-lua', { 'branch': 'main' }
 
         " Oil file manager
         Plug 'stevearc/oil.nvim'
@@ -154,9 +160,6 @@ call plug#begin('~/.vim/plugged')
         " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
         Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
-        " Fuzzy-find more stuff
-        Plug 'ibhagwan/fzf-lua', { 'branch': 'main' }
-
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
 
@@ -164,9 +167,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'lambdalisue/suda.vim'
 
     endif " -- End of NeoVim specific plugins
-
-    " Proper syntax highlighting when editing .tmux.conf
-    Plug 'tmux-plugins/vim-tmux'
 
     " Jupyter Vim support
     Plug 'jupyter-vim/jupyter-vim'
@@ -239,7 +239,7 @@ xnoremap C "_C
 nnoremap <leader>d ""d
 xnoremap <leader>d ""d
 
-" Jump 15 characters with K and J
+" Jump 20 characters with K and J
 nnoremap K 20k
 vnoremap K 20k
 nnoremap J 20j
@@ -295,7 +295,7 @@ cnoremap <C-k> <C-t>
 
 " NeoVim tree toggle
 if has('nvim')
-    nnoremap <leader>, :NvimTreeFindFileToggle<CR>
+    nnoremap <F2> :NvimTreeFindFileToggle<CR>
 endif
 
 " Do not use default jupyter-vim keybindings
