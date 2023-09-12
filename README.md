@@ -16,6 +16,5 @@ executing.
 ```bash
 git clone git@github.com:miklhh/.dotfiles.git
 cd .dotfiles
-git submodule update --init --recursive
 ./install
 ```
