@@ -80,7 +80,8 @@ alias cdd='_tmux_cd_relative down-lf'
 # --                            Change dir FZF style                                -- #
 # ------------------------------------------------------------------------------------ #
 
-# * Command 'C'  : Use FZF to change directory backward, from the current directory
+# * Command 'C' : Use FZF to change directory backwards, from the current directory
+# * command 'c' : Use FZF to change directory forwards, from the current directory
 function _generate_backward_dir_list() {
     local PARAM="$1"
     local REM="$(pwd)"
@@ -99,10 +100,18 @@ function _generate_backward_dir_list() {
         done
     fi
 }
-function _fzf_cd_backward {
-    cd $(_generate_backward_dir_list --exclude | fzf --tac || echo .)
+
+function _fzf_cd_preview {
+    fzf --height=40% --reverse --border --info=inline ${1}
 }
-alias  C=_fzf_cd_backward
+function _fzf_cd_backward {
+    cd $(_generate_backward_dir_list --exclude | _fzf_cd_preview --tac || echo .)
+}
+function _fzf_cd_forward {
+    cd $(fd --hidden --no-ignore-vcs --type d . | _fzf_cd_preview || echo .)
+}
+alias C=_fzf_cd_backward
+alias c=_fzf_cd_forward
 
 
 # ------------------------------------------------------------------------------------ #
