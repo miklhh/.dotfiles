@@ -130,9 +130,6 @@ call plug#begin('~/.vim/plugged')
         " NeoVim LSP diagnostics trouble finder
         Plug 'folke/trouble.nvim'
 
-        " Telescope
-        Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
-
         " Autocompletion engine
         Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
@@ -150,7 +147,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/vim-vsnip-integ'
 
         " LSP fidget spinner
-        Plug 'j-hui/fidget.nvim', { 'branch': 'legacy' }
+        Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
