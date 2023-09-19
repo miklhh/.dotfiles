@@ -9,6 +9,9 @@ require("fzf-lua").setup({
   files = {
     fd_opts = "--color=never --type f --hidden --no-ignore-vcs --follow",
   },
+  grep = {
+    rg_opts = "--hidden --color=always --smart-case --no-ignore-vcs"
+  },
   winopts = {
       height = 0.80,
       width = 0.85,
