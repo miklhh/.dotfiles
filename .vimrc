@@ -390,27 +390,6 @@ lua << EOF
     })
 EOF
 
-" LSP Context helper menu (list available LSP options)
-let g:lsp_context_menu_commands = [
-            \    'vim.lsp.buf.document_symbol()',
-            \    'vim.lsp.buf.declaration()',
-            \    'vim.lsp.buf.definition()',
-            \    'vim.lsp.buf.implementation()',
-            \    'vim.lsp.buf.type_definition()',
-            \    'vim.lsp.buf.hover()',
-            \    'vim.lsp.buf.references()',
-            \    'vim.lsp.buf.formatting()',
-            \    'vim.lsp.buf.outgoing_calls()',
-            \    'vim.lsp.buf.incoming_calls()',
-            \ ]
-function Fzf_lsp_context_menu()
-    call fzf#run({'sink': 'lua', 'source': g:lsp_context_menu_commands, 'down': 10})
-endf
-nmap <Leader>lc :call g:Fzf_lsp_context_menu()<cr>
-
-" FZF window layout
-let g:fzf_layout = { 'down': '~40%' }
-
 endif "if has('nvim')
 
 " ------------------------------------------------------------------------------------ #
