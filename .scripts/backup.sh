@@ -2,7 +2,7 @@
 
 # Setting this, so the repo does not need to be given on the commandline:
 # export BORG_REPO=ssh://frask53@liu:22/~/backup/office
-export BORG_REPO=ssh://mikhe33@only-da/home/mikhe33/backup/maokai
+export BORG_REPO=ssh://mikhe33@only-da-bash/home/mikhe33/backup/maokai
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }

@@ -16,7 +16,7 @@ set nocompatible
 
 " Enable plugin loading, auto indentation and syntax highlighting
 filetype plugin indent on
-syntax on
+syntax enable
 
 " Enable 24-bit true color support
 if exists('+termguicolors')
@@ -77,7 +77,10 @@ call plug#begin('~/.vim/plugged')
     " Get (Neo)Vim startup time with :StartupTime
     Plug 'dstein64/vim-startuptime'
 
-    " LaTeX synctex synchronization through DBus
+    " LaTeX goodies
+    Plug 'lervag/vimtex'
+
+    " LaTeX synctex synchronization through DBus (for use with Evince)
     Plug 'peterbjorgensen/sved'
 
     " Vim surround

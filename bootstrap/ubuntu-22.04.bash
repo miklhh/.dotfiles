@@ -4,16 +4,26 @@
 # Author: Mikael Henriksson (2022)
 #
 
+# Stop on script failure
 set -e
+
 SUDO_USER_HOME="$(eval echo "~${SUDO_USER}")"
 BOOTSTRAP_PATH="$(dirname "$(readlink -f "$0")")"
 
-# Add Ubuntu external repositories (to only run apt update once)
+# Add NeoVim PPA
 add-apt-repository -y ppa:neovim-ppa/unstable
-apt update
+
+# Add Syncthing PPA with PGP key
+"${BOOTSTRAP_PATH}"/ubuntu-syncthing-ppa.bash
+
+# Perform apt repository refresh
+apt-get update
 
 # NeoVim unstable
 apt-get -y install neovim vim xclip wl-clipboard
+
+# Syncthing
+apt-get -y install syncthing
 
 # Build essentials
 apt-get -y install  \
@@ -74,4 +84,3 @@ apt-get -y install              \
     xdg-desktop-portal          \
     xdg-desktop-portal-gnome    \
     xdg-desktop-portal-gtk
-
