@@ -112,9 +112,6 @@ call plug#begin('~/.vim/plugged')
         " Quickstart configs for Nvim LSP
         Plug 'neovim/nvim-lspconfig'
 
-        " Indentation blankline
-        Plug 'lukas-reineke/indent-blankline.nvim'
-
         " LSP server package manager Mason
         Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
         Plug 'williamboman/mason-lspconfig.nvim'
@@ -165,6 +162,9 @@ call plug#begin('~/.vim/plugged')
 
         " NeoVim sudo read/write (:SudaRead, :SudaWrite)
         Plug 'lambdalisue/suda.vim'
+
+        " Profiler
+        Plug 'stevearc/profile.nvim'
 
     endif " -- End of NeoVim specific plugins
 
@@ -414,15 +414,15 @@ source ~/.config/vim/config/additional-color.vim
 if has('nvim')
 
 lua <<EOF
+    require('colorizer').setup()
+    require('config/fzf-lua')
+    require('config/lsp_signature')
+    require('config/lualine')
     require('config/nvim-tree')
+    require('config/oil')
+    require('config/profile')
     require('config/treesitter')
     require('config/which-key')
-    require('config/lualine')
-    require('config/indent-blankline')
-    require('config/oil')
-    require('config/lsp_signature')
-    require('config/fzf-lua')
-    require('colorizer').setup()
 EOF
 
 let g:pydocstring_formatter = 'numpy'
