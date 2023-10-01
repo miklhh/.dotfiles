@@ -118,7 +118,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'mfussenegger/nvim-lint'
 
         " LSP signature help
-        Plug 'ray-x/lsp_signature.nvim'
+        "Plug 'ray-x/lsp_signature.nvim'
 
         " NeoVim tree file manager
         Plug 'nvim-tree/nvim-tree.lua'
@@ -416,7 +416,7 @@ if has('nvim')
 lua <<EOF
     require('colorizer').setup()
     require('config/fzf-lua')
-    require('config/lsp_signature')
+    --require('config/lsp_signature')
     require('config/lualine')
     require('config/nvim-tree')
     require('config/oil')
