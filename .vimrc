@@ -163,7 +163,7 @@ call plug#begin('~/.vim/plugged')
         " NeoVim sudo read/write (:SudaRead, :SudaWrite)
         Plug 'lambdalisue/suda.vim'
 
-        " Profiler
+        " NeoVim runtime profiler
         Plug 'stevearc/profile.nvim'
 
     endif " -- End of NeoVim specific plugins

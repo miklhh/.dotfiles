@@ -2,24 +2,18 @@ require'nvim-treesitter.configs'.setup {
 
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
-    "help",
-    "query",
-    "c",
-    "lua",
-    "vim",
-    "python",
-    "rust",
-    "javascript",
-    "cpp",
     "bash",
-    "bibtex",
+    "c",
     "cmake",
+    "cpp",
     "dockerfile",
     "dot",
     "go",
-    "latex",
+    "help",
+    "javascript",
     "julia",
     "llvm",
+    "lua",
     "make",
     "markdown",
     "markdown_inline",
@@ -27,11 +21,15 @@ require'nvim-treesitter.configs'.setup {
     "ninja",
     "passwd",
     "perl",
+    "python",
+    "query",
     "regex",
     "ruby",
+    "rust",
     "toml",
-    "yaml",
     "typescript",
+    "vim",
+    "yaml",
   },
 
   -- Install languages synchronously (only applied to `ensure_installed`)
@@ -52,7 +50,6 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
-
   },
 }
 
