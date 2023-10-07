@@ -100,9 +100,6 @@ call plug#begin('~/.vim/plugged')
         " NeoVim devicons
         Plug 'nvim-tree/nvim-web-devicons'
 
-        " Lua command line
-        Plug 'nvim-lualine/lualine.nvim'
-
         " Fuzzy-find more stuff with fzf-lua
         Plug 'ibhagwan/fzf-lua', { 'branch': 'main' }
 
@@ -209,18 +206,6 @@ set colorcolumn=88
 " Map leader key to spacebar
 let mapleader = " "
 
-" Fzf file to open in new buffer by filename
-map <Leader>e :FZF<CR>
-
-" Fzf buffer swapping by filename
-map <Leader>w :Buffers<CR>
-
-" Fzf lines in current buffer
-map <Leader>f :FZFBLines<CR>
-
-" Fzf lines in all open buffers
-map <Leader>F :Lines<CR>
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -285,9 +270,6 @@ nnoremap <M-F> :MaximizerToggle<CR>
 
 " Redraw
 nnoremap <leader>r :redraw!<CR>
-
-" FZF files in '~/.dotfiles'
-nnoremap <leader>.e :FZF ~/.dotfiles<CR>
 
 " Scroll with <C-j/k> when searching
 cnoremap <C-j> <C-g>
@@ -416,7 +398,6 @@ if has('nvim')
 lua <<EOF
     require('colorizer').setup()
     require('config/fzf-lua')
-    require('config/lualine')
     require('config/nvim-tree')
     require('config/oil')
     require('config/profile')
