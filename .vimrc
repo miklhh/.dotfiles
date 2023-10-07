@@ -416,7 +416,6 @@ if has('nvim')
 lua <<EOF
     require('colorizer').setup()
     require('config/fzf-lua')
-    --require('config/lsp_signature')
     require('config/lualine')
     require('config/nvim-tree')
     require('config/oil')
