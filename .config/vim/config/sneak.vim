@@ -22,8 +22,8 @@ omap <leader>s <Plug>Sneak_S
 " labels should:
 " 1. Be fast (think home row) and easy to use for the keyboard and keyboard
 "    layout at hand.
-" 2. Not interfear with actions that are common to use *after* a sneak action
+" 2. Not interfear with actians that are common to use *after* a sneak action
 "    has been performed. This since labeling mode fallthrough can save one
 "    extra keystroke
-let g:sneak#target_labels = "fs,.mönMLÖNFSqtuRGHQZT"
+let g:sneak#target_labels = "fsmörwinu"
 
