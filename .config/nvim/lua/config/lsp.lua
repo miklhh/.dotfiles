@@ -7,7 +7,6 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     -- Mason + LspConfig bridge settings go here
     ensure_installed = {
-        "pyright",
         "clangd",
     }
 })

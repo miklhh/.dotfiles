@@ -6,6 +6,7 @@
 local actions = require("fzf-lua").actions
 
 require("fzf-lua").setup({
+
   fzf_opts = {
     ['--layout'] = 'default',
   },
@@ -48,6 +49,7 @@ require("fzf-lua").setup({
       ["alt-q"]     = actions.file_sel_to_qf,
     },
   },
+
 })
 
 
