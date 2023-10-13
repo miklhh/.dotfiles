@@ -44,57 +44,6 @@ function prepend_path {
 # set before the FZF settings are loaded, as FZF depends on it being set properly.
 bindkey -v
 
-# ------------------------------------------------------------------------------------ #
-# --                                  FZF settings                                  -- #
-# ------------------------------------------------------------------------------------ #
-
-export FZF_COMPLETION_TRIGGER='**'
-export FZF_DEFAULT_OPTS='
-    --border --info=inline
-    --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
-    --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
-    --color marker:#fe8019,header:#665c54
-'
-
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments to fzf.
-_fzf_comprun() {
-  local command=$1
-  shift
-  case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'    "$@" ;;
-    export|unset) fzf --preview "eval 'echo \$'{}"          "$@" ;;
-    ssh)          fzf --preview 'dig {}'                    "$@" ;;
-    *)            fzf                                       "$@" ;;
-  esac
-}
-
-if command -v fd 1>/dev/null 2>&1; then
-    export FD_DEFAULT="fd --hidden --no-ignore-vcs"
-    export FZF_DEFAULT_COMMAND="${FD_DEFAULT} ."
-    export FZF_CTRL_T_COMMAND="${FD_DEFAULT} . ${HOME}"
-    export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
-    export FZF_ALT_C_COMMAND="(echo ${HOME}/; ${FD_DEFAULT} --type d . ${HOME})"
-    export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
-    _fzf_compgen_path() {
-        fd --type file --hidden --no-ignore-vcs . "$1" 2>/dev/null
-    }
-    _fzf_compgen_dir() {
-        fd --type directory --hidden --no-ignore-vcs . "$1"
-    }
-else
-    # Fd not in path, falling back to regular GNU (or BSD) find for command-line
-    # completion with fzf
-    echo "[ .zshrc:${LINENO} ]: Warning: 'fd' not in \${PATH}"
-fi
-
-# Source FZF settings
-[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"                              \
-    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.fzf.zsh not found"
-
-[ -f "${HOME}/.dotfiles/.fzf-git.sh" ] && source "${HOME}/.dotfiles/.fzf-git.sh"    \
-    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.dotfiles/.fzf-git.sh"
 
 # ------------------------------------------------------------------------------------ #
 # --                              Prompt settings                                   -- #
@@ -148,6 +97,60 @@ else
     set_prompt_plain
 fi
 
+
+# ------------------------------------------------------------------------------------ #
+# --                                  FZF settings                                  -- #
+# ------------------------------------------------------------------------------------ #
+
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_DEFAULT_OPTS='
+    --border --info=inline
+    --color fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f
+    --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598
+    --color marker:#fe8019,header:#665c54
+'
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'    "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"          "$@" ;;
+    ssh)          fzf --preview 'dig {}'                    "$@" ;;
+    *)            fzf                                       "$@" ;;
+  esac
+}
+
+if command -v fd 1>/dev/null 2>&1; then
+    export FD_DEFAULT="fd --hidden --no-ignore-vcs"
+    export FZF_DEFAULT_COMMAND="${FD_DEFAULT} ."
+    export FZF_CTRL_T_COMMAND="${FD_DEFAULT} . ${HOME}"
+    export FZF_CTRL_T_OPTS="-d '${HOME}/' --with-nth 2"
+    export FZF_ALT_C_COMMAND="(echo ${HOME}/; ${FD_DEFAULT} --type d . ${HOME})"
+    export FZF_ALT_C_OPTS="-d '${HOME}/' --with-nth 2"
+    _fzf_compgen_path() {
+        fd --type file --hidden --no-ignore-vcs . "$1" 2>/dev/null
+    }
+    _fzf_compgen_dir() {
+        fd --type directory --hidden --no-ignore-vcs . "$1"
+    }
+else
+    # Fd not in path, falling back to regular GNU (or BSD) find for command-line
+    # completion with fzf
+    echo "[ .zshrc:${LINENO} ]: Warning: 'fd' not in \${PATH}"
+fi
+
+# Source FZF settings
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"                              \
+    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.fzf.zsh not found"
+
+[ -f "${HOME}/.dotfiles/.fzf-git.sh" ] && source "${HOME}/.dotfiles/.fzf-git.sh"    \
+    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.dotfiles/.fzf-git.sh"
+
+
 # ------------------------------------------------------------------------------------ #
 # --                               History settings                                 -- #
 # ------------------------------------------------------------------------------------ #
@@ -181,6 +184,7 @@ bindkey -a k history-beginning-search-backward
 bindkey '^[[7~' beginning-of-line
 bindkey '^[[8~' end-of-line
 bindkey '^[[3~' delete-char
+
 
 # ------------------------------------------------------------------------------------ #
 # --                                    Misc                                        -- #
