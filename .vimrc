@@ -11,6 +11,11 @@
 " --                                Initialization                                  -- "
 " ------------------------------------------------------------------------------------ "
 
+" Enable Lua loader byte-compilation cache
+if has('nvim')
+    lua vim.loader.enable()
+endif
+
 " Vim != Vi
 set nocompatible
 
