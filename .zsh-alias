@@ -17,27 +17,30 @@ local _GNU_LS_FLAGS=(
     '--group-directories-first'
     '--human-readable'
 )
-function _ls_gnu_linux {
+function ls_gnu_linux {
     ls ${_GNU_LS_FLAGS[@]} "${@}"
 }
-function _ls_gnu_darwin {
+function ls_gnu_darwin {
     gls ${_GNU_LS_FLAGS[@]} "${@}"
 }
-function _ls_bsd {
+function ls_bsd {
     ls -G "${@}"
 }
 
 if [ $(uname -s) = "Darwin" ]
 then
     if command -v gls 1>/dev/null 2>&1; then
-        alias ls=_ls_gnu_darwin
+        alias ls=ls_gnu_darwin
+        compdef ls_gnu_darwin=ls
     else
         echo "[ .zsh-alias:${LINENO} ]:" \
              "Warning: 'GNU coreutils' not installed, using 'BSD ls'"
-        alias ls=_ls_bsd
+        alias ls=ls_bsd
+        compdef ls_bsd=ls
     fi
 else
-    alias ls=_ls_gnu_linux
+    alias ls=ls_gnu_linux
+    compdef ls_gnu_linux=ls
 fi
 
 alias l='ls -l'
@@ -49,7 +52,7 @@ alias ll='ls -l -a'
 
 if command -v "nvim" 1>/dev/null; then
     if command -v "tmux" 1>/dev/null 2>&1; then
-        function _nvim_in_tmux() {
+        function nvim_in_tmux() {
             if [ -z "${TMUX}" ]; then
                 tmux new-session -d
                 tmux send-keys "nvim $@" Enter
@@ -58,7 +61,8 @@ if command -v "nvim" 1>/dev/null; then
                 nvim "$@"
             fi
         }
-        alias vim=_nvim_in_tmux
+        alias vim=nvim_in_tmux
+        compdef nvim_in_tmux=nvim
     else
         alias vim=nvim
     fi
@@ -66,14 +70,14 @@ else
     echo "[ .zsh-alias:${LINENO} ]: Warning: 'nvim' not in \${PATH}"
 fi
 
-function _tmux_cd_relative {
+function tmux_cd_relative {
     local target=${1}
     cd $(tmux display-message -p -F "#{pane_current_path}" -t "{$target}"  || echo ".")
 }
-alias cdl='_tmux_cd_relative left-of'
-alias cdr='_tmux_cd_relative right-of'
-alias cdu='_tmux_cd_relative up-of'
-alias cdd='_tmux_cd_relative down-lf'
+alias cdl='tmux_cd_relative left-of'
+alias cdr='tmux_cd_relative right-of'
+alias cdu='tmux_cd_relative up-of'
+alias cdd='tmux_cd_relative down-lf'
 
 
 # ------------------------------------------------------------------------------------ #
@@ -82,7 +86,7 @@ alias cdd='_tmux_cd_relative down-lf'
 
 # * Command 'C' : Use FZF to change directory backwards, from the current directory
 # * command 'c' : Use FZF to change directory forwards, from the current directory
-function _generate_backward_dir_list() {
+function generate_backward_dir_list() {
     local PARAM="$1"
     local REM="$(pwd)"
     local PART=""
@@ -101,17 +105,17 @@ function _generate_backward_dir_list() {
     fi
 }
 
-function _fzf_cd_preview {
+function fzf_cd_preview {
     fzf --height=40% --reverse --border --info=inline ${1}
 }
-function _fzf_cd_backward {
-    cd $(_generate_backward_dir_list --exclude | _fzf_cd_preview --tac || echo .)
+function fzf_cd_backward {
+    cd $(generate_backward_dir_list --exclude | fzf_cd_preview --tac || echo .)
 }
-function _fzf_cd_forward {
-    cd $(fd --hidden --no-ignore-vcs --type d . | _fzf_cd_preview || echo .)
+function fzf_cd_forward {
+    cd $(fd --hidden --no-ignore-vcs --type d . | fzf_cd_preview || echo .)
 }
-alias C=_fzf_cd_backward
-alias c=_fzf_cd_forward
+alias C=fzf_cd_backward
+alias c=fzf_cd_forward
 
 
 # ------------------------------------------------------------------------------------ #
@@ -184,7 +188,7 @@ else
 fi
 
 # Create a new directory and change to it
-function _mkdir_and_cd() {
+function mkdir_and_cd() {
     local MKPATH="${1}"
     mkdir -p "${MKPATH}"
     cd "${MKPATH}"
@@ -195,5 +199,5 @@ alias ca=cargo
 alias t=tmux
 alias ta='tmux attach -t'
 alias g=git
-alias m=_mkdir_and_cd
+alias m=mkdir_and_cd
 

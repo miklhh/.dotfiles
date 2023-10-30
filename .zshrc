@@ -26,6 +26,11 @@ function prepend_path {
     esac
 }
 
+# Enable zsh autocompletion
+autoload -U compinit
+autoload compdef
+compinit -d "${HOME}/.config/zsh/.zcompdump"
+
 # Add ${HOME}.local/bin to path if available
 [ -d "${HOME}/.local/bin" ] && prepend_path "${HOME}/.local/bin"
 
@@ -202,8 +207,4 @@ else
     echo "[ .zshrc:${LINENO} ]:" \
          "Warning: neither 'nvim' nor 'bat' in \${PATH} for man-page formating"
 fi
-
-# Enable zsh autocompletion
-autoload -U compinit
-compinit -d "${HOME}/.config/zsh/.zcompdump"
 
