@@ -25,5 +25,5 @@ omap <leader>s <Plug>Sneak_S
 " 2. Not interfear with actians that are common to use *after* a sneak action
 "    has been performed. This since labeling mode fallthrough can save one
 "    extra keystroke
-let g:sneak#target_labels = "fsmörwinu"
+let g:sneak#target_labels = "fsmörwnu"
 
