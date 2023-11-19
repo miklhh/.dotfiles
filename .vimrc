@@ -303,6 +303,14 @@ set cursorline                  " Highlight the row under the cursor
 set nowrap                      " Don't wrap very long lines to next row
 set ignorecase                  " Ignore casing when searching by default
 
+" Folding options
+set foldcolumn=1
+set foldlevel=0
+set foldnestmax=2
+set foldmethod=indent
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
+
 " Use white space for tabbing
 set tabstop=4
 set shiftwidth=4
