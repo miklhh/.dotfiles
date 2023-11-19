@@ -1,12 +1,13 @@
 [user]
     name = Mikael Henriksson
-    email = mike.zx@hotmail.com
+    email = mikael.henriksson@liu.se
 
 [alias]
     a = add
     s = status
     c = commit
     ps = push
+    psfwl = push --force-with-lease
     pl = pull
     co = checkout
     sw = switch
