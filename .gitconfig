@@ -23,8 +23,8 @@
     f = fetch
     bl = blame
 
-#[status]
-#    short = true
+[status]
+    short = true
 
 [pager]
     diff = delta
