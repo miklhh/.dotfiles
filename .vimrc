@@ -149,7 +149,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/vim-vsnip-integ'
 
         " LSP fidget spinner
-        Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
+        Plug 'j-hui/fidget.nvim'
 
         " TreeSitter syntax highlighting
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -210,6 +210,12 @@ set colorcolumn=88
 
 " Map leader key to spacebar
 let mapleader = " "
+
+" Map '-' key to '/' for fast searches
+nnoremap - /
+
+" Map '==' to resize all Vim-splits equally
+nnoremap == <C-w>=
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
