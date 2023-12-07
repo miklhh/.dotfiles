@@ -11,7 +11,7 @@ require("fzf-lua").setup({
     ['--layout'] = 'default',
   },
   files = {
-    fd_opts = 
+    fd_opts =
         "--color=never "    ..
         "--type f "         ..
         "--hidden "         ..
@@ -20,21 +20,21 @@ require("fzf-lua").setup({
         "",
   },
   grep = {
-    rg_opts = 
+    rg_opts =
         "--hidden "         ..
         "--color=always "   ..
         "--smart-case "     ..
         "--no-ignore-vcs "  ..
+        "--line-number"     ..
         "",
   },
   winopts = {
     height          = 0.80,
-    width           = 0.85,
+    width           = 0.90,
     preview = {
       layout        = 'horizontal',
       vertical      = 'up:60%',
       horizontal    = 'right:50%',
-      hidden = '',
     },
   },
   actions = {
