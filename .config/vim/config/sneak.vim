@@ -1,5 +1,4 @@
-" Use Sneak labeling mode, i.e., label sneak matches when performing a sneak
-" operation
+" Use Sneak labeling mode, i.e., label sneak matches when performing a sneak operation
 let g:sneak#label = 1
 
 " Only exit Sneak labeling mode using <Esc> (not <Space> as is default).
@@ -18,12 +17,11 @@ xmap <leader>s <Plug>Sneak_S
 omap s <Plug>Sneak_s
 omap <leader>s <Plug>Sneak_S
 
-" The set of keys available as labels when sneaking around. Ultimatly, these
-" labels should:
-" 1. Be fast (think home row) and easy to use for the keyboard and keyboard
-"    layout at hand.
-" 2. Not interfear with actians that are common to use *after* a sneak action
-"    has been performed. This since labeling mode fallthrough can save one
-"    extra keystroke
-let g:sneak#target_labels = "fsmörwnu"
+" The set of keys available as labels when sneaking around. Ultimatly, these labels
+" should:
+" 1. Be fast (think home row) and easy to use for the keyboard and keyboard layout at
+"    hand.
+" 2. Not interfear with actians that are common to use *after* a sneak action has been
+"    performed. This since labeling mode fall-through can save one extra keystroke
+let g:sneak#target_labels = "fsmörnuw"
 

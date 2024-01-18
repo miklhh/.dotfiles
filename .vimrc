@@ -4,14 +4,14 @@
 """ under 'https://github.com/miklhh/.dotfiles'. Happy go lucky as this configuration
 """ is licensed under the permissive MIT License. Have at it!
 """
-""" Author: Mikael Henriksson (2015 - 2023)
+""" Author: Mikael Henriksson (2015 - 2024)
 """
 
 " ------------------------------------------------------------------------------------ "
 " --                                Initialization                                  -- "
 " ------------------------------------------------------------------------------------ "
 
-" Enable Lua loader byte-compilation cache
+" Enable Lua loader byte-compilation caching
 if has('nvim')
     lua vim.loader.enable()
 endif
@@ -203,6 +203,7 @@ set ruler
 nmap <C-L><C-L> :set invrelativenumber<CR>
 
 set colorcolumn=88
+set textwidth=88
 
 " ------------------------------------------------------------------------------------ #
 " --                                  Keybindings                                   -- #
