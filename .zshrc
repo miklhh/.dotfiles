@@ -109,12 +109,13 @@ fi
 
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#121212,bg+:#262626
-  --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
-  --color=prompt:#d7005f,spinner:#af5fff,pointer:#af5fff,header:#87afaf
+  --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#1b1919,bg+:#262626
+  --color=hl:#5f87af,hl+:#00befe,info:#afaf87,marker:#00ff15
+  --color=prompt:#d60019,spinner:#af5fff,pointer:#8d25f6,header:#87afaf
   --color=border:#262626,label:#aeaeae,query:#d9d9d9
-  --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
-  --marker=">" --pointer="◆" --separator="─" --scrollbar="│"
+  --border="double" --border-label="" --preview-window="border-double" --padding="0"
+  --prompt="> " --marker=">" --pointer="◆" --separator="─"
+  --scrollbar="│"
 '
 
 # Advanced customization of fzf options via _fzf_comprun function
