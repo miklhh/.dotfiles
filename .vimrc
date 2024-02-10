@@ -257,10 +257,10 @@ nnoremap <leader>n :noh<CR>
 
 " Switch between panes (i3-like) using TMux Navigator
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-j> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-l> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-k> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-ö> :TmuxNavigateRight<cr>
+noremap <silent> <M-j> :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <M-l> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <M-k> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <M-ö> :<C-U>TmuxNavigateRight<cr>
 
 " Move current split to the far right/left (i3-like)
 nnoremap <M-Ö> <C-W>L
@@ -363,6 +363,10 @@ map <leader>E :call fzf#run({'source': 'find . -type d -print', 'sink': 'FzfEdit
 
 " Newly open .tex-files are always LaTeX
 let g:tex_flavor='latex'
+
+" Vim-Tmux navigator settings
+let g:tmux_navigator_disable_when_zoomed = 0
+let g:tmux_navigator_preserve_zoom = 0
 
 " ------------------------------------------------------------------------------------ #
 " --                             LSP settings for NeoVim                            -- #
