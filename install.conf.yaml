@@ -1,8 +1,27 @@
 - clean: ['~']
 
+
 # ################################################################################### #
-#                               Link vim configuration                                #
+# #                                 Shell setup                                     # #
 # ################################################################################### #
+
+- create:
+    - ~/.local/bin
+    - ~/.local/share
+    - ~/.local/lib
+
+- link:
+    ~/.zshrc: .zshrc
+    ~/.zsh-alias: .zsh-alias
+    ~/.config/zsh: .config/zsh
+    ~/.powerlevel10k: powerlevel10k
+    ~/.tmux.conf: .tmux.conf
+    ~/.gdbinit: gdb-dashboard/.gdbinit
+
+# ################################################################################### #
+# #                              Vim configuration                                  # #
+# ################################################################################### #
+
 - link:
     ~/.vim/autoload/plug.vim:
       create: true
@@ -21,32 +40,24 @@
 
 
 # ################################################################################### #
-#                                   Shell setup                                       #
+# #                              Install and setup FZF                              # #
 # ################################################################################### #
-- link:
-    ~/.zshrc: .zshrc
-    ~/.zsh-alias: .zsh-alias
-    ~/.config/zsh: .config/zsh
-    ~/.powerlevel10k: powerlevel10k
-    ~/.tmux.conf: .tmux.conf
-    ~/.gdbinit: gdb-dashboard/.gdbinit
 
-
-# ################################################################################### #
-#                                Install and setup FZF                                #
-# ################################################################################### #
 - shell:
     - command: ./fzf/install --all --no-update-rc
       quiet: false
 
 
 # ################################################################################### #
-#                                 Misc configuration                                  #
+# #                               Misc configuration                                # #
 # ################################################################################### #
+
 - link:
     ~/.ipython/profile_default/ipython_config.py:
+      create: true
       path: .ipython/profile_default/ipython_config.py
     ~/.ipython/profile_default/ipython_kernel_config.py:
+      create: true
       path: .ipython/profile_default/ipython_kernel_config.py
     
     # Fd ignores home directory ignore
