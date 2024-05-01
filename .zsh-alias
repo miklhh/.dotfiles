@@ -11,37 +11,36 @@
 # --                                Settings for ls                                 -- #
 # ------------------------------------------------------------------------------------ #
 
-local _GNU_LS_FLAGS=(
-    '--classify'
-    '--color'
-    '--group-directories-first'
-    '--human-readable'
-)
-function ls_gnu_linux {
-    ls ${_GNU_LS_FLAGS[@]} "${@}"
+function ls_gnu_linux { # GNU/Linux
+    ls --classify --color --group-directories-first --human-readable "${@}"
 }
-function ls_gnu_darwin {
-    gls ${_GNU_LS_FLAGS[@]} "${@}"
+function ls_gnu_macos { # MacOS Darwin with GNU utilities installed
+    gls --classify --color --group-directories-first --human-readable "${@}"
 }
-function ls_bsd {
+function ls_bsd { # BSD ls (boring, can't group directories first)
     ls -G "${@}"
 }
 
-if [ $(uname -s) = "Darwin" ]
-then
-    if command -v gls 1>/dev/null 2>&1; then
-        alias ls=ls_gnu_darwin
-        compdef ls_gnu_darwin=ls
-    else
-        echo "[ .zsh-alias:${LINENO} ]:" \
-             "Warning: 'GNU coreutils' not installed, using 'BSD ls'"
-        alias ls=ls_bsd
-        compdef ls_bsd=ls
-    fi
-else
-    alias ls=ls_gnu_linux
-    compdef ls_gnu_linux=ls
-fi
+case "$(uname -s)" in
+    Linux)
+        alias ls=ls_gnu_linux
+        compdef ls_gnu_linux=ls
+        ;;
+    Darwin)
+        if command -v gls 1>/dev/null 2>&1; then
+            alias ls=ls_gnu_macos
+            compdef ls_gnu_macos=ls
+        else
+            alias ls=ls_bsd
+            compdef ls_bsd=ls
+        fi
+        ;;
+    *) # Unknown, default to GNU ls
+        echo "[ .zsh-alias:${LINENO} ]: Warning: defaulting ls to 'ls_gnu_linux'"
+        alias ls=ls_gnu_linux
+        compdef ls_gnu_linux=ls
+        ;;
+esac
 
 alias l='ls -l'
 alias ll='ls -l -a'
@@ -77,7 +76,7 @@ function tmux_cd_relative {
 alias cdl='tmux_cd_relative left-of'
 alias cdr='tmux_cd_relative right-of'
 alias cdu='tmux_cd_relative up-of'
-alias cdd='tmux_cd_relative down-lf'
+alias cdd='tmux_cd_relative down-of'
 
 
 # ------------------------------------------------------------------------------------ #
