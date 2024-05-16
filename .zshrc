@@ -44,6 +44,13 @@ compinit -d "${HOME}/.config/zsh/.zcompdump"
 [ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
+# Source Node Version Manager (NVM) if available
+if [ -d "${HOME}/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
+
 # Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
 # More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be
 # set before the FZF settings are loaded, as FZF depends on it being set properly.
