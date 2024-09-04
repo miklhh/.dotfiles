@@ -6,56 +6,6 @@
 # Author: Mikael Henriksson (www.github.com/miklhh)
 #
 
-# ------------------------------------------------------------------------------------ #
-# --                              Environment settings                              -- #
-# ------------------------------------------------------------------------------------ #
-
-# Export base env-variables.
-export HOST=$(uname -n)
-export NAME=$(whoami)
-export PAGER="less"
-export DOTFILES="${HOME}/.dotfiles"
-command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
-
-# Prepend to PATH if not already in PATH
-function prepend_path {
-    local to_add_path="${1}"
-    case ":${PATH}:" in
-        *:"${to_add_path}":*) ;;
-        *) export PATH="${to_add_path}:$PATH" ;;
-    esac
-}
-
-# Enable zsh autocompletion
-autoload -U compinit
-autoload compdef
-compinit -d "${HOME}/.config/zsh/.zcompdump"
-
-# Add ${HOME}.local/bin to path if available
-[ -d "${HOME}/.local/bin" ] && prepend_path "${HOME}/.local/bin"
-
-# Add ${HOME}/.cargo/bin to path if available
-[ -d "${HOME}/.cargo/bin" ] && prepend_path "${HOME}/.cargo/bin"
-
-# Source ${HOME}/.zsh-local which can contain machine/system specific zsh settings
-[ -f "${HOME}/.zsh-local" ] && source "${HOME}/.zsh-local"
-
-# Source the zsh aliasing file if available
-[ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
-    || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
-
-# Source Node Version Manager (NVM) if available
-if [ -d "${HOME}/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-fi
-
-# Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
-# More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be
-# set before the FZF settings are loaded, as FZF depends on it being set properly.
-bindkey -v
-
 
 # ------------------------------------------------------------------------------------ #
 # --                              Prompt settings                                   -- #
@@ -108,6 +58,59 @@ if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
 else
     set_prompt_plain
 fi
+
+
+# ------------------------------------------------------------------------------------ #
+# --                              Environment settings                              -- #
+# ------------------------------------------------------------------------------------ #
+
+# Export base env-variables.
+export HOST=$(uname -n)
+export NAME=$(whoami)
+export PAGER="less"
+export DOTFILES="${HOME}/.dotfiles"
+command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
+
+# Prepend to PATH if not already in PATH
+function prepend_path {
+    local to_add_path="${1}"
+    case ":${PATH}:" in
+        *:"${to_add_path}":*) ;;
+        *) export PATH="${to_add_path}:$PATH" ;;
+    esac
+}
+
+# Enable zsh autocompletion
+autoload -U compinit
+autoload compdef
+compinit -d "${HOME}/.config/zsh/.zcompdump"
+
+# Add ${HOME}.local/bin to path if available
+[ -d "${HOME}/.local/bin" ] && prepend_path "${HOME}/.local/bin"
+
+# Add ${HOME}/.cargo/bin to path if available
+[ -d "${HOME}/.cargo/bin" ] && prepend_path "${HOME}/.cargo/bin"
+
+# Source ${HOME}/.zsh-local which can contain machine/system specific zsh settings
+[ -f "${HOME}/.zsh-local" ] && source "${HOME}/.zsh-local"
+
+# Source the zsh aliasing file if available
+[ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
+    || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
+
+# Source Node Version Manager (NVM) if available
+# This is a slow process, so it should necessary happen *AFTER* loading P10K for the
+# effect of instant prompt to work
+if [ -d "${HOME}/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
+
+# Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
+# More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be
+# set before the FZF settings are loaded, as FZF depends on it being set properly.
+bindkey -v
 
 
 # ------------------------------------------------------------------------------------ #
