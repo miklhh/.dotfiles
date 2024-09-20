@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Ubuntu 22.04 unattended bootstraper for freshly installed system
-# Author: Mikael Henriksson (2022)
+# Ubuntu 24.04 unattended bootstraper for freshly installed system
+# Author: Mikael Henriksson (2024)
 #
 
 # Stop on script failure
@@ -33,13 +33,15 @@ apt-get -y install  \
     manpages-dev
 
 # Python3
-apt-get -y install  \
-    pip             \
-    python3         \
-    python3-venv
-PYTHON_PIP_PACKAGES="numpy matplotlib sympy ipython pynvim pygments"
-sudo --user="${SUDO_USER}" -- \
-    bash -c "pip install --upgrade --user ${PYTHON_PIP_PACKAGES}"
+apt-get -y install          \
+    python3                 \
+    python3-pip             \
+    python3-venv            \
+    python3-numpy           \
+    python3-matplotlib      \
+    python3-sympy           \
+    python3-ipython         \
+    python3-pygments
 
 # Rust & Co (un-attended rustup install)
 apt-get -y install  \
