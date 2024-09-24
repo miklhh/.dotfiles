@@ -98,14 +98,11 @@ compinit -d "${HOME}/.config/zsh/.zcompdump"
 [ -f "${HOME}/.zsh-alias" ] && source "${HOME}/.zsh-alias" \
     || echo "[ .zshrc:${LINENO} ]: Warning: \${HOME}/.zsh-alias unavailable"
 
-# Source Node Version Manager (NVM) if available
-# This is a slow process, so it should necessary happen *AFTER* loading P10K for the
-# effect of instant prompt to work
-if [ -d "${HOME}/.nvm" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# Fast Node manager (FNM)
+if command -v fnm 1>/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
 fi
+
 
 # Default to Vim keybindings no matter the ${EDITOR}/${VISUAL} environment variables.
 # More key binding are found below under 'Key bindings'. The 'bindkey -v' option must be

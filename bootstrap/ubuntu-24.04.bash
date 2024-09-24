@@ -47,7 +47,7 @@ apt-get -y install          \
 apt-get -y install  \
     bat             \
     ripgrep
-RUST_CARGO_PACKAGES="git-delta fd-find"
+RUST_CARGO_PACKAGES="git-delta fd-find fnm"
 sudo --user="${SUDO_USER}"                              \
     bash "${BOOTSTRAP_PATH}/rustup-init-1.26.0.sh"      \
         --default-host="x86_64-unknown-linux-gnu"       \
@@ -86,7 +86,7 @@ apt-get -y install              \
     xdg-desktop-portal-gnome    \
     xdg-desktop-portal-gtk
 
-# Purge NodeJS
+# Purge NodeJS from the system
 apt-get -y remove nodejs npm
 rm -rf "${SUDO_USER_HOME}/.npm"
 rm -rf "${SUDO_USER_HOME}/.node-gyp"
