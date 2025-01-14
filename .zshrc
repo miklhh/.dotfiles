@@ -176,6 +176,7 @@ SAVEHIST=5000                   # Max events stored in history file
 setopt extended_history         # Record timestamp in history file
 setopt hist_expire_dups_first   # Delete duplicates first when HISTFILE is full
 setopt hist_ignore_all_dups     # Remove older enties if command is a duplicate
+setopt hist_ignore_space        # Don't save commands starting with a space into history
 setopt inc_append_history       # Load history only on startup but append in realtime
 setopt hist_verify              # Upon hitting enter, reload line into edit buf
 
