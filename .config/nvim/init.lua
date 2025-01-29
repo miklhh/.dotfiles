@@ -1,5 +1,5 @@
 --
--- Brand new vim configuration
+-- Brand new NeoVim configuration
 -- Author: Mikael Henriksson (2025)
 --
 
@@ -13,6 +13,10 @@ vim.g.loaded_netrwPlugin = 1
 -- Map the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+----------------------------------------------------------------------------------------
+--                              Plugins, LSP, Treesitter                              --
+----------------------------------------------------------------------------------------
 
 -- Lazy plugin manager
 require('config.lazy')
@@ -29,24 +33,44 @@ require('config.fzf-lua')
 -- Setup the TreeSitter
 require('config.treesitter')
 
--- Other options
+----------------------------------------------------------------------------------------
+--                               Options and apperance                                --
+----------------------------------------------------------------------------------------
+
+-- Colorscheme
+vim.cmd([[colorscheme tokyonight-night]])
+
+-- Global options
+vim.opt.autoread = true
+vim.opt.colorcolumn = "88"
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.ignorecase = true
+vim.opt.incsearch = true
 vim.opt.laststatus = 2
-vim.opt.signcolumn = "no"
+vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.mouse = "a"
-vim.opt.showmode = true
-vim.opt.tabstop = 4
+vim.opt.ruler = true
+vim.opt.scrolloff = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.splitright = true
+vim.opt.showmode = false
+vim.opt.showmode = true
+vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.tabstop = 4
+vim.opt.textwidth = 88
+vim.opt.wrap = false
 
 ----------------------------------------------------------------------------------------
---                                  Keybindings                                       --
+--                                    Keybindings                                     --
 ----------------------------------------------------------------------------------------
 
--- Map '==' to resize all Vim-splits equally
+-- Invert relativenumber
+vim.keymap.set("n", "<C-L><C-L>", "<CMD>set invrelativenumber<CR>")
+
+-- Resize all Vim-splits equally
 vim.keymap.set("n", "==", "<C-w>=", { silent = true, noremap = true })
 
 -- Map '-' key to '/' for fast searches

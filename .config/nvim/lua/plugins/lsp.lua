@@ -1,11 +1,9 @@
 return {
-
     {
         -- Default LSP configuration for most LSPs
         'neovim/nvim-lspconfig',
         dependencies = { 'saghen/blink.cmp' },
     },
-
     {
         -- The Mason LSP/DAP plugin manager
         "williamboman/mason.nvim",
@@ -13,7 +11,6 @@ return {
             -- Mason package manager settings go here
         }
     },
-
     {
         -- Link between Mason and nvim-lspconfig
         "williamboman/mason-lspconfig.nvim",
@@ -47,12 +44,10 @@ return {
             }
         },
     },
-
     {
         -- Fast autocompletion tool for LSPs
         "saghen/blink.cmp",
         dependencies = {
-            "rafamadriz/friendly-snippets",
             "folke/lazydev.nvim",
             "onsails/lspkind-nvim",
         },
@@ -90,7 +85,6 @@ return {
             },
         },
     },
-
     {
         -- LazyDev for NeoVim/Lua completion
         "folke/lazydev.nvim",
@@ -98,9 +92,8 @@ return {
         opts = {
         }
     },
-
     {
-        -- LSP fidgeter :)
+        -- LSP fidget spinner =)
         "j-hui/fidget.nvim",
         opts = {}
     },
