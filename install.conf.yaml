@@ -23,21 +23,9 @@
 # ################################################################################### #
 
 - link:
-    ~/.vim/autoload/plug.vim:
+    ~/.config/nvim:
       create: true
-      path: .vim/autoload/plug.vim
-    ~/.local/share/nvim/site/autoload/plug.vim:
-      create: true
-      path: .vim/autoload/plug.vim
-    ~/.config/nvim/lua:
-      create: true
-      path: .config/nvim/lua
-    ~/.config/vim/config:
-      create: true
-      path: .config/vim/config
-    ~/.vimrc: .vimrc
-    ~/.config/nvim/init.vim: .vimrc
-    ~/.config/nvim/init.lua: .config/nvim/init.lua
+      path: .config/nvim
 
 
 # ################################################################################### #
