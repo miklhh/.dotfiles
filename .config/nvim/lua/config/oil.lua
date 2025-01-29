@@ -204,7 +204,4 @@ require("oil").setup({
 --
 -- Keybindings
 --
-vim.keymap.set(
-    "n", "<leader>o",
-    "<cmd>Oil<CR>"
-)
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
