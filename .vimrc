@@ -48,23 +48,17 @@ call plug#begin('~/.vim/plugged')
     " Sneak motions
     Plug 'justinmk/vim-sneak'
 
-    " Wipeout like well behaved citizens (':Bwipeout', ':Bdelete')
+    " Wipeout like ``well behaved citizens'' (':Bwipeout', ':Bdelete')
     Plug 'moll/vim-bbye'
 
     " UndoTree for easy undo history access
     Plug 'mbbill/undotree'
-
-    " Clipboard peek-a-boo
-    Plug 'junegunn/vim-peekaboo'
 
     " Git integration in Vim with vim-fugitive
     Plug 'tpope/vim-fugitive'
 
     " Maximize Vim splits
     Plug 'szw/vim-maximizer'
-
-    " Go-to file manager (gof) or go-to terminal (got)
-    Plug 'justinmk/vim-gtfo'
 
     " Easy Vim alignment
     Plug 'junegunn/vim-easy-align'
@@ -91,21 +85,17 @@ call plug#begin('~/.vim/plugged')
     " Vim surround
     Plug 'tpope/vim-surround'
 
-    " Vim <3 FZF
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'chengzeyi/fzf-preview.vim'
-
     " Plugins specific to NeoVim starts here
     if has('nvim')
 
-        " All the Lua function I don't want to write twice
+        " ``All the Lua function I don't want to write twice''
         Plug 'nvim-lua/plenary.nvim'
 
-        " NeoVim devicons
+        " NeoVim dev-icons
         Plug 'nvim-tree/nvim-web-devicons'
 
         " Fuzzy-find more stuff with fzf-lua
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'ibhagwan/fzf-lua', { 'branch': 'main' }
 
         " Oil file manager
@@ -118,9 +108,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
         Plug 'williamboman/mason-lspconfig.nvim'
         Plug 'mfussenegger/nvim-lint'
-
-        " LSP signature help
-        "Plug 'ray-x/lsp_signature.nvim'
 
         " NeoVim tree file manager
         Plug 'nvim-tree/nvim-tree.lua'
@@ -140,7 +127,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'hrsh7th/cmp-cmdline'
         Plug 'hrsh7th/nvim-cmp'
 
-        " Pictograms for nvim-cmp
+        Plug 'saghen/blink.cmp', { 'tag': 'v0.11.0' }
+
+        " Pictograms for NeoVim auto-completion
         Plug 'onsails/lspkind-nvim'
 
         " Snippet engine with snippet support for LSP-servers
@@ -156,9 +145,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'nvim-treesitter/nvim-treesitter-context'
         Plug 'nvim-treesitter/playground'
 
-        " Toggle LSP diagnostics 'ToggleDiagOn/ToggleDiagOff'
-        Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
-
         " NeoVims which-key
         Plug 'folke/which-key.nvim'
 
@@ -171,7 +157,7 @@ call plug#begin('~/.vim/plugged')
     endif " -- End of NeoVim specific plugins
 
     " Jupyter Vim support
-    Plug 'jupyter-vim/jupyter-vim'
+    "Plug 'jupyter-vim/jupyter-vim'
 
     " Colorizer
     Plug 'norcalli/nvim-colorizer.lua'
@@ -241,12 +227,6 @@ nnoremap K 20k
 vnoremap K 20k
 nnoremap J 20j
 vnoremap J 20j
-
-" Jump paragraphs with capital U and D
-nnoremap U <C-u>
-vnoremap U <C-u>
-nnoremap D <C-d>
-vnoremap D <C-d>
 
 " Use <Ctrl+c/x> to copy/cut into register + when in visual mode
 vnoremap <C-c> "+y

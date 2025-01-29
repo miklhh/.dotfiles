@@ -50,3 +50,5 @@
 [merge]
     ff = only
 
+[maintenance]
+	repo = /home/mikl/programming/zcu216

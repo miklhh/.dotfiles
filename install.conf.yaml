@@ -37,6 +37,7 @@
       path: .config/vim/config
     ~/.vimrc: .vimrc
     ~/.config/nvim/init.vim: .vimrc
+    ~/.config/nvim/init.lua: .config/nvim/init.lua
 
 
 # ################################################################################### #

@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup {
 
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
@@ -10,7 +10,6 @@ require'nvim-treesitter.configs'.setup {
     "dockerfile",
     "dot",
     "go",
-    "help",
     "javascript",
     "julia",
     "llvm",
@@ -55,7 +54,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-require'treesitter-context'.setup {
+require("treesitter-context").setup {
 
   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
   max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.

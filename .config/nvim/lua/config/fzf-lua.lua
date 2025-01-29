@@ -56,24 +56,24 @@ require("fzf-lua").setup({
 --
 -- Keybindings
 --
-vim.keymap.set(
-    "n", "<leader>f",
-    "<cmd>lua require('fzf-lua').builtin()<CR>"
-)
+vim.keymap.set("n", "<leader>f", require('fzf-lua').builtin)
+vim.keymap.set("n", "<leader>e", require('fzf-lua').files)
 vim.keymap.set(
     "n", "<leader>.e",
-    "<cmd>lua require('fzf-lua').files({ cwd = '~/.dotfiles/' })<CR>"
+    function ()
+        require('fzf-lua').files({ cwd = '~/.dotfiles/' })
+    end
 )
 vim.keymap.set(
     "n", "<leader>,e",
-    "<cmd>lua require('fzf-lua').files({ cwd = '~' })<CR>"
-)
-vim.keymap.set(
-    "n", "<leader>e",
-    "<cmd>lua require('fzf-lua').files()<CR>"
+    function ()
+        require('fzf-lua').files({ cwd = '~' })
+    end
 )
 vim.keymap.set(
     "n", "<leader>w",
-    "<cmd>lua require('fzf-lua').buffers()<CR>"
+    function ()
+        require('fzf-lua').buffers()
+    end
 )
 
