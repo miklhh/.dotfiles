@@ -18,20 +18,14 @@ vim.g.maplocalleader = " "
 --                              Plugins, LSP, Treesitter                              --
 ----------------------------------------------------------------------------------------
 
--- Lazy plugin manager
+-- Lazy plugin manager (plugin configuration directory: `~/.config/nvim/lua/plugins`)
 require('config.lazy')
-
--- Setup LSP keybinds
-require('config.lsp-keybinds')
 
 -- Setup the Oil file manager
 require('config.oil')
 
 -- Setup fzf-lua
 require('config.fzf-lua')
-
--- Setup the TreeSitter
-require('config.treesitter')
 
 ----------------------------------------------------------------------------------------
 --                               Options and apperance                                --
@@ -62,6 +56,15 @@ vim.opt.splitright = true
 vim.opt.tabstop = 4
 vim.opt.textwidth = 88
 vim.opt.wrap = false
+
+-- Profiling support
+function START_PROFILE (output_file)
+    require("plenary.profile").start(output_file, { flame = true })
+end
+function STOP_PROFILE ()
+    require("plenary.profile").stop()
+end
+
 
 ----------------------------------------------------------------------------------------
 --                                    Keybindings                                     --
@@ -110,3 +113,18 @@ vim.keymap.set("n", "<M-Ö>", "<C-W>L", { noremap = true })
 vim.keymap.set("n", "<M-J>", "<C-W>H", { noremap = true })
 vim.keymap.set("n", "<M-K>", "<C-W>J", { noremap = true })
 vim.keymap.set("n", "<M-L>", "<C-W>K", { noremap = true })
+
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+vim.keymap.set("n", "<space>i",   vim.lsp.buf.hover)
+vim.keymap.set("n", "<space>lR",  vim.lsp.buf.rename)
+vim.keymap.set("n", "<space>lgi", require("fzf-lua").lsp_implementations)
+vim.keymap.set("n", "<space>lr",  require("fzf-lua").lsp_references)
+vim.keymap.set("n", "<space>la",  require("fzf-lua").lsp_code_actions)
+vim.keymap.set("n", "<space>ld",  require("fzf-lua").lsp_document_symbols)
+vim.keymap.set("n", "<space>lw",  require("fzf-lua").lsp_workspace_symbols)
+vim.keymap.set("n", "<space>lgd",
+    function ()
+        require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+    end
+)
+
