@@ -1,8 +1,28 @@
 return {
     {
         -- Default LSP configuration for most LSPs
-        'neovim/nvim-lspconfig',
-        dependencies = { 'saghen/blink.cmp' },
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "saghen/blink.cmp",
+        },
+        config = function ()
+            local configs = require("lspconfig.configs")
+            local util = require("lspconfig.util")
+
+            if configs["vhdl_tool"] == nil then
+                configs["vhdl_tool"] = {
+                    default_config = {
+                        cmd = { 'vhdl-tool', 'lsp' },
+                        filetypes = { 'vhdl' },
+                        root_dir = util.root_pattern('vhdltool-config.yaml', '.git'),
+                        settings = {},
+                    }
+                }
+                require("lspconfig").vhdl_tool.setup{
+                    capabilities = require("blink.cmp").get_lsp_capabilities()
+                }
+            end
+        end
     },
     {
         -- The Mason LSP/DAP plugin manager
@@ -16,6 +36,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
             "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
             "saghen/blink.cmp",
         },
         opts = {
@@ -33,14 +54,6 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
-                -- Next, you can provide targeted overrides for specific servers.
-                --["vhdl_tool"] = function()
-                --    local capabilities = require('block.cmp').get_lsp_capabilities()
-                --    require("lspconfig").vhdl_tool.setup{
-                --        capabilities = capabilities
-                --    }
-                --end
             }
         },
     },
@@ -54,10 +67,17 @@ return {
         version = "v0.11.0",
         opts = {
             -- 'default' for mappings similar to built-in completion
-            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to
+            -- navigate)
             -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- See the full "keymap" documentation for information on defining your own keymap.
-            keymap = { preset = 'super-tab' },
+            -- See the full "keymap" documentation for information on defining your own
+            -- keymap.
+            keymap = {
+                preset = 'super-tab',
+                ['<C-j>'] = { 'select_next', 'fallback' },
+                ['<C-k>'] = { 'select_prev', 'fallback' },
+
+            },
 
             signature = { enabled = true },
 
@@ -89,12 +109,11 @@ return {
         -- LazyDev for NeoVim/Lua completion
         "folke/lazydev.nvim",
         ft = "lua",
-        opts = {
-        }
+        opts = {},
     },
     {
         -- LSP fidget spinner =)
         "j-hui/fidget.nvim",
-        opts = {}
+        opts = {},
     },
 }

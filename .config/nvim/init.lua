@@ -14,6 +14,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Set termguicolors
+vim.opt.termguicolors = true
+
 ----------------------------------------------------------------------------------------
 --                              Plugins, LSP, Treesitter                              --
 ----------------------------------------------------------------------------------------
@@ -32,7 +35,7 @@ require('config.fzf-lua')
 ----------------------------------------------------------------------------------------
 
 -- Colorscheme
-vim.cmd([[colorscheme tokyonight-night]])
+vim.cmd([[colorscheme tokyonight-moon]])
 
 -- Global options
 vim.opt.autoread = true
