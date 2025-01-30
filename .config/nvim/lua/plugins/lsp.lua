@@ -2,9 +2,7 @@ return {
     {
         -- Default LSP configuration for most LSPs
         "neovim/nvim-lspconfig",
-        dependencies = {
-            "saghen/blink.cmp",
-        },
+        dependencies = { "saghen/blink.cmp", },
         config = function ()
             local configs = require("lspconfig.configs")
             local util = require("lspconfig.util")
@@ -61,7 +59,6 @@ return {
         -- Fast autocompletion tool for LSPs
         "saghen/blink.cmp",
         dependencies = {
-            "folke/lazydev.nvim",
             "onsails/lspkind-nvim",
         },
         version = "v0.11.0",

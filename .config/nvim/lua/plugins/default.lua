@@ -19,8 +19,7 @@ return {
     {
         -- ``What did that key do again?''
         "folke/which-key.nvim",
-        lazy = true,
-        event = { "VeryLazy" },
+        lazy = false,
         opts = {},
     },
     {
@@ -74,6 +73,13 @@ return {
         -- Easy undo history access
         "mbbill/undotree",
         lazy = true,
+        cmd = {
+            "UndotreeToggle",
+            "UndotreeShow",
+            "UndotreeHide",
+            "UndotreeFocus",
+            "UndotreePersistUndo",
+        },
         keys = {
             {
                 "<leader>u",
@@ -87,6 +93,7 @@ return {
         -- Vim-split maximizer
         "szw/vim-maximizer",
         lazy = true,
+        cmd = { "MaximizerToggle" },
         keys = {
             {
                 "<M-F>",
@@ -97,7 +104,7 @@ return {
         },
     },
     {
-        -- Color everything
+        -- Color colorcodes
         "norcalli/nvim-colorizer.lua",
         lazy = false,
         opts = {},
