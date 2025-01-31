@@ -21,6 +21,7 @@ return {
                 indent = { enable = true },
                 sync_install = false,
                 ensure_installed = {
+
                     "bash",
                     "c",
                     "cmake",
@@ -46,9 +47,11 @@ return {
                     "rust",
                     "toml",
                     "typescript",
+                    "vhdl",
                     "vim",
                     "vimdoc",
                     "yaml",
+
                 },
             })
         end,

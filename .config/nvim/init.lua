@@ -37,7 +37,7 @@ require('config.fzf-lua')
 ----------------------------------------------------------------------------------------
 
 -- Colorscheme
-vim.cmd([[colorscheme tokyonight-moon]])
+vim.cmd([[colorscheme cyberdream]])
 
 -- Global options
 vim.opt.autoread = true
