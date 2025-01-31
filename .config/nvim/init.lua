@@ -4,7 +4,9 @@
 --
 
 -- Enable Lua loader byte-compilation caching
-vim.loader.enable()
+if vim.loader then
+    vim.loader.enable()
+end
 
 -- Disable built-in nvim netrw plugin
 vim.g.loaded_netrw = 1
