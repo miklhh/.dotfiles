@@ -34,8 +34,20 @@ return {
         'AlexvZyl/nordic.nvim',
         lazy = false,
         priority = 1000,
+        --config = function()
+        --    require('nordic').load()
+        --end
+    },
+    {
+        "navarasu/onedark.nvim",
+        lazy = false,
+        priority = 1000,
         config = function()
-            require('nordic').load()
+            require("onedark").setup {
+                style = "warmer"
+            }
+            require("onedark").load()
+            vim.cmd([[colorscheme onedark]])
         end
     },
 }

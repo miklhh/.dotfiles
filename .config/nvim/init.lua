@@ -36,9 +36,6 @@ require('config.fzf-lua')
 --                               Options and apperance                                --
 ----------------------------------------------------------------------------------------
 
--- Colorscheme
-vim.cmd([[colorscheme cyberdream]])
-
 -- Global options
 vim.opt.autoread = true
 vim.opt.colorcolumn = "88"
@@ -120,16 +117,45 @@ vim.keymap.set("n", "<M-K>", "<C-W>J", { noremap = true })
 vim.keymap.set("n", "<M-L>", "<C-W>K", { noremap = true })
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>i",   vim.lsp.buf.hover)
-vim.keymap.set("n", "<space>lR",  vim.lsp.buf.rename)
-vim.keymap.set("n", "<space>lgi", require("fzf-lua").lsp_implementations)
-vim.keymap.set("n", "<space>lr",  require("fzf-lua").lsp_references)
-vim.keymap.set("n", "<space>la",  require("fzf-lua").lsp_code_actions)
-vim.keymap.set("n", "<space>ld",  require("fzf-lua").lsp_document_symbols)
-vim.keymap.set("n", "<space>lw",  require("fzf-lua").lsp_workspace_symbols)
-vim.keymap.set("n", "<space>lgd",
+vim.keymap.set(
+    "n", "<space>i",
+    vim.lsp.buf.hover,
+    { desc = "LSP: Hover" }
+)
+vim.keymap.set(
+    "n", "<space>lR",
+    vim.lsp.buf.rename,
+    { desc = "LSP: Rename" }
+)
+vim.keymap.set(
+    "n", "<space>lr",
+    require("fzf-lua").lsp_references,
+    { desc = "LSP: References" }
+)
+vim.keymap.set(
+    "n", "<space>la",
+    require("fzf-lua").lsp_code_actions,
+    { desc = "LSP: Code actions" }
+)
+vim.keymap.set(
+    "n", "<space>ld",
+    require("fzf-lua").lsp_document_symbols,
+    { desc = "LSP: Document symbols" }
+)
+vim.keymap.set(
+    "n", "<space>lw",
+    require("fzf-lua").lsp_workspace_symbols,
+    { desc = "LSP: Workspace symbols" }
+)
+vim.keymap.set(
+    "n", "<space>lgd",
     function ()
         require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-    end
+    end,
+    { desc = "LSP: Go to definition" }
 )
-
+vim.keymap.set(
+    "n", "<space>lgi",
+    require("fzf-lua").lsp_implementations,
+    { desc = "LSP: Go to implementation" }
+)
