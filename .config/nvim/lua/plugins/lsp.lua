@@ -73,7 +73,6 @@ return {
                 preset = 'super-tab',
                 ['<C-j>'] = { 'select_next', 'fallback' },
                 ['<C-k>'] = { 'select_prev', 'fallback' },
-
             },
 
             signature = { enabled = true },
@@ -98,6 +97,21 @@ return {
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
                     }
+                }
+            },
+
+            -- Completion menu
+            completion = {
+                menu = {
+                    draw = {
+                        columns = {
+                            { "kind_icon", "label", "label_description", gap = 1 },
+                            { "kind" } },
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
                 }
             },
         },
