@@ -7,6 +7,9 @@ return {
             local configs = require("lspconfig.configs")
             local util = require("lspconfig.util")
 
+            --
+            -- Configuration for custom LSP servers go here
+            --
             if configs["vhdl_tool"] == nil then
                 configs["vhdl_tool"] = {
                     default_config = {
@@ -60,8 +63,9 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             "onsails/lspkind-nvim",
+            { "folke/lazydev.nvim", ft = "lua", opts = {} },
         },
-        version = "v0.11.0",
+        version = "*",
         opts = {
             -- 'default' for mappings similar to built-in completion
             -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to
@@ -115,12 +119,6 @@ return {
                 }
             },
         },
-    },
-    {
-        -- LazyDev for NeoVim/Lua completion
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {},
     },
     {
         -- LSP fidget spinner =)
