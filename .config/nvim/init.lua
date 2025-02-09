@@ -128,6 +128,16 @@ vim.keymap.set(
     { desc = "LSP: Rename" }
 )
 vim.keymap.set(
+    "n", "<space>lh",
+    vim.lsp.buf.document_highlight,
+    { desc = "LSP: Document highlight" }
+)
+vim.keymap.set(
+    "n", "<space>lH",
+    vim.lsp.buf.clear_references,
+    { desc = "LSP: Document highlight" }
+)
+vim.keymap.set(
     "n", "<space>lr",
     require("fzf-lua").lsp_references,
     { desc = "LSP: References" }
