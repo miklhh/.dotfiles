@@ -44,7 +44,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "clangd",
-                "jedi-language-server",
                 "ruff",
             },
             handlers = {

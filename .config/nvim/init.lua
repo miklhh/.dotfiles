@@ -118,54 +118,54 @@ vim.keymap.set("n", "<M-L>", "<C-W>K", { noremap = true })
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 vim.keymap.set(
-    "n", "<space>i",
+    "n", "<leader>i",
     vim.lsp.buf.hover,
     { desc = "LSP: Hover" }
 )
 vim.keymap.set(
-    "n", "<space>lR",
+    "n", "<leader>lR",
     vim.lsp.buf.rename,
     { desc = "LSP: Rename" }
 )
 vim.keymap.set(
-    "n", "<space>lh",
+    "n", "<leader>lh",
     vim.lsp.buf.document_highlight,
     { desc = "LSP: Document highlight" }
 )
 vim.keymap.set(
-    "n", "<space>lH",
+    "n", "<leader>lH",
     vim.lsp.buf.clear_references,
     { desc = "LSP: Document highlight" }
 )
 vim.keymap.set(
-    "n", "<space>lr",
+    "n", "<leader>lr",
     require("fzf-lua").lsp_references,
     { desc = "LSP: References" }
 )
 vim.keymap.set(
-    "n", "<space>la",
+    "n", "<leader>la",
     require("fzf-lua").lsp_code_actions,
     { desc = "LSP: Code actions" }
 )
 vim.keymap.set(
-    "n", "<space>ld",
+    "n", "<leader>ld",
     require("fzf-lua").lsp_document_symbols,
     { desc = "LSP: Document symbols" }
 )
 vim.keymap.set(
-    "n", "<space>lw",
+    "n", "<leader>lw",
     require("fzf-lua").lsp_workspace_symbols,
     { desc = "LSP: Workspace symbols" }
 )
 vim.keymap.set(
-    "n", "<space>lgd",
+    "n", "<leader>lgd",
     function ()
         require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
     end,
     { desc = "LSP: Go to definition" }
 )
 vim.keymap.set(
-    "n", "<space>lgi",
+    "n", "<leader>lgi",
     require("fzf-lua").lsp_implementations,
     { desc = "LSP: Go to implementation" }
 )
