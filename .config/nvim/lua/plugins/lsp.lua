@@ -56,6 +56,22 @@ return {
                         capabilities = capabilities
                     }
                 end,
+
+                -- Next, you can provide targeted overrides for specific servers.
+                ["ltex"] = function ()
+                    local capabilities = require('blink.cmp').get_lsp_capabilities()
+                    require("lspconfig")["ltex"].setup {
+                        capabilities = capabilities,
+                        settings = {
+                            ltex = {
+                                language = "en-US",
+                                additionalRules = {
+                                    languageModel = "~/opt/ngram"
+                                }
+                            }
+                        }
+                    }
+                end,
             }
         },
     },
