@@ -24,28 +24,13 @@ return {
     },
     {
         -- Fast on-screen navigation
-        "justinmk/vim-sneak",
-        lazy = true,
-        init = function()
-            -- Use Sneak labeling mode, i.e., label sneak matches
-            vim.g["sneak#label"] = 1
-
-            -- Case in-sensitive sneaking
-            vim.g["sneak#use_ic_scs"] = 1
-
-            -- The set of keys available as labels when sneaking around. Ultimatly,
-            -- these labels should:
-            -- 1. Be fast (think home row) and easy to use for the keyboard and keyboard
-            --    layout at hand.
-            -- 2. Not interfear with actians that are common to use *after* a sneak
-            --    action has been performed. This since labeling mode fall-through can
-            --    save one extra keystroke
-            vim.g["sneak#target_labels"] = "fsmörnuw"
+        "ggandor/leap.nvim",
+        lazy = false,
+        init = function ()
+            vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+            vim.keymap.set({'n', 'x', 'o'}, '<leader>s',  '<Plug>(leap-backward)')
+            vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
         end,
-        keys = {
-            { "s", "<Plug>Sneak_s", mode = { "n", "x", "o" } },
-            { "<leader>s", "<Plug>Sneak_S", mode = { "n", "x", "o" } },
-        },
     },
     {
         -- Proper navigation between Vim splits and Tmux panes

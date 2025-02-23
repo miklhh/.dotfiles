@@ -160,7 +160,7 @@ vim.keymap.set(
 vim.keymap.set(
     "n", "<leader>lgd",
     function ()
-        require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
+        require("fzf-lua").lsp_definitions({ jump1 = true })
     end,
     { desc = "LSP: Go to definition" }
 )
