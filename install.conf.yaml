@@ -63,6 +63,11 @@
     ~/.ssh/config: .ssh/config
     ~/.gitconfig: .gitconfig
 
+    # gptme
+    ~/.config/gptme/config.toml:
+      path: .config/gptme/config.toml
+      create: true
+
 - shell:
   # Download Meslo LGS Nerd Font
   - command: .local/share/fonts/download-meslo-font.bash
