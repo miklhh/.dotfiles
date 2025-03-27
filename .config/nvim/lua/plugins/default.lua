@@ -27,6 +27,9 @@ return {
         "ggandor/leap.nvim",
         lazy = false,
         init = function ()
+            -- No need to run `require('leap').init()`
+            require('leap').opts.safe_labels = 'sfnut-LMHUNF?=/'
+            require('leap').opts.labels = 'sfnjklhodweimbuyvrgtaqpcxzLMJKLHONDIUYPF?=/'
             vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
             vim.keymap.set({'n', 'x', 'o'}, '<leader>s',  '<Plug>(leap-backward)')
             vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
@@ -115,5 +118,21 @@ return {
         opts = {
             highlight = { on_put = true }
         }
+    },
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy", -- Or `LspAttach`
+        priority = 1000, -- needs to be loaded in first
+        config = function()
+            require('tiny-inline-diagnostic').setup({
+                options = {
+                    multilines = {
+                        enabled = true,
+                        always_show = true,
+                    },
+                },
+            })
+            vim.diagnostic.config({ virtual_text = false })
+        end
     },
 }

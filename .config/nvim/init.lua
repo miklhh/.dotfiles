@@ -169,3 +169,8 @@ vim.keymap.set(
     require("fzf-lua").lsp_implementations,
     { desc = "LSP: Go to implementation" }
 )
+vim.keymap.set(
+    "n", "<leader>ltd",
+    require("tiny-inline-diagnostic").toggle,
+    { desc = "LSP: Toggle inline diagnostics" }
+)

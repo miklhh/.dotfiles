@@ -44,7 +44,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "clangd",
-                "ruff",
             },
             handlers = {
                 -- The first entry (without a key) will be the default handler
@@ -96,8 +95,6 @@ return {
                 ['<C-k>'] = { 'select_prev', 'fallback' },
             },
 
-            signature = { enabled = true },
-
             appearance = {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups
                 -- Useful for when your theme doesn't support blink.cmp
@@ -135,6 +132,9 @@ return {
                     auto_show_delay_ms = 500,
                 }
             },
+
+            fuzzy = { implementation = "rust" },
+            signature = { enabled = true },
         },
     },
     {
