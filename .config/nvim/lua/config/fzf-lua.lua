@@ -6,7 +6,6 @@
 local actions = require("fzf-lua").actions
 
 require("fzf-lua").setup({
-
   fzf_opts = {
     ['--layout'] = 'default',
   },
@@ -42,38 +41,11 @@ require("fzf-lua").setup({
       -- instead of the default action 'actions.file_edit_or_qf' it's important to
       -- define all other actions here as this table does not get merged with the
       -- global defaults
-      ["default"]   = actions.file_edit,
-      ["ctrl-s"]    = actions.file_split,
-      ["ctrl-v"]    = actions.file_vsplit,
-      ["ctrl-t"]    = actions.file_tabedit,
-      ["alt-q"]     = actions.file_sel_to_qf,
+      ["enter"]   = actions.file_edit,
+      ["ctrl-s"]  = actions.file_split,
+      ["ctrl-v"]  = actions.file_vsplit,
+      ["ctrl-t"]  = actions.file_tabedit,
+      ["alt-q"]   = actions.file_sel_to_qf,
     },
   },
-
 })
-
-
---
--- Keybindings
---
-vim.keymap.set("n", "<leader>f", require('fzf-lua').builtin)
-vim.keymap.set("n", "<leader>e", require('fzf-lua').files)
-vim.keymap.set(
-    "n", "<leader>.e",
-    function ()
-        require('fzf-lua').files({ cwd = '~/.dotfiles/' })
-    end
-)
-vim.keymap.set(
-    "n", "<leader>,e",
-    function ()
-        require('fzf-lua').files({ cwd = '~' })
-    end
-)
-vim.keymap.set(
-    "n", "<leader>w",
-    function ()
-        require('fzf-lua').buffers()
-    end
-)
-

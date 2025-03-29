@@ -9,6 +9,7 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
+        -- Setup of FZF-Lua in: `~/.config/nvim/lua/config/fzf-lua.lua`
     },
     {
         -- Git integration
