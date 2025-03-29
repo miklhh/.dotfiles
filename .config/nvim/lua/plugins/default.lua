@@ -5,6 +5,12 @@ return {
         lazy = true,
     },
     {
+        "ibhagwan/fzf-lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+    },
+    {
         -- Git integration
         "tpope/vim-fugitive",
         lazy = true,
