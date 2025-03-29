@@ -9,7 +9,7 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        -- Setup of FZF-Lua in: `~/.config/nvim/lua/config/fzf-lua.lua`
+        -- Setup/configuraiton of FZF-Lua in: `~/.config/nvim/lua/config/fzf-lua.lua`
     },
     {
         -- Git integration
@@ -36,9 +36,9 @@ return {
         init = function ()
             -- No need to run `require('leap').init()`
             require('leap').opts.safe_labels = 'sfnut-LMHUNF?=/'
-            require('leap').opts.labels = 'sfnjklhodweimbuyvrgtaqpcxzLMJKLHONDIUYPF?=/'
-            vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
-            vim.keymap.set({'n', 'x', 'o'}, '<leader>s',  '<Plug>(leap-backward)')
+            require('leap').opts.labels = 'sfnjklhodweimbuyvrgtaqpcxLMJKLHONDIUYPF?=/'
+            vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
+            vim.keymap.set({'n', 'x', 'o'}, '<leader>s', '<Plug>(leap-backward)')
             vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
         end,
     },
@@ -97,12 +97,6 @@ return {
                 desc = "Toggle Vim Maximizer"
             }
         },
-    },
-    {
-        -- Color colorcodes
-        "norcalli/nvim-colorizer.lua",
-        lazy = false,
-        opts = {},
     },
     {
         -- NeoVim sudo read/write (:SudaRead, :SudaWrite)
