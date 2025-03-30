@@ -39,6 +39,7 @@ require('config.keybinds')
 -- Global options
 vim.opt.autoread = true
 vim.opt.colorcolumn = "88"
+vim.opt.textwidth = 88
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
@@ -56,7 +57,6 @@ vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.tabstop = 4
-vim.opt.textwidth = 88
 vim.opt.wrap = false
 
 -- Profiling support
