@@ -51,4 +51,5 @@
     ff = only
 
 [maintenance]
-	repo = /home/mikl/programming/zcu216
+	#repo = /home/mikl/programming/zcu216
+	#repo = /Users/mikl/programming/apytypes
