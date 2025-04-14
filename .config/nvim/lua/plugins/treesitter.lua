@@ -54,24 +54,24 @@ return {
             })
         end,
     },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        event = { "VeryLazy" },
-        lazy = vim.fn.argc(-1) == 0, -- load treesitter early if opening file on cmdline
-        opts = {
-            enable = true,
-            max_lines = 0,
-            min_window_height = 0,
-            line_numbers = true,
-            multiline_threshold = 20,
-            trim_scope = 'outer',
-            mode = 'cursor',
+    -- {
+    --     "nvim-treesitter/nvim-treesitter-context",
+    --     event = { "VeryLazy" },
+    --     lazy = vim.fn.argc(-1) == 0, -- load treesitter early if opening file on cmdline
+    --     opts = {
+    --         enable = true,
+    --         max_lines = 0,
+    --         min_window_height = 0,
+    --         line_numbers = true,
+    --         multiline_threshold = 20,
+    --         trim_scope = 'outer',
+    --         mode = 'cursor',
 
-            -- Separator between context and content. Should be a single character
-            -- string, like '-'. When separator is set, the context will only show up
-            -- when there are at least 2 lines above cursorline.
-            separator = nil,
-            zindex = 20,
-        }
-    },
+    --         -- Separator between context and content. Should be a single character
+    --         -- string, like '-'. When separator is set, the context will only show up
+    --         -- when there are at least 2 lines above cursorline.
+    --         separator = nil,
+    --         zindex = 20,
+    --     }
+    -- },
 }

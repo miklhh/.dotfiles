@@ -136,4 +136,7 @@ return {
             vim.diagnostic.config({ virtual_text = false })
         end
     },
+    {
+        "stevearc/profile.nvim"
+    }
 }
