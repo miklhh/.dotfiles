@@ -34,9 +34,10 @@ return {
         "ggandor/leap.nvim",
         lazy = false,
         init = function ()
-            -- No need to run `require('leap').init()`
-            require('leap').opts.safe_labels = 'sfnut-LMHUNF?=/'
-            require('leap').opts.labels = 'sfnjklhodweimbuyvrgtaqpcxLMJKLHONDIUYPF?=/'
+            local labels_homerow = 'jklfdsöa'
+            local labels_backup = 'ioewurm,.-cx<pq'
+            require('leap').opts.labels = labels_homerow .. labels_backup
+            require('leap').opts.safe_labels = ''
             vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
             vim.keymap.set({'n', 'x', 'o'}, '<leader>s', '<Plug>(leap-backward)')
             vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
