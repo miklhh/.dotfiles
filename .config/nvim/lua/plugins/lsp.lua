@@ -95,16 +95,16 @@ return {
     },
     {
         -- The Mason LSP/DAP plugin manager
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = {
             -- Mason package manager settings go here
         }
     },
     {
         -- Link between Mason and nvim-lspconfig
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
             "saghen/blink.cmp",
         },
