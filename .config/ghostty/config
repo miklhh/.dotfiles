@@ -1,0 +1,11 @@
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+keybind = clear
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# See: https://github.com/ghostty-org/ghostty/issues/7110
+keybind = alt+ö=esc:ö
+keybind = alt+shift+ö=esc:Ö
