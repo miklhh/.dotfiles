@@ -8,7 +8,7 @@ if vim.loader then
     vim.loader.enable()
 end
 
--- Disable built-in nvim netrw plugin
+-- Disable built-in neovim netrw plugin
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -18,6 +18,19 @@ vim.g.maplocalleader = " "
 
 -- Set termguicolors
 vim.opt.termguicolors = true
+
+-- Always enable relative line numbering (swap with `<CTRL>ll`)
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+-- Disable line wrapping
+vim.opt.wrap = false
+
+-- Keep at least four lines above and under cursor on screen at all times
+vim.opt.scrolloff = 4
+
+-- Enable mouse gestures
+vim.opt.mouse = "a"
 
 ----------------------------------------------------------------------------------------
 --                              Plugins, LSP, Treesitter                              --
@@ -45,11 +58,7 @@ vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.laststatus = 2
-vim.opt.mouse = "a"
-vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.ruler = true
-vim.opt.scrolloff = 4
 vim.opt.shiftwidth = 4
 vim.opt.showmode = false
 vim.opt.showmode = true
@@ -57,16 +66,8 @@ vim.opt.signcolumn = "no"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.tabstop = 4
-vim.opt.wrap = false
 
 -- Profiling support
-function START_PROFILE (output_file)
-    require("plenary.profile").start(output_file, { flame = true })
-end
-function STOP_PROFILE ()
-    require("plenary.profile").stop()
-end
-
 local should_profile = os.getenv("NVIM_PROFILE")
 if should_profile then
   require("profile").instrument_autocmds()
@@ -80,14 +81,18 @@ if should_profile then
     local prof = require("profile")
     if prof.is_recording() then
       prof.stop()
-      vim.ui.input({ prompt = "Save profile to:", completion = "file", default = "profile.json" }, function(filename)
-        if filename then
-          prof.export(filename)
-          vim.notify(string.format("Wrote %s", filename))
+      vim.ui.input(
+        { prompt = "Save profile to: ", completion = "file", default = "profile.json" },
+        function(filename)
+          if filename then
+            prof.export(filename)
+            vim.notify(string.format("Wrote %s", filename))
+          end
         end
-      end)
+      )
     else
       prof.start("*")
+      vim.notify("Profiling started")
     end
   end
   vim.keymap.set("", "<f1>", toggle_profile)
