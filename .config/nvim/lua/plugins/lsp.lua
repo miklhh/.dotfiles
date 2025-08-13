@@ -68,79 +68,51 @@ return {
         },
     },
     {
-        -- Default LSP configuration for most LSPs
+        -- LSP configuration settings
         "neovim/nvim-lspconfig",
         dependencies = { "saghen/blink.cmp", },
         config = function ()
-            local configs = require("lspconfig.configs")
             local util = require("lspconfig.util")
 
-            --
-            -- Configuration for custom LSP servers go here
-            --
-            if configs["vhdl_tool"] == nil then
-                configs["vhdl_tool"] = {
-                    default_config = {
-                        cmd = { 'vhdl-tool', 'lsp' },
-                        filetypes = { 'vhdl' },
-                        root_dir = util.root_pattern('vhdltool-config.yaml', '.git'),
-                        settings = {},
+            -- Activate blink.cmp capabilities for all servers
+            local blink_cap = require("blink.cmp").get_lsp_capabilities()
+            vim.lsp.config("*", { capabilities = blink_cap })
+
+            vim.lsp.config("ltex_plus", {
+                settings = {
+                    ltex = {
+                        language = "en-US",
+                        additionalRules = {
+                            languageModel = "~/opt/ngram"
+                        }
                     }
                 }
-                require("lspconfig").vhdl_tool.setup{
-                    capabilities = require("blink.cmp").get_lsp_capabilities()
-                }
-            end
+            })
+
+            vim.lsp.config("vhdl_tool", {
+                cmd = { 'vhdl-tool', 'lsp' },
+                filetypes = { 'vhdl' },
+                root_markers = { "vhdltool-config.yaml", ".git" },
+                settings = {},
+
+            })
+            vim.lsp.enable("vhdl_tool")
         end
+    },
+    {
+        -- Automatically enable LSP configs (`vim.lsp.enable(...)`) from the Mason
+        -- package manager
+        "mason-org/mason-lspconfig.nvim",
+        opts = {},
+        dependencies = {
+            "mason-org/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
     },
     {
         -- The Mason LSP/DAP plugin manager
         "mason-org/mason.nvim",
-        opts = {
-            -- Mason package manager settings go here
-        }
-    },
-    {
-        -- Link between Mason and nvim-lspconfig
-        "mason-org/mason-lspconfig.nvim",
-        dependencies = {
-            "mason-org/mason.nvim",
-            "neovim/nvim-lspconfig",
-            "saghen/blink.cmp",
-        },
-        opts = {
-            ensure_installed = {
-                "lua_ls",
-                "clangd",
-            },
-            handlers = {
-                -- The first entry (without a key) will be the default handler
-                -- and will be called for each installed server that doesn't have
-                -- a dedicated handler.
-                function (server_name)
-                    local capabilities = require('blink.cmp').get_lsp_capabilities()
-                    require("lspconfig")[server_name].setup{
-                        capabilities = capabilities
-                    }
-                end,
-
-                -- Next, you can provide targeted overrides for specific servers.
-                ["ltex"] = function ()
-                    local capabilities = require('blink.cmp').get_lsp_capabilities()
-                    require("lspconfig")["ltex"].setup {
-                        capabilities = capabilities,
-                        settings = {
-                            ltex = {
-                                language = "en-US",
-                                additionalRules = {
-                                    languageModel = "~/opt/ngram"
-                                }
-                            }
-                        }
-                    }
-                end,
-            }
-        },
+        opts = {}
     },
     {
         -- LSP fidget spinner =)
