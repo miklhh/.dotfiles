@@ -117,12 +117,12 @@ return {
         -- Yank ring (Emacs `kill ring`-like copying/pasting
         "gbprod/yanky.nvim",
         lazy = false,
-        system_clipboard = {
-            -- ISSUE: https://github.com/gbprod/yanky.nvim/issues/123
-            sync_with_ring = false,
-        },
         opts = {
             highlight = { on_put = true },
+            system_clipboard = {
+                -- ISSUE: https://github.com/gbprod/yanky.nvim/issues/123
+                sync_with_ring = false,
+            },
         }
     },
     {
