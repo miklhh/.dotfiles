@@ -4,7 +4,12 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             { "onsails/lspkind-nvim" },
-            { "folke/lazydev.nvim", ft = "lua", opts = {} },
+            {
+                "folke/lazydev.nvim",
+                ft = "lua",
+                opts = {},
+                version = "1.9.0"
+            },
         },
 
         -- use a release tag to download pre-built Rust fuzzy find binary
@@ -72,8 +77,6 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = { "saghen/blink.cmp", },
         config = function ()
-            local util = require("lspconfig.util")
-
             -- Activate blink.cmp capabilities for all servers
             local blink_cap = require("blink.cmp").get_lsp_capabilities()
             vim.lsp.config("*", { capabilities = blink_cap })
