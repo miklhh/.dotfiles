@@ -4,12 +4,7 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             { "onsails/lspkind-nvim" },
-            {
-                "folke/lazydev.nvim",
-                ft = "lua",
-                opts = {},
-                version = "1.9.0"
-            },
+            { "folke/lazydev.nvim", ft = "lua", opts = {}, },
         },
 
         -- use a release tag to download pre-built Rust fuzzy find binary
