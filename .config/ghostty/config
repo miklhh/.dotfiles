@@ -12,3 +12,6 @@ keybind = ctrl+zero=reset_font_size
 # See: https://github.com/ghostty-org/ghostty/issues/7110
 keybind = alt+ö=esc:ö
 keybind = alt+shift+ö=esc:Ö
+
+# Hold-up, don't scroll so freaking fast
+mouse-scroll-multiplier = 0.5
