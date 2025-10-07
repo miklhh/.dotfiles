@@ -21,6 +21,7 @@ require("fzf-lua").setup({
   grep = {
     rg_opts =
         "--hidden "         ..
+        "--column "         ..
         "--color=always "   ..
         "--smart-case "     ..
         "--no-ignore-vcs "  ..
