@@ -1,0 +1,17 @@
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=80
+--max-columns-preview
+
+# More good settings
+--hidden
+--column
+--no-ignore-vcs
+--follow
+--line-number
+--smart-case
+--color=always
+
+# Globbing
+--glob=!.git/*
+--glob=!node_modules/*
+--glob=!__pycache__/*

@@ -67,6 +67,11 @@
       create: true
       path: .config/fd/ignore
 
+    # Ripgrep default config
+    ~/.config/ripgrep/config:
+      create: true
+      path: .config/ripgrep/config
+
     # Others
     ~/.screenrc: .screenrc
     ~/.ssh/config: .ssh/config
