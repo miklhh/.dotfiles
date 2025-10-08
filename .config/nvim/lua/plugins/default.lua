@@ -34,7 +34,7 @@ return {
         "ggandor/leap.nvim",
         lazy = false,
         init = function ()
-            local labels_best = 'jklfdsöaiowe,.'
+            local labels_best = 'jklfdsaiowe,.'
             local labels_backup = 'urm-cx<pq'
             require('leap').opts.safe_labels = ''
             require('leap').opts.labels = labels_best .. labels_backup
