@@ -21,8 +21,8 @@ return {
             -- keymap.
             keymap = {
                 preset = 'super-tab',
-                ['<C-j>'] = { 'select_next', 'fallback' },
-                ['<C-k>'] = { 'select_prev', 'fallback' },
+                ['<C-j>'] = { 'select_next' },
+                ['<C-k>'] = { 'select_prev' },
             },
             appearance = {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups

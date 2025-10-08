@@ -78,28 +78,36 @@ vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
 local fzf_lua = require('fzf-lua')
 
 vim.keymap.set(
-    "n", "<leader>f", require('fzf-lua').builtin,
+    "n", "<leader>f", fzf_lua.builtin,
     { desc = "Fzf-Lua: builtin" }
 )
 vim.keymap.set(
-    "n", "<leader>e", require('fzf-lua').files,
+    "n", "<leader>e", fzf_lua.files,
     { desc = "Fzf-Lua: files" }
 )
 vim.keymap.set(
-    "n", "<leader>w", require('fzf-lua').buffers,
+    "n", "<leader>w", fzf_lua.buffers,
     { desc = "Fzf-Lua: buffers" }
 )
 vim.keymap.set(
-    "n", "<leader>g", require('fzf-lua').live_grep,
+    "n", "<leader>g", fzf_lua.live_grep,
     { desc = "Fzf-Lua: live grep" }
+)
+vim.keymap.set(
+    "n","<leader>.g", function () fzf_lua.live_grep({ cwd = '~/.dotfiles/'} ) end,
+    { desc = "Fzf-Lua: live grep (`~/.dotfiles/`)" }
+)
+vim.keymap.set(
+    "n","<leader>,g", function () fzf_lua.live_grep({ cwd = '~/' }) end,
+    { desc = "Fzf-Lua: live grep (`~/`)" }
 )
 vim.keymap.set(
     "n", "<leader>.e", function () fzf_lua.files({ cwd = '~/.dotfiles/' }) end,
     { desc = "Fzf-Lua: files (`~/.dotfiles/`)" }
 )
 vim.keymap.set(
-    "n", "<leader>,e", function () fzf_lua.files({ cwd = '~' }) end,
-    { desc = "Fzf-Lua: files (`~`)" }
+    "n", "<leader>,e", function () fzf_lua.files({ cwd = '~/' }) end,
+    { desc = "Fzf-Lua: files (`~/`)" }
 )
 
 vim.keymap.set(
@@ -126,3 +134,12 @@ vim.keymap.set(
     "n", "<leader>lgi", fzf_lua.lsp_implementations,
     { desc = "Fzf-Lua: LSP implementations" }
 )
+
+----------------------------------------------------------------------------------------
+--                                   Blink.cmp                                        --
+----------------------------------------------------------------------------------------
+
+-- Primary keymaps are set in `~/.config/nvim/lua/plugins/lsp.lua`, this is for
+-- command-mode only
+vim.keymap.set({"c"}, "<C-j>", require("blink.cmp").select_next)
+vim.keymap.set({"c"}, "<C-k>", require("blink.cmp").select_prev)
