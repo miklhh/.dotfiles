@@ -1,8 +1,3 @@
---
--- Fzf-Lua configuration
--- Plugin: https://github.com/ibhagwan/fzf-lua
---
-
 local actions = require("fzf-lua").actions
 
 require("fzf-lua").setup({

@@ -52,6 +52,7 @@ require('config.keybinds')
 -- Global options
 vim.opt.autoread = true
 vim.opt.colorcolumn = "88"
+vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.ignorecase = true
