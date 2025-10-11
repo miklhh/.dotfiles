@@ -1,6 +1,5 @@
 - clean: ['~']
 
-
 # ################################################################################### #
 # #                                 Shell setup                                     # #
 # ################################################################################### #
@@ -9,6 +8,8 @@
     - ~/.local/bin
     - ~/.local/share
     - ~/.local/lib
+    - ~/.config
+    - ~/.cache
 
 - link:
     ~/.zshrc: .zshrc
@@ -17,24 +18,21 @@
     ~/.powerlevel10k: powerlevel10k
     ~/.tmux.conf: .tmux.conf
     ~/.gdbinit: gdb-dashboard/.gdbinit
+    ~/.config/ghostty: .config/ghostty
+
 
 # ################################################################################### #
-# #                              Ghostty configuration                              # #
-# ################################################################################### #
-
-- link:
-    ~/.config/ghostty:
-      create: true
-      path: .config/ghostty
-
-# ################################################################################### #
-# #                              Vim configuration                                  # #
+# #                              NeoVim configuration                               # #
 # ################################################################################### #
 
 - link:
     ~/.config/nvim:
       create: true
       path: .config/nvim
+
+- shell:
+  - command: mkdir -p ~/.cache/nvim
+  - command: touch ~/.cache/nvim/mason.log
 
 
 # ################################################################################### #
@@ -78,17 +76,13 @@
     ~/.gitconfig: .gitconfig
 
     # gptme
-    ~/.config/gptme/config.toml:
-      path: .config/gptme/config.toml
+    ~/.config/gptme/config.template.toml:
+      path: .config/gptme/config.template.toml
       create: true
 
 - shell:
   # Download Meslo LGS Nerd Font
   - command: .local/share/fonts/download-meslo-font.bash
-
-  # Create/touch the NeoVim LSP package manager Mason cache file
-  - command: mkdir -p ~/.cache/nvim
-  - command: touch ~/.cache/nvim/mason.log
 
 - link: # Install Meslo LGS Nerd Font
     ~/.local/share/fonts/MesloLGS NF Regular.ttf:
