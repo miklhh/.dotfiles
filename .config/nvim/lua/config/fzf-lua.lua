@@ -4,6 +4,11 @@ require("fzf-lua").setup({
     fzf_opts = {
         ["--layout"] = "default",
     },
+    helptags = {
+        actions = {
+            ["enter"] = actions.help_curwin
+        }
+    },
     files = {
         fd_opts = "--color=never "
             .. "--type f "
