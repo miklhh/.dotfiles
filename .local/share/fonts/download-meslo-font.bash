@@ -13,4 +13,3 @@ LINK_BASE="https://github.com/romkatv/powerlevel10k-media/raw/master"
 [ -f 'MesloLGS NF Bold.ttf' ] || wget --quiet "${LINK_BASE}/MesloLGS%20NF%20Bold.ttf"
 [ -f 'MesloLGS NF Italic.ttf' ] || wget --quiet "${LINK_BASE}/MesloLGS%20NF%20Italic.ttf"
 [ -f 'MesloLGS NF Bold Italic.ttf' ] || wget --quiet "${LINK_BASE}/MesloLGS%20NF%20Bold%20Italic.ttf"
-

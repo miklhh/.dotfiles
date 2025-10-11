@@ -4,7 +4,7 @@ return {
         "saghen/blink.cmp",
         dependencies = {
             { "onsails/lspkind-nvim" },
-            { "folke/lazydev.nvim", ft = "lua", opts = {}, },
+            { "folke/lazydev.nvim", ft = "lua", opts = {} },
         },
 
         -- use a release tag to download pre-built Rust fuzzy find binary
@@ -20,13 +20,13 @@ return {
             -- See the full "keymap" documentation for information on defining your own
             -- keymap.
             keymap = {
-                preset = 'super-tab',
-                ['<C-j>'] = { 'select_next' },
-                ['<C-k>'] = { 'select_prev' },
+                preset = "super-tab",
+                ["<C-j>"] = { "select_next" },
+                ["<C-k>"] = { "select_prev" },
             },
             cmdline = {
-                keymap = { preset = 'inherit' },
-                completion = { menu = { auto_show = true} },
+                keymap = { preset = "inherit" },
+                completion = { menu = { auto_show = true } },
             },
             appearance = {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -35,20 +35,20 @@ return {
                 use_nvim_cmp_as_default = true,
                 -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
                 -- Adjusts spacing to ensure icons are aligned
-                nerd_font_variant = 'mono'
+                nerd_font_variant = "mono",
             },
 
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         score_offset = 100,
-                    }
-                }
+                    },
+                },
             },
 
             -- Completion menu
@@ -57,14 +57,14 @@ return {
                     draw = {
                         columns = {
                             { "kind_icon", "label", "label_description", gap = 1 },
-                            { "kind" }
+                            { "kind" },
                         },
                     },
                 },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 500,
-                }
+                },
             },
 
             fuzzy = { implementation = "rust" },

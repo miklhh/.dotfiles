@@ -5,11 +5,11 @@ return {
         lazy = true,
     },
     {
+        -- Setup/configuration of FZF-Lua in: `~/.config/nvim/lua/config/fzf-lua.lua`
         "ibhagwan/fzf-lua",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        -- Setup/configuraiton of FZF-Lua in: `~/.config/nvim/lua/config/fzf-lua.lua`
     },
     {
         -- Git integration
@@ -21,10 +21,12 @@ return {
         -- Wipeout like ``well behaved citizens'' (':Bwipeout', ':Bdelete')
         "moll/vim-bbye",
         lazy = false,
-        config = function () vim.cmd([[cnoreabbrev bd Bwipeout]]) end,
+        config = function()
+            vim.cmd([[cnoreabbrev bd Bwipeout]])
+        end,
     },
     {
-        -- ``What did that key do again?''
+        -- ``What does that key do again?''
         "folke/which-key.nvim",
         lazy = false,
         opts = {},
@@ -33,28 +35,28 @@ return {
         -- Fast on-screen navigation
         "ggandor/leap.nvim",
         lazy = false,
-        init = function ()
-            local labels_best = 'jklfdsaiowe,.'
-            local labels_backup = 'urm-cx<pq'
-            require('leap').opts.safe_labels = ''
-            require('leap').opts.labels = labels_best .. labels_backup
-            vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap-forward)')
-            vim.keymap.set({'n', 'x', 'o'}, '<leader>s', '<Plug>(leap-backward)')
-            vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
+        init = function()
+            local labels_best = "jklfdsaiowe,."
+            local labels_backup = "urm-cx<pq"
+            require("leap").opts.safe_labels = ""
+            require("leap").opts.labels = labels_best .. labels_backup
+            vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+            vim.keymap.set({ "n", "x", "o" }, "<leader>s", "<Plug>(leap-backward)")
+            vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
         end,
     },
     {
         -- Proper navigation between Vim splits and Tmux panes
         "christoomey/vim-tmux-navigator",
         lazy = true,
-        init = function ()
+        init = function()
             vim.g.tmux_navigator_no_mappings = 1
         end,
         keys = {
-            { "<M-j>", "<CMD>TmuxNavigateLeft<CR>", mode = { "n" }},
-            { "<M-l>", "<CMD>TmuxNavigateUp<CR>", mode = { "n" }},
-            { "<M-k>", "<CMD>TmuxNavigateDown<CR>", mode = { "n" }},
-            { "<M-ö>", "<CMD>TmuxNavigateRight<CR>", mode = { "n" }},
+            { "<M-j>", "<CMD>TmuxNavigateLeft<CR>", mode = { "n" } },
+            { "<M-l>", "<CMD>TmuxNavigateUp<CR>", mode = { "n" } },
+            { "<M-k>", "<CMD>TmuxNavigateDown<CR>", mode = { "n" } },
+            { "<M-ö>", "<CMD>TmuxNavigateRight<CR>", mode = { "n" } },
         },
     },
     {
@@ -81,8 +83,8 @@ return {
                 "<leader>u",
                 "<CMD>UndotreeToggle<CR>",
                 mode = { "n" },
-                desc = "UndoTree"
-            }
+                desc = "UndoTree",
+            },
         },
     },
     {
@@ -95,8 +97,8 @@ return {
                 "<M-F>",
                 "<CMD>MaximizerToggle<CR>",
                 mode = { "n" },
-                desc = "Toggle Vim Maximizer"
-            }
+                desc = "Toggle Vim Maximizer",
+            },
         },
     },
     {
@@ -106,7 +108,7 @@ return {
         cmd = {
             "SudaWrite",
             "SudaRead",
-        }
+        },
     },
     {
         -- Quickly change surroundings
@@ -123,14 +125,14 @@ return {
                 -- ISSUE: https://github.com/gbprod/yanky.nvim/issues/123
                 sync_with_ring = false,
             },
-        }
+        },
     },
     {
         "rachartier/tiny-inline-diagnostic.nvim",
         event = "VeryLazy", -- Or `LspAttach`
         priority = 1000, -- needs to be loaded in first
         config = function()
-            require('tiny-inline-diagnostic').setup({
+            require("tiny-inline-diagnostic").setup({
                 options = {
                     multilines = {
                         enabled = true,
@@ -139,44 +141,41 @@ return {
                 },
             })
             vim.diagnostic.config({ virtual_text = false })
-        end
+        end,
     },
     {
         -- Monkey-patch profiling support
         "stevearc/profile.nvim",
         lazy = false,
-        config = function ()
+        config = function()
             if os.getenv("NVIM_PROFILE") then
-              require("profile").instrument_autocmds()
-              if os.getenv("NVIM_PROFILE"):lower():match("^start") then
-                require("profile").start("*")
-              else
-                require("profile").instrument("*")
-              end
-              local function toggle_profile()
-                local prof = require("profile")
-                if prof.is_recording() then
-                  prof.stop()
-                  vim.ui.input(
-                    {
-                      prompt = "Save profile to: ",
-                      completion = "file",
-                      default = "profile.json"
-                    },
-                    function(filename)
-                      if filename then
-                        prof.export(filename)
-                        vim.notify(string.format("Wrote %s", filename))
-                      end
-                    end
-                  )
+                require("profile").instrument_autocmds()
+                if os.getenv("NVIM_PROFILE"):lower():match("^start") then
+                    require("profile").start("*")
                 else
-                  prof.start("*")
-                  vim.notify("Profiling started")
+                    require("profile").instrument("*")
                 end
-              end
-              vim.keymap.set("", "<f1>", toggle_profile)
+                local function toggle_profile()
+                    local prof = require("profile")
+                    if prof.is_recording() then
+                        prof.stop()
+                        vim.ui.input({
+                            prompt = "Save profile to: ",
+                            completion = "file",
+                            default = "profile.json",
+                        }, function(filename)
+                            if filename then
+                                prof.export(filename)
+                                vim.notify(string.format("Wrote %s", filename))
+                            end
+                        end)
+                    else
+                        prof.start("*")
+                        vim.notify("Profiling started")
+                    end
+                end
+                vim.keymap.set("", "<f1>", toggle_profile)
             end
-        end
-    }
+        end,
+    },
 }

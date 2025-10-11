@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Ubuntu 24.04 unattended bootstraper for freshly installed system
+# Ubuntu 24.04 unattended bootstrapper for freshly installed system
 # Author: Mikael Henriksson (2024)
 #
 
@@ -90,8 +90,8 @@ apt-get -y install              \
 apt-get -y remove nodejs npm
 rm -rf "${SUDO_USER_HOME}/.npm"
 rm -rf "${SUDO_USER_HOME}/.node-gyp"
-rm -rf /usr/local/bin/npm 
-rm -rf /usr/local/share/man/man1/node* 
+rm -rf /usr/local/bin/npm
+rm -rf /usr/local/share/man/man1/node*
 rm -rf /usr/local/lib/dtrace/node.d
 rm -rf /opt/local/bin/node
 rm -rf /opt/local/include/node

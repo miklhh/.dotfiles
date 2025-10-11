@@ -224,4 +224,3 @@ else
     echo "[ .zshrc:${LINENO} ]:" \
          "Warning: neither 'nvim' nor 'bat' in \${PATH} for man-page formating"
 fi
-

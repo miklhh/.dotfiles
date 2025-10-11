@@ -58,7 +58,7 @@
     ~/.config/pycodestyle:
       create: true
       path: .config/pycodestyle
-    
+
     # Fd ignores home directory ignore
     ~/.ignore: .ignore
     ~/.config/fd/ignore:

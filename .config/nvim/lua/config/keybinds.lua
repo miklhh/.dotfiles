@@ -14,17 +14,20 @@ vim.keymap.set("n", "-", "/", { noremap = true })
 vim.keymap.set("n", "<leader>n", ":noh<CR>", { silent = true })
 
 -- No yank on delete. Use <Leader+d> to remove and yank
-vim.keymap.set({"n", "x"}, "d", '"_d', { noremap = true })
-vim.keymap.set({"n", "x"}, "x", '"_x', { noremap = true })
-vim.keymap.set({"n", "x"}, "c", '"_c', { noremap = true })
-vim.keymap.set({"n", "x"}, "C", '"_C', { noremap = true })
+vim.keymap.set({ "n", "x" }, "d", '"_d', { noremap = true })
+vim.keymap.set({ "n", "x" }, "x", '"_x', { noremap = true })
+vim.keymap.set({ "n", "x" }, "c", '"_c', { noremap = true })
+vim.keymap.set({ "n", "x" }, "C", '"_C', { noremap = true })
 vim.keymap.set(
-    {"n", "x"}, "<leader>d", '""d', { noremap = true, desc="Yank + Delete" }
+    { "n", "x" },
+    "<leader>d",
+    '""d',
+    { noremap = true, desc = "Yank + Delete" }
 )
 
 -- Jump 20 characters with K and J
-vim.keymap.set({"n", "v"}, "K", "20k", { noremap = true })
-vim.keymap.set({"n", "v"}, "J", "20j", { noremap = true })
+vim.keymap.set({ "n", "v" }, "K", "20k", { noremap = true })
+vim.keymap.set({ "n", "v" }, "J", "20j", { noremap = true })
 
 -- Use <Ctrl+c/x> to copy/cut into register + when in visual mode
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true })
@@ -62,47 +65,40 @@ vim.keymap.set(
     { desc = "LSP: Toggle inline diagnostics" }
 )
 
-
 ----------------------------------------------------------------------------------------
 --                                    FZF-Lua                                         --
 ----------------------------------------------------------------------------------------
 
-local fzf_lua = require('fzf-lua')
+local fzf_lua = require("fzf-lua")
 
 vim.keymap.set("n", "<leader>f", fzf_lua.builtin, { desc = "Fzf-Lua: builtin" })
 vim.keymap.set("n", "<leader>e", fzf_lua.files, { desc = "Fzf-Lua: files" })
 vim.keymap.set("n", "<leader>w", fzf_lua.buffers, { desc = "Fzf-Lua: buffers" })
 vim.keymap.set("n", "<leader>g", fzf_lua.live_grep, { desc = "Fzf-Lua: live grep" })
-vim.keymap.set(
-    "n",
-    "<leader>.g",
-    function () fzf_lua.live_grep({ cwd = '~/.dotfiles/'} ) end,
-    { desc = "Fzf-Lua: live grep (`~/.dotfiles/`)" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>,g",
-    function () fzf_lua.live_grep({ cwd = '~/' }) end,
-    { desc = "Fzf-Lua: live grep (`~/`)" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>.e",
-    function () fzf_lua.files({ cwd = '~/.dotfiles/' }) end,
-    { desc = "Fzf-Lua: files (`~/.dotfiles/`)" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>,e",
-    function () fzf_lua.files({ cwd = '~/' }) end,
-    { desc = "Fzf-Lua: files (`~/`)" }
-)
+vim.keymap.set("n", "<leader>.g", function()
+    fzf_lua.live_grep({ cwd = "~/.dotfiles/" })
+end, { desc = "Fzf-Lua: live grep (`~/.dotfiles/`)" })
+vim.keymap.set("n", "<leader>,g", function()
+    fzf_lua.live_grep({ cwd = "~/" })
+end, { desc = "Fzf-Lua: live grep (`~/`)" })
+vim.keymap.set("n", "<leader>.e", function()
+    fzf_lua.files({ cwd = "~/.dotfiles/" })
+end, { desc = "Fzf-Lua: files (`~/.dotfiles/`)" })
+vim.keymap.set("n", "<leader>,e", function()
+    fzf_lua.files({ cwd = "~/" })
+end, { desc = "Fzf-Lua: files (`~/`)" })
 
 vim.keymap.set(
-    "n", "<leader>lr", fzf_lua.lsp_references, { desc = "Fzf-Lua: LSP references" }
+    "n",
+    "<leader>lr",
+    fzf_lua.lsp_references,
+    { desc = "Fzf-Lua: LSP references" }
 )
 vim.keymap.set(
-    "n", "<leader>la", fzf_lua.lsp_code_actions, { desc = "Fzf-Lua: LSP code actions" }
+    "n",
+    "<leader>la",
+    fzf_lua.lsp_code_actions,
+    { desc = "Fzf-Lua: LSP code actions" }
 )
 vim.keymap.set(
     "n",
@@ -116,12 +112,9 @@ vim.keymap.set(
     fzf_lua.lsp_workspace_symbols,
     { desc = "Fzf-Lua: LSP workspace symbols" }
 )
-vim.keymap.set(
-    "n",
-    "<leader>lgd",
-    function () fzf_lua.lsp_definitions({ jump1 = true }) end,
-    { desc = "Fzf-Lua: LSP definitions" }
-)
+vim.keymap.set("n", "<leader>lgd", function()
+    fzf_lua.lsp_definitions({ jump1 = true })
+end, { desc = "Fzf-Lua: LSP definitions" })
 vim.keymap.set(
     "n",
     "<leader>lgi",
