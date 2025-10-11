@@ -1,6 +1,5 @@
-----------------------------------------------------------------------------------------
---                                    Keybindings                                     --
-----------------------------------------------------------------------------------------
+-- Smooth like vinegar and oil
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
 
 -- Invert relativenumber
 vim.keymap.set("n", "<C-L><C-L>", "<CMD>set invrelativenumber<CR>")
@@ -20,8 +19,7 @@ vim.keymap.set({"n", "x"}, "x", '"_x', { noremap = true })
 vim.keymap.set({"n", "x"}, "c", '"_c', { noremap = true })
 vim.keymap.set({"n", "x"}, "C", '"_C', { noremap = true })
 vim.keymap.set(
-    {"n", "x"}, "<leader>d", '""d',
-    { noremap = true, desc="Yank + Delete" }
+    {"n", "x"}, "<leader>d", '""d', { noremap = true, desc="Yank + Delete" }
 )
 
 -- Jump 20 characters with K and J
@@ -43,32 +41,26 @@ vim.keymap.set("n", "<M-K>", "<C-W>J", { noremap = true })
 vim.keymap.set("n", "<M-L>", "<C-W>K", { noremap = true })
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
+vim.keymap.set("n", "<leader>i", vim.lsp.buf.hover, { desc = "LSP: Hover" })
+vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "LSP: Rename" })
 vim.keymap.set(
-    "n", "<leader>i",
-    vim.lsp.buf.hover,
-    { desc = "LSP: Hover" }
-)
-vim.keymap.set(
-    "n", "<leader>lR",
-    vim.lsp.buf.rename,
-    { desc = "LSP: Rename" }
-)
-vim.keymap.set(
-    "n", "<leader>lh",
+    "n",
+    "<leader>lh",
     vim.lsp.buf.document_highlight,
     { desc = "LSP: Document highlight" }
 )
 vim.keymap.set(
-    "n", "<leader>lH",
+    "n",
+    "<leader>lH",
     vim.lsp.buf.clear_references,
-    { desc = "LSP: Document highlight" }
+    { desc = "LSP: Document clear highlights" }
 )
 vim.keymap.set(
-    "n", "<leader>ltd",
+    "n",
+    "<leader>ltd",
     require("tiny-inline-diagnostic").toggle,
     { desc = "LSP: Toggle inline diagnostics" }
 )
-vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
 
 
 ----------------------------------------------------------------------------------------
@@ -77,69 +69,62 @@ vim.keymap.set("n", "<leader>o", "<cmd>Oil<CR>")
 
 local fzf_lua = require('fzf-lua')
 
+vim.keymap.set("n", "<leader>f", fzf_lua.builtin, { desc = "Fzf-Lua: builtin" })
+vim.keymap.set("n", "<leader>e", fzf_lua.files, { desc = "Fzf-Lua: files" })
+vim.keymap.set("n", "<leader>w", fzf_lua.buffers, { desc = "Fzf-Lua: buffers" })
+vim.keymap.set("n", "<leader>g", fzf_lua.live_grep, { desc = "Fzf-Lua: live grep" })
 vim.keymap.set(
-    "n", "<leader>f", fzf_lua.builtin,
-    { desc = "Fzf-Lua: builtin" }
-)
-vim.keymap.set(
-    "n", "<leader>e", fzf_lua.files,
-    { desc = "Fzf-Lua: files" }
-)
-vim.keymap.set(
-    "n", "<leader>w", fzf_lua.buffers,
-    { desc = "Fzf-Lua: buffers" }
-)
-vim.keymap.set(
-    "n", "<leader>g", fzf_lua.live_grep,
-    { desc = "Fzf-Lua: live grep" }
-)
-vim.keymap.set(
-    "n","<leader>.g", function () fzf_lua.live_grep({ cwd = '~/.dotfiles/'} ) end,
+    "n",
+    "<leader>.g",
+    function () fzf_lua.live_grep({ cwd = '~/.dotfiles/'} ) end,
     { desc = "Fzf-Lua: live grep (`~/.dotfiles/`)" }
 )
 vim.keymap.set(
-    "n","<leader>,g", function () fzf_lua.live_grep({ cwd = '~/' }) end,
+    "n",
+    "<leader>,g",
+    function () fzf_lua.live_grep({ cwd = '~/' }) end,
     { desc = "Fzf-Lua: live grep (`~/`)" }
 )
 vim.keymap.set(
-    "n", "<leader>.e", function () fzf_lua.files({ cwd = '~/.dotfiles/' }) end,
+    "n",
+    "<leader>.e",
+    function () fzf_lua.files({ cwd = '~/.dotfiles/' }) end,
     { desc = "Fzf-Lua: files (`~/.dotfiles/`)" }
 )
 vim.keymap.set(
-    "n", "<leader>,e", function () fzf_lua.files({ cwd = '~/' }) end,
+    "n",
+    "<leader>,e",
+    function () fzf_lua.files({ cwd = '~/' }) end,
     { desc = "Fzf-Lua: files (`~/`)" }
 )
 
 vim.keymap.set(
-    "n", "<leader>lr", fzf_lua.lsp_references,
-    { desc = "Fzf-Lua: LSP references" }
+    "n", "<leader>lr", fzf_lua.lsp_references, { desc = "Fzf-Lua: LSP references" }
 )
 vim.keymap.set(
-    "n", "<leader>la", fzf_lua.lsp_code_actions,
-    { desc = "Fzf-Lua: LSP code actions" }
+    "n", "<leader>la", fzf_lua.lsp_code_actions, { desc = "Fzf-Lua: LSP code actions" }
 )
 vim.keymap.set(
-    "n", "<leader>ld", fzf_lua.lsp_document_symbols,
+    "n",
+    "<leader>ld",
+    fzf_lua.lsp_document_symbols,
     { desc = "Fzf-Lua: LSP document symbols" }
 )
 vim.keymap.set(
-    "n", "<leader>lw", fzf_lua.lsp_workspace_symbols,
+    "n",
+    "<leader>lw",
+    fzf_lua.lsp_workspace_symbols,
     { desc = "Fzf-Lua: LSP workspace symbols" }
 )
 vim.keymap.set(
-    "n", "<leader>lgd", function () fzf_lua.lsp_definitions({ jump1 = true }) end,
+    "n",
+    "<leader>lgd",
+    function () fzf_lua.lsp_definitions({ jump1 = true }) end,
     { desc = "Fzf-Lua: LSP definitions" }
 )
 vim.keymap.set(
-    "n", "<leader>lgi", fzf_lua.lsp_implementations,
+    "n",
+    "<leader>lgi",
+    fzf_lua.lsp_implementations,
     { desc = "Fzf-Lua: LSP implementations" }
 )
-
-----------------------------------------------------------------------------------------
---                                   Blink.cmp                                        --
-----------------------------------------------------------------------------------------
-
--- Primary keymaps are set in `~/.config/nvim/lua/plugins/lsp.lua`, this is for
--- command-mode only
-vim.keymap.set({"c"}, "<C-j>", require("blink.cmp").select_next)
-vim.keymap.set({"c"}, "<C-k>", require("blink.cmp").select_prev)
