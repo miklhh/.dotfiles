@@ -6,8 +6,8 @@ require("fzf-lua").setup({
     },
     helptags = {
         actions = {
-            ["enter"] = actions.help_curwin
-        }
+            ["enter"] = actions.help_curwin,
+        },
     },
     files = {
         fd_opts = "--color=never "

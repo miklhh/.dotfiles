@@ -10,7 +10,8 @@
 .config/Microsoft
 .eclipse/
 .felix/
-.local/
+.local/bin
+.local/lib
 .matlab/
 .minecraft/
 .mozilla/

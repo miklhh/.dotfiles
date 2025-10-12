@@ -13,18 +13,15 @@
 
 function set_prompt_plain {
     autoload -U colors && colors
-    PROMPT=""
-    PROMPT+="%B[%{$fg[cyan]%}%n%{$reset_color%}%B@%{$fg[green]%}%m%{$reset_color%}%B "
-    PROMPT+="%{$fg[yellow]%}%~%{$reset_color%}%B] $%b "
+    PROMPT="%F{blue}%~ %(?.%F{green}.%F{red})%#%f "
 }
 
 function set_prompt_p10k {
     if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     then
         source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-    else
-        echo "[ .zshrc:${LINENO} ]: Warning: could not enable P10k instant prompt"
     fi
+
     source "${P10K_THEME}"
     source "${HOME}/.p10k.zsh"
 
@@ -33,11 +30,14 @@ function set_prompt_p10k {
         source "${HOME}/.dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
 }
 
-if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
+
+if [ "${TERM}" = "linux" ] || [ -z "${DISPLAY}" ]; then
+    set_prompt_plain
+else
     autoload is-at-least
     if is-at-least "5.3.0"; then
         # If dotfiles are bootstraped from 'https://github.com/miklhh/.dotfiles', then
-        # '${HOME}/.powerlevel10k' is symlinked to '${HOME}/.dotfiles/powerlevel10k'.
+        # '${HOME}/.powerlevel10k' is a symlink to '${HOME}/.dotfiles/powerlevel10k'.
         # If this '.zshrc' file is used stand alone, users will manually have to install
         # Powerlevel10k into '${HOME}/.powerlevel10k'.
         [ -d "${HOME}/.powerlevel10k" ] &&
@@ -55,8 +55,6 @@ if [ "${TERM}" != "linux" ] && [ "${TERM}" != "xterm" ]; then
              "than the required 5.3.0, could not load Powerlevel10k"
         set_prompt_plain
     fi
-else
-    set_prompt_plain
 fi
 
 
@@ -71,7 +69,7 @@ export PAGER="less"
 export DOTFILES="${HOME}/.dotfiles"
 command -v "nvim" 1>/dev/null 2>&1 && export EDITOR="nvim" || export EDITOR="vim"
 
-# Prepend to PATH if not already in PATH
+# Prepend to $PATH if not already in $PATH
 function prepend_path {
     local to_add_path="${1}"
     case ":${PATH}:" in

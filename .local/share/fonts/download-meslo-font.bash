@@ -5,7 +5,7 @@ set -e
 
 # Work and download directory: .dotfiles/.local/share/fonts
 BASEDIR=$(dirname "$0")
-cd ${BASEDIR}
+cd "${BASEDIR}"
 
 # Download the four MesloLGS Nerd fonts
 LINK_BASE="https://github.com/romkatv/powerlevel10k-media/raw/master"
