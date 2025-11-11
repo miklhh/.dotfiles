@@ -20,3 +20,6 @@ keybind = alt+shift+ö=esc:Ö
 
 # Hold-up, don't scroll so freaking fast
 mouse-scroll-multiplier = 0.5
+
+# Install Terminfo automatically on first SSH
+shell-integration-features = ssh-terminfo,ssh-env
