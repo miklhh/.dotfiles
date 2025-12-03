@@ -121,3 +121,30 @@ vim.keymap.set(
     fzf_lua.lsp_implementations,
     { desc = "Fzf-Lua: LSP implementations" }
 )
+
+----------------------------------------------------------------------------------------
+--                                     DAP                                            --
+----------------------------------------------------------------------------------------
+---
+local dapui = require("dapui")
+vim.keymap.set("n", "<leader>öt", dapui.toggle, { desc = "DAP-UI: toggle" })
+
+local dap = require("dap")
+
+vim.keymap.set("n", "<leader>öb", dap.toggle_breakpoint, { desc = "DAP: toggle breakpoint" })
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = "DAP: Step over"})
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = "DAP: Step into"})
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = "DAP: Step out"})
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<Leader>ödr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<Leader>ödl', function() require('dap').run_last() end)
+vim.keymap.set({'n', 'v'}, '<Leader>öi', function() require('dap.ui.widgets').hover() end)
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function() require('dap.ui.widgets').preview() end)
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end)
