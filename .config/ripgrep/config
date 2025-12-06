@@ -15,3 +15,4 @@
 --glob=!.git/*
 --glob=!node_modules/*
 --glob=!__pycache__/*
+--glob=!.zig-cache/*
