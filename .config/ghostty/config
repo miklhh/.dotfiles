@@ -23,3 +23,6 @@ mouse-scroll-multiplier = 0.5
 
 # Install Terminfo automatically on first SSH
 shell-integration-features = ssh-terminfo,ssh-env
+
+# Use the ZSH
+command = /usr/bin/zsh
