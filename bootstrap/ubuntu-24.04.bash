@@ -19,11 +19,11 @@ add-apt-repository -y ppa:neovim-ppa/unstable
 # Perform apt repository refresh
 apt-get update
 
-# NeoVim unstable
-apt-get -y install neovim vim xclip wl-clipboard
-
 # Syncthing
 apt-get -y install syncthing
+
+# NeoVim (unstable)
+apt-get -y install neovim xclip wl-clipboard
 
 # Build essentials
 apt-get -y install  \
@@ -43,10 +43,7 @@ apt-get -y install          \
     python3-ipython         \
     python3-pygments
 
-# Rust & Co (un-attended rustup install)
-apt-get -y install  \
-    bat             \
-    ripgrep
+# Rust & Co (unattended rustup install)
 RUST_CARGO_PACKAGES="git-delta fd-find fnm"
 sudo --user="${SUDO_USER}"                              \
     bash "${BOOTSTRAP_PATH}/rustup-init-1.26.0.sh"      \
@@ -62,29 +59,19 @@ sudo --user="${SUDO_USER}" -- \
 # Profile: default
 # Modify PATH: no
 
+# (Z)Shell and company (fzf is installed from git)
+apt-get -y install  \
+    bfs             \
+    tmux            \
+    zsh             \
+    bat             \
+    ripgrep
+
 # Ubuntu: symbolic link batcat -> bat
 if [ ! -f "${SUDO_USER_HOME}/.local/bin/bat" ]; then
     sudo --user="${SUDO_USER}" mkdir -p "${SUDO_USER_HOME}/.local/bin"
     sudo --user="${SUDO_USER}" ln -s /usr/bin/batcat "${SUDO_USER_HOME}/.local/bin/bat"
 fi
-
-# (Z)Shell and company (fzf is installed from git)
-apt-get -y install  \
-    bfs             \
-    tmux            \
-    zsh
-
-# Other packages
-apt-get -y install              \
-    fuse3                       \
-    htop                        \
-    inkscape                    \
-    libfuse2                    \
-    texlive-full                \
-    tree                        \
-    xdg-desktop-portal          \
-    xdg-desktop-portal-gnome    \
-    xdg-desktop-portal-gtk
 
 # Purge NodeJS from the system
 apt-get -y remove nodejs npm
