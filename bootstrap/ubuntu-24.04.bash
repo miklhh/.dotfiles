@@ -13,6 +13,13 @@ BOOTSTRAP_PATH="$(dirname "$(readlink -f "$0")")"
 # Add NeoVim PPA
 add-apt-repository -y ppa:neovim-ppa/unstable
 
+# Build essentials
+apt-get -y install  \
+    build-essential \
+    curl            \
+    git             \
+    manpages-dev
+
 # Add Syncthing PPA with PGP key
 "${BOOTSTRAP_PATH}"/ubuntu-syncthing-ppa.bash
 
@@ -25,12 +32,6 @@ apt-get -y install syncthing
 # NeoVim (unstable)
 apt-get -y install neovim xclip wl-clipboard
 
-# Build essentials
-apt-get -y install  \
-    build-essential \
-    curl            \
-    git             \
-    manpages-dev
 
 # Python3
 apt-get -y install          \
