@@ -177,8 +177,9 @@ fi
 
 # (i)Python calculator
 PYTHON_CALC_INIT_CMD='import math; import matplotlib.pyplot as plt; import numpy as np;'
-if command -v ipython 1>/dev/null 2>&1; then
-    # Ipython with Vim keybindings and _without_ QT backend (nice..)
+if command -v ipython3 1>/dev/null 2>&1; then
+    alias calc="ipython3 -i -c '${PYTHON_CALC_INIT_CMD}'"
+elif command -v ipython 1>/dev/null 2>&1; then
     alias calc="ipython -i -c '${PYTHON_CALC_INIT_CMD}'"
 else
     # Regular python calculator (lame..)
