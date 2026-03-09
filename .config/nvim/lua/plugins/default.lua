@@ -33,7 +33,7 @@ return {
     },
     {
         -- Fast on-screen navigation
-        "ggandor/leap.nvim",
+        url = "https://codeberg.org/andyg/leap.nvim",
         lazy = false,
         init = function()
             local labels_best = "jklfdsaiowe,."
