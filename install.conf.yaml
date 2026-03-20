@@ -19,6 +19,7 @@
     ~/.tmux.conf: .tmux.conf
     ~/.gdbinit: gdb-dashboard/.gdbinit
     ~/.config/ghostty: .config/ghostty
+    ~/.config/surfer: .config/surfer
 
 
 # ################################################################################### #
