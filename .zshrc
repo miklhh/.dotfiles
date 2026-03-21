@@ -160,9 +160,6 @@ fi
 [ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"                              \
     || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.fzf.zsh not found"
 
-[ -f "${HOME}/.dotfiles/.fzf-git.sh" ] && source "${HOME}/.dotfiles/.fzf-git.sh"    \
-    || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.dotfiles/.fzf-git.sh"
-
 
 # ------------------------------------------------------------------------------------ #
 # --                              Ripgrep settings                                  -- #
