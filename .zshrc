@@ -157,7 +157,7 @@ else
 fi
 
 # Source FZF settings
-[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh"                              \
+[ -f "${HOME}/.fzf.zsh" ] && source "${HOME}/.fzf.zsh" \
     || echo "[ .zshrc:${LINENO} ]: Warning: ${HOME}/.fzf.zsh not found"
 
 
