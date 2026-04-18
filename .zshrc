@@ -212,7 +212,9 @@ export BAT_THEME="gruvbox-dark"
 
 # Man pages coloring and formating using nvim or bat
 if command -v nvim 1>/dev/null 2>&1; then
-    export MANPAGER='nvim +Man!'
+    man() {
+        nvim +"hide Man ${*}"
+    }
 elif command -v bat 1>/dev/null 2>&1; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 else
