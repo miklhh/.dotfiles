@@ -8,6 +8,8 @@ return {
             local blink_cap = require("blink.cmp").get_lsp_capabilities()
             vim.lsp.config("*", { capabilities = blink_cap })
 
+
+            -- LaTeX LSP (LTeX+) specific setup
             vim.lsp.config("ltex_plus", {
                 settings = {
                     ltex = {
@@ -19,13 +21,12 @@ return {
                 },
             })
 
-            vim.lsp.config("vhdl_tool", {
-                cmd = { "vhdl-tool", "lsp" },
-                filetypes = { "vhdl" },
-                root_markers = { "vhdltool-config.yaml", ".git" },
-                settings = {},
-            })
-            vim.lsp.enable("vhdl_tool")
+            -- Harper specific setup
+            vim.lsp.config['harper'] = {
+                cmd = { 'harper-ls', '--stdio' },
+                filetypes = { 'markdown', 'text', 'tex', 'typst' }
+            }
+            vim.lsp.enable('harper')
         end,
     },
     {
