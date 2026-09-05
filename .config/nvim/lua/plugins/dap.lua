@@ -2,6 +2,11 @@ return {
     {
         "rcarriga/nvim-dap-ui",
         dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+        -- No `event`/`cmd`/`keys`/`ft` here, so without an explicit `lazy = true` this
+        -- plugin loads eagerly at startup regardless of how it's required elsewhere.
+        -- The DAP keymaps in `config/keybinds.lua` call `require("dap")`/`require("dapui")`
+        -- inside their callbacks, which is what actually triggers the lazy-load.
+        lazy = true,
 
         config = function()
             require("dapui").setup()

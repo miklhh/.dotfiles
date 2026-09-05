@@ -125,13 +125,10 @@ vim.keymap.set(
 ----------------------------------------------------------------------------------------
 --                                     DAP                                            --
 ----------------------------------------------------------------------------------------
----
-local dapui = require("dapui")
-vim.keymap.set("n", "<leader>öt", dapui.toggle, { desc = "DAP-UI: toggle" })
 
-local dap = require("dap")
+vim.keymap.set("n", "<leader>öt", function() require("dapui").toggle() end, { desc = "DAP-UI: toggle" })
 
-vim.keymap.set("n", "<leader>öb", dap.toggle_breakpoint, { desc = "DAP: toggle breakpoint" })
+vim.keymap.set("n", "<leader>öb", function() require("dap").toggle_breakpoint() end, { desc = "DAP: toggle breakpoint" })
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = "DAP: Step over"})
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = "DAP: Step into"})
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = "DAP: Step out"})
